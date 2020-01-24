@@ -1,0 +1,9 @@
+rules:
+    nesting-depth:
+        - 1
+        - max-depth: 4
+    quotes:
+        - 0
+        - style: single
+    no-vendor-prefixes: 
+        - 0

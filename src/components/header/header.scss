@@ -1,0 +1,32 @@
+$header-color: #444;
+
+.header {
+  line-height: 2rem;
+
+  ul {
+    margin: 0 2rem 0 0;
+
+    li {
+      color: $header-color;
+      font-size: 1.2rem;
+      list-style: none;
+      margin: 0;
+      padding: 2rem;
+
+      a {
+        color: inherit;
+
+        &.is-active {
+          border-bottom: 1px solid $header-color;
+        }
+      }
+    }
+  }
+
+  a {
+    &:hover {
+      border-bottom: 1px solid $header-color;
+      text-decoration: none;
+    }
+  }
+}
