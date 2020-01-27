@@ -4,9 +4,9 @@ import { Link, NavLink } from "react-router-dom";
 import "./header.scss";
 import { useTranslation } from "react-i18next";
 
-const LanguageSwitcher = ({ title, link, click }) => {
+const LinkMenu = ({ title, link, click, className }) => {
   return (
-    <li key={title}>
+    <li className={className} key={title}>
       <Link to={link} onClick={click}>
         {title}
       </Link>
@@ -24,10 +24,10 @@ const Header = () => {
   };
 
   const menuItems = [
-    { title: t("header.menu.home"), link: "/", click: null },
-    { title: t("header.menu.gallery"), link: "/people/", click: null },
+    { title: t("header.menu.projects"), link: "/projects/", click: null },
+    { title: t("header.menu.people"), link: "/people/", click: null },
+    { title: t("header.menu.blog"), link: "/blog/", click: null },
     { title: t("header.menu.contacts"), link: "/contacts/", click: null }
-    // { title: t("header.menu.language"), link: "#", click: switchLanguage }
   ];
 
   const menu = menuItems.map(({ title, link, click }) => {
@@ -46,10 +46,16 @@ const Header = () => {
   });
 
   return (
-    <header className="header d-flex justify-content-end">
+    <header className="header d-flex">
       <ul className="d-flex">
+        <LinkMenu
+          title={t("header.menu.home")}
+          link={"/"}
+          click={null}
+          className={"home-link mr-auto"}
+        />
         {menu}
-        <LanguageSwitcher
+        <LinkMenu
           title={t("header.menu.language")}
           link={"#"}
           click={switchLanguage}

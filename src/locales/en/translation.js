@@ -2,7 +2,9 @@ export default {
   header: {
     menu: {
       home: "Home",
-      gallery: "Gallery",
+      projects: "Gallery",
+      people: "People",
+      blog: "Blog",
       contacts: "Contacts",
       language: "укр"
     }

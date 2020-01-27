@@ -1,8 +1,10 @@
 export default {
   header: {
     menu: {
-      home: "Дім",
-      gallery: "Галерея",
+      home: "Проектна майстерня Бєляєвих",
+      projects: "Проекти",
+      people: "Майстерня",
+      blog: "Блог",
       contacts: "Контакти",
       language: "eng"
     }

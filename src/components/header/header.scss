@@ -5,6 +5,7 @@ $header-color: #444;
 
   ul {
     margin: 0 2rem 0 0;
+    width: 100vw;
 
     li {
       color: $header-color;
@@ -18,6 +19,16 @@ $header-color: #444;
 
         &.is-active {
           border-bottom: 1px solid $header-color;
+        }
+      }
+
+      &.home-link > a {
+        border: 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        &:hover {
+          border: 0;
         }
       }
     }

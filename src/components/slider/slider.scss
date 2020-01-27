@@ -1,0 +1,57 @@
+$background: #00000077;
+$button-colors: #ffffff77;
+$button-hover: #ffffffbb;
+$button-size: 1.4rem;
+$title-color: #ffffffbb;
+$fade-transition-time: 5000ms;
+$slide-transition-time: 300ms;
+
+.slide-control {
+  background: $background;
+  bottom: 0;
+  height: 36px;
+  position: absolute;
+  width: 100%;
+
+  h5 {
+    color: $title-color;
+    margin: auto;
+    padding: 0;
+  }
+
+  button {
+    background: transparent;
+    border: 1px solid $button-colors;
+    border-radius: 50%;
+    color: $button-colors;
+    height: $button-size;
+    margin: auto .5rem;
+    text-align: center;
+    width: $button-size;
+
+    &:hover {
+      border-color: $button-hover;
+      color: $button-hover;
+      height: $button-size + .1rem;
+      width: $button-size + .1rem;
+    }
+
+    &:active {
+      height: $button-size;
+      width: $button-size;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    span {
+      bottom: .25rem;
+      position: relative;
+
+      &.left-arrow {
+        right: .12rem;
+      }
+    }
+  }
+}

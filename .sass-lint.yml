@@ -7,3 +7,5 @@ rules:
         - style: single
     no-vendor-prefixes: 
         - 0
+    no-invalid-hex:
+        - 0
