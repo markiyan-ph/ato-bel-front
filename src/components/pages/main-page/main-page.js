@@ -8,25 +8,25 @@ const MainPage = () => {
   const [state] = useState([
     {
       _id: 1,
-      title: "Title1",
+      title: "Реконструкція аквапарку",
       imgSrc: "http://127.0.0.1:5000/04.jpg",
       description: "image description"
     },
     {
       _id: 2,
-      title: "Title2",
+      title: "Приватна резиденція в м. Дубно",
       imgSrc: "http://127.0.0.1:5000/03.jpg",
       description: "Second Image"
     },
     {
       _id: 3,
-      title: "Title3",
+      title: "Апартамент готель. Зелена 67",
       imgSrc: "http://127.0.0.1:5000/final01.jpg",
       description: "Third Image"
     },
     {
       _id: 4,
-      title: "Title4",
+      title: "Магнолія Spring",
       imgSrc: "http://127.0.0.1:5000/2.jpg",
       description: "4th Image"
     }

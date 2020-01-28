@@ -1,5 +1,5 @@
-$background: #00000077;
-$button-colors: #ffffff77;
+$background: #00000080;
+$button-colors: #ffffff80;
 $button-hover: #ffffffbb;
 $button-size: 1.4rem;
 $title-color: #ffffffbb;
@@ -9,7 +9,8 @@ $slide-transition-time: 300ms;
 .slide-control {
   background: $background;
   bottom: 0;
-  height: 36px;
+  height: 41px;
+  overflow: hidden;
   position: absolute;
   width: 100%;
 
@@ -21,7 +22,8 @@ $slide-transition-time: 300ms;
 
   button {
     background: transparent;
-    border: 1px solid $button-colors;
+    border: none;
+    // border: 1px solid $button-colors;
     border-radius: 50%;
     color: $button-colors;
     height: $button-size;
@@ -46,7 +48,9 @@ $slide-transition-time: 300ms;
     }
 
     span {
-      bottom: .25rem;
+      bottom: 1.51rem;
+      font-size: 41px;
+      font-weight: bold;
       position: relative;
 
       &.left-arrow {
