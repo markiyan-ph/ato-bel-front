@@ -1,38 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
 import Slider from "../../slider";
-// import { useTranslation } from "react-i18next";
 import "./main-page.scss";
 
-const MainPage = () => {
-  // const [t] = useTranslation();
-  const [state] = useState([
-    {
-      _id: 1,
-      title: "Реконструкція аквапарку",
-      imgSrc: "http://127.0.0.1:5000/04.jpg",
-      description: "image description"
-    },
-    {
-      _id: 2,
-      title: "Приватна резиденція в м. Дубно",
-      imgSrc: "http://127.0.0.1:5000/03.jpg",
-      description: "Second Image"
-    },
-    {
-      _id: 3,
-      title: "Апартамент готель. Зелена 67",
-      imgSrc: "http://127.0.0.1:5000/final01.jpg",
-      description: "Third Image"
-    },
-    {
-      _id: 4,
-      title: "Магнолія Spring",
-      imgSrc: "http://127.0.0.1:5000/2.jpg",
-      description: "4th Image"
-    }
-  ]);
+const MainPage = ({ projects: {loading, projectsList}, onFetchProjects }) => {
+  useEffect(() => {
+    onFetchProjects();
+  }, [onFetchProjects]);
 
-  return <Slider slides={state} />;
+  const content = !loading ? (
+    <Slider slides={projectsList} />
+  ) : (
+    <p>Loading... </p>
+  );
+
+  return <div className="main-page">{content}</div>;
 };
 
-export default MainPage;
+const mapStateToProps = state => {
+  return {
+    projects: state.projects,
+    error: state.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchProjects: () => dispatch(actions.fetchProjects())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

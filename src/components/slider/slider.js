@@ -1,43 +1,60 @@
 import React, { useState } from "react";
 import { getRandomInt } from "../../tools/helpers";
+import { CSSTransition } from "react-transition-group";
+import SliderControl from "./slider-control";
 
 import "./slider.scss";
 
-const SliderControl = ({ title, onNext, onPrev }) => {
-  return (
-    <div className="slide-control d-flex justify-content-between">
-      <button onClick={onPrev}>
-        <span className="left-arrow">&lsaquo;</span>
-        {/* <span className="left-arrow">&lt;</span> */}
-      </button>
-      <h5>{title}</h5>
-      <button onClick={onNext}>
-        <span className="right-arrow">&rsaquo;</span>
-      </button>
-    </div>
-  );
-};
-
 const Slider = ({ slides }) => {
   const [slideIndex, setSlideIndex] = useState(getRandomInt(0, slides.length));
+  const [showSlide, setShowSlide] = useState(true);
+  const [slideState, setSlideState] = useState("shown");
 
   const { title, imgSrc } = slides[slideIndex];
 
+  const changeSlide = state => {
+    switch (state) {
+      case "next":
+        setSlideIndex(slideIndex =>
+          slideIndex === slides.length - 1 ? 0 : slideIndex + 1
+        );
+        break;
+      case "prev":
+        setSlideIndex(slideIndex =>
+          slideIndex === 0 ? slides.length - 1 : slideIndex - 1
+        );
+        break;
+      default:
+        setSlideState("shown");
+    }
+  };
+
   const onNext = () => {
-    setSlideIndex(slideIndex =>
-      slideIndex === slides.length - 1 ? 0 : slideIndex + 1
-    );
+    setShowSlide(false);
+    setSlideState("next");
   };
 
   const onPrev = () => {
-    setSlideIndex(slideIndex =>
-      slideIndex === 0 ? slides.length - 1 : slideIndex - 1
-    );
+    setShowSlide(false);
+    setSlideState("prev");
   };
 
   return (
-    <div className="main-page">
-      <img src={imgSrc} alt="Projects" />
+    <div className="slider">
+      <CSSTransition
+        mountOnEnter
+        unmountOnExit
+        in={showSlide}
+        appear={true}
+        timeout={500}
+        classNames="fade"
+        onExited={() => {
+          changeSlide(slideState);
+          setShowSlide(true);
+        }}
+      >
+        <img src={`data:image/png;base64,${imgSrc}`} alt="Projects" />
+      </CSSTransition>
       <SliderControl title={title} onNext={onNext} onPrev={onPrev} />
     </div>
   );

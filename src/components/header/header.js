@@ -46,8 +46,8 @@ const Header = () => {
   });
 
   return (
-    <header className="header d-flex">
-      <ul className="d-flex">
+    <header className="header d-flex align-items-center">
+      <ul className="d-flex align-items-baseline">
         <LinkMenu
           title={t("header.menu.home")}
           link={"/"}

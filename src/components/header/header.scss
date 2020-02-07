@@ -1,6 +1,7 @@
-$header-color: #444;
+@import '../../assets/styles/shared';
 
 .header {
+  height: $header-height;
   line-height: 2.5rem;
 
   ul {

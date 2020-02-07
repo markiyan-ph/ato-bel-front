@@ -1,26 +1,8 @@
-$main-page-width: 100%;
-$main-page-height: calc(100vh - 4.6rem);
+@import '../../../assets/styles/shared';
 
 .main-page {
   height: $main-page-height;
   margin: 0;
   overflow-x: hidden;
   padding: 0;
-
-  &:first-child {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  img {
-    display: block;
-    height: 100%;
-    margin: 0 auto;
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: cover;
-    object-position: left bottom;
-    padding: 0;
-    width: 100%;
-  }
 }
