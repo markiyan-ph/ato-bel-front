@@ -1,16 +1,23 @@
-import React, { useState } from "react";
-import { getRandomInt } from "../../tools/helpers";
+import React, { useState, useEffect } from "react";
+
 import { CSSTransition } from "react-transition-group";
 import SliderControl from "./slider-control";
 
 import "./slider.scss";
 
-const Slider = ({ slides }) => {
-  const [slideIndex, setSlideIndex] = useState(getRandomInt(0, slides.length));
+const getIndexById = (array, id) => array.findIndex((proj) => proj._id === id);
+
+const Slider = ({ slides, slideId }) => {
+  const [slideIndex, setSlideIndex] = useState(0);
   const [showSlide, setShowSlide] = useState(true);
   const [slideState, setSlideState] = useState("shown");
-
+  
+  //console.log(slideIndex);
   const { title, imgSrc } = slides[slideIndex];
+
+  useEffect(() => {
+    setSlideIndex(getIndexById(slides, slideId));
+  }, [slides, slideId]);
 
   const changeSlide = state => {
     switch (state) {
