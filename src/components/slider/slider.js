@@ -14,6 +14,7 @@ const Slider = ({ slides, slideId }) => {
   
   //console.log(slideIndex);
   const { title, imgSrc } = slides[slideIndex];
+  const showButtons = slides.length > 1 ? true : false;
 
   useEffect(() => {
     setSlideIndex(getIndexById(slides, slideId));
@@ -62,7 +63,7 @@ const Slider = ({ slides, slideId }) => {
       >
         <img src={`data:image/png;base64,${imgSrc}`} alt="Projects" />
       </CSSTransition>
-      <SliderControl title={title} onNext={onNext} onPrev={onPrev} />
+      <SliderControl title={title} onNext={onNext} onPrev={onPrev} showButtons={showButtons} />
     </div>
   );
 };
