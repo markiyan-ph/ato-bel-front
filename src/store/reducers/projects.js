@@ -8,7 +8,13 @@ const initialState = {
 };
 
 const fetchProjectsSuccess = (state, action) => {
-  console.log(updateObject(state, { projectsList: [...action.projects], loading: false }));
+  return updateObject(state, {
+    projectsList: [...action.projects],
+    loading: false
+  });
+};
+
+const fetchRandomProjectSuccess = (state, action) => {
   return updateObject(state, {
     projectsList: [...action.projects],
     loading: false
@@ -18,6 +24,7 @@ const fetchProjectsSuccess = (state, action) => {
 const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PROJECTS_SUCCESS: return fetchProjectsSuccess(state, action);
+    case actionTypes.FETCH_RANDOM_PROJECT_SUCCESS: return fetchRandomProjectSuccess(state, action);
     default:
       return state;
   }

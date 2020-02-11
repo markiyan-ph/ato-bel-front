@@ -1,4 +1,6 @@
 export { 
   fetchProjects,
-  fetchProjectsSuccess
+  fetchProjectsSuccess,
+  fetchRandomProject,
+  fetchRandomProjectSuccess
 } from './projects';
