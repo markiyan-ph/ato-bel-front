@@ -1,42 +1,87 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import Slider from "../../slider";
-import { getRandomInt } from '../../../tools/helpers';
+import { getRandomInt } from "../../../tools/helpers";
 import "./main-page.scss";
 
-const MainPage = ({
-  projects: { loading, projectsList },
-  onFetchProjects,
-  onFetchRandomProject
-}) => {
+class MainPage extends Component {
+  // projects: { loading, projectsList },
+  // onFetchProjects,
+  // onFetchRandomProject
 
-  const [projectId, setProjectId] = useState(null);
+  state = {
+    projectId: null,
+    loadProjects: false
+  };
+  // const [projectId, setProjectId] = useState(null);
+  // const [loadProjects, setLoadProjects] = useState(false);
 
-  useEffect(() => {
+  componentDidMount() {
+    const {
+      projects: { projectsList },
+      onFetchRandomProject
+    } = this.props;
 
     if (projectsList.length === 0) {
       onFetchRandomProject();
-      
-    } else if (projectsList.length === 1) {
-      onFetchProjects();
-      setProjectId(projectsList[0]._id);
-    
+      this.setState({ loadProjects: true });
     } else {
       const randProject = getRandomInt(0, projectsList.length);
-      setProjectId((prevState) => prevState ? prevState : projectsList[randProject]._id); 
+      this.setState(({projectId}) => {
+        const id = projectId ? projectId : projectsList[randProject]._id;
+        return { projectId: id };
+      });
     }
-  }, [projectsList, onFetchRandomProject, onFetchProjects]);
+  }
 
-  const content = !loading && projectId ? (
-    <Slider slides={projectsList} slideId={projectId} />
-  ) : (
-    <p>Loading... </p>
-  );
+  componentDidUpdate(prevState) {
+    const {
+      projects: { projectsList },
+      onFetchProjects
+    } = this.props;
 
-  return <div className="main-page">{content}</div>;
-};
+    const { loadProjects } = this.state;
 
+    if (prevState.projects.projectsList.length !== projectsList.length) {
+      if (projectsList.length === 1 && loadProjects) {
+        onFetchProjects();
+        this.setState({ projectId: projectsList[0]._id });
+      }
+    }
+  }
+
+  // useEffect(() => {
+
+  //   if (projectsList.length === 0) {
+  //     onFetchRandomProject();
+  //     setLoadProjects(true);
+
+  //   } else if (projectsList.length === 1 && loadProjects) {
+  //     onFetchProjects();
+  //     setProjectId(projectsList[0]._id);
+
+  //   } else {
+  //     const randProject = getRandomInt(0, projectsList.length);
+  //     setProjectId((prevState) => prevState ? prevState : projectsList[randProject]._id);
+  //   }
+  // }, [projectsList, onFetchRandomProject, onFetchProjects]);
+
+  render() {
+    const {
+      projects: { loading, projectsList }
+    } = this.props;
+    const { projectId } = this.state;
+    const content =
+      !loading && projectId ? (
+        <Slider slides={projectsList} slideId={projectId} />
+      ) : (
+        <p>Loading... </p>
+      );
+
+    return <div className="main-page">{content}</div>;
+  }
+}
 const mapStateToProps = state => {
   return {
     projects: state.projects,
