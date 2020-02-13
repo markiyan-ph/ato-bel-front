@@ -6,16 +6,11 @@ import { getRandomInt } from "../../../tools/helpers";
 import "./main-page.scss";
 
 class MainPage extends Component {
-  // projects: { loading, projectsList },
-  // onFetchProjects,
-  // onFetchRandomProject
 
   state = {
     projectId: null,
     loadProjects: false
   };
-  // const [projectId, setProjectId] = useState(null);
-  // const [loadProjects, setLoadProjects] = useState(false);
 
   componentDidMount() {
     const {
@@ -50,22 +45,6 @@ class MainPage extends Component {
       }
     }
   }
-
-  // useEffect(() => {
-
-  //   if (projectsList.length === 0) {
-  //     onFetchRandomProject();
-  //     setLoadProjects(true);
-
-  //   } else if (projectsList.length === 1 && loadProjects) {
-  //     onFetchProjects();
-  //     setProjectId(projectsList[0]._id);
-
-  //   } else {
-  //     const randProject = getRandomInt(0, projectsList.length);
-  //     setProjectId((prevState) => prevState ? prevState : projectsList[randProject]._id);
-  //   }
-  // }, [projectsList, onFetchRandomProject, onFetchProjects]);
 
   render() {
     const {

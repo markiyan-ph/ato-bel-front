@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from '../../assets/images/fbLogoTrans.png';
+import logo from "../../assets/images/fbLogoTrans.png";
 import "./header.scss";
 import { useTranslation } from "react-i18next";
 
@@ -47,22 +47,30 @@ const Header = () => {
 
   return (
     <header className="header d-flex align-items-center">
-      <ul className="d-flex align-items-baseline">
-        <li><img src={logo} alt="Logo" width="100" /></li>
-        <LinkMenu
-          title={t("header.menu.home")}
-          link={"/"}
-          click={null}
-          className="home-link mr-auto"
-        />
-        {menu}
-        <LinkMenu
-          title={t("header.menu.language")}
-          link={"#"}
-          click={switchLanguage}
-          className="language-selector ml-3"
-        />
-      </ul>
+      <div className="logo">
+        <img src={logo} alt="Logo" width="100" />
+      </div>
+      <div className="menu">
+        <ul className="d-flex align-items-baseline">
+          <LinkMenu
+            title={t("header.menu.home")}
+            link={"/"}
+            click={null}
+            className="home-link mr-auto"
+          />
+          {menu}
+        </ul>
+      </div>
+      <div className="language">
+        <ul>
+          <LinkMenu
+            title={t("header.menu.language")}
+            link={"#"}
+            click={switchLanguage}
+            className="language-selector ml-3"
+          />
+        </ul>
+      </div>
     </header>
   );
 };
