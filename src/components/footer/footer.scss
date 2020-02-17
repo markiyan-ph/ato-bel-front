@@ -1,0 +1,16 @@
+@import "../../assets/styles/shared";
+
+.footer {
+  border-top: 2px solid #eee;
+  height: $footer-height;
+  margin: 0 $content-indent 0 $content-indent;
+
+  p {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  a {
+    padding: 3px;
+  }
+}

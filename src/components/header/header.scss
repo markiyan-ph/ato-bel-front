@@ -16,7 +16,7 @@
         font-size: 1.2rem;
         list-style: none;
         margin: 0;
-        padding: 1rem;
+        padding: 1rem 2rem 1rem 1rem;
 
         a {
           color: inherit;
@@ -48,7 +48,12 @@
 
   .logo {
     width: $content-indent;
-    text-align: end;
+    text-align: center;
+
+    div {
+      padding-left: 20px;
+      width: 100%;
+    }
   }
   
   .menu {
@@ -74,6 +79,7 @@
   .language {
     @extend %menu-links;
 
+    text-align: center;
     width: $content-indent;
   }
 }

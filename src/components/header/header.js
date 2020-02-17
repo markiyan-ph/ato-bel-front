@@ -48,7 +48,9 @@ const Header = () => {
   return (
     <header className="header d-flex align-items-center">
       <div className="logo">
-        <img src={logo} alt="Logo" width="100" />
+        <div>
+          <img src={logo} alt="Logo" width="100" />
+        </div>
       </div>
       <div className="menu">
         <ul className="d-flex align-items-baseline">

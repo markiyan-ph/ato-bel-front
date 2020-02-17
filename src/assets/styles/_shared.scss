@@ -1,8 +1,11 @@
 $header-color: #444;
 $header-height: 75px;
 
-$main-page-width: 100%;
-$main-page-height: calc(100vh - 75px);
+$footer-height: 75px;
 
-$content-width: 70%;
-$content-indent: 15%;
+$main-page-width: 100%;
+$main-page-height: calc(100vh - #{$header-height});
+
+$content-indent: 150px;
+$content-width: calc(100% - #{$content-indent});
+$content-height: calc(#{$main-page-height} - #{$footer-height});
