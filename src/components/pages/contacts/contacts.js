@@ -17,7 +17,7 @@ const Contacts = () => {
             <a href="tel:+380638326925">+38 063 8326925</a>
           </h5>
           <h5>
-            <a href="mailto:office@ato-bel.com.ua">office@ato-bel.com.ua</a>
+            <a target="_blank" rel="noopener noreferrer" href="mailto:office@ato-bel.com.ua">office@ato-bel.com.ua</a>
           </h5>
         </div>
       </Content>

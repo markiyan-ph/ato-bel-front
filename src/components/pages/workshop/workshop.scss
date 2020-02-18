@@ -1,0 +1,43 @@
+@import "../../../assets/styles/shared";
+
+.company-info {
+  border-bottom: 2px solid #eee;
+  margin-bottom: 2rem;
+  padding: 1rem 0 1rem 0;
+
+  .group-photo {
+    padding-right: 1rem;
+    width: 50%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .description {
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    height: 100%;
+    width: 50%;
+  }
+}
+
+.galery-container {
+  // width: $content-width;
+
+  .img-container {
+    border: 3px double black;
+    height: 200px;
+    overflow: hidden;
+    margin: 10px;
+    width: 300px;
+    // width: calc(#{$content-width} / 2);
+
+    img {
+      display: block;
+      object-fit: scale-down;
+      width: 300px;
+      height: 200px;
+    }
+  }
+}

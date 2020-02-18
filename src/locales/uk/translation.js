@@ -3,7 +3,7 @@ export default {
     menu: {
       home: "Проектна майстерня Бєляєвих",
       projects: "Проекти",
-      people: "Майстерня",
+      workshop: "Майстерня",
       blog: "Блог",
       contacts: "Контакти",
       language: "eng"

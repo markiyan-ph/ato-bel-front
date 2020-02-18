@@ -1,7 +1,7 @@
 import React from 'react';
 
 import fbIcon from '../../assets/images/facebook-icon.png';
-import twIcon from '../../assets/images/twitter-icon.png';
+import bhIcon from '../../assets/images/behance-icon.png';
 import emailIcon from '../../assets/images/mail-icon.png';
 import './footer.scss';
 
@@ -13,7 +13,7 @@ const Footer = () => {
       <p>розроблено 2020р. ......... всякі інші штуки</p>
       <div className="d-flex">
         <a href="https://www.facebook.com/atobeldesign/"><img src={fbIcon} alt="fb-icon" width={iconWidth} /></a>
-        <a href="https://www.facebook.com/atobeldesign/"><img src={twIcon} alt="tw-icon" width={iconWidth} /></a>
+        <a href="https://www.behance.net/Andriy_Byelyayev"><img src={bhIcon} alt="behance-icon" width={iconWidth} /></a>
         <a href="https://www.facebook.com/atobeldesign/"><img src={emailIcon} alt="email-icon" width={iconWidth} /></a>
       </div>
     </div>

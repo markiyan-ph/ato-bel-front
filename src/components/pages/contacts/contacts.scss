@@ -1,5 +1,10 @@
 @import "../../../assets/styles/shared";
 
 .contacts {
+  color: $main-color;
   height: $content-height;
+
+  a {
+    color: inherit;
+  }
 }

@@ -3,10 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import Header from "../header";
 import Contacts from "../pages/contacts";
 import MainPage from "../pages/main-page";
+import Workshop from "../pages/workshop";
 import "./app.scss";
 
-function App({location}) {
-  console.log(location);
+function App() {
   return (
     <div className="app">
       <Header />
@@ -14,6 +14,7 @@ function App({location}) {
         <Route path="/" component={MainPage} exact />
         <Route path="/main" component={MainPage} exact />
         <Route path="/contacts" component={Contacts} exact />
+        <Route path="/workshop" component={Workshop} exact />
       </Switch>
     </div>
   );
