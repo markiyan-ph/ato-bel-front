@@ -6,7 +6,6 @@ const SliderButton = ({ onClickAction, spanClass, buttonTitle }) => {
   return (
     <button onClick={onClickAction}>
       <span className={spanClass}>{buttonTitle}</span>
-      {/* <span className="left-arrow">&lt;</span> */}
     </button>
   );
 };

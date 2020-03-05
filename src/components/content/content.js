@@ -2,9 +2,9 @@ import React from 'react';
 
 import './content.scss';
 
-const Content = ({children}) => {
+const Content = ({children, classNames}) => {
   return (
-    <div className="content">
+    <div className={`content ${classNames}`}>
       {children}
     </div>
   );
