@@ -22,7 +22,7 @@ const ConmpanyInfo = ({ imgSrc }) => {
 
 // TODO: Move Gallery to other file. 
 const Gallery = ({ images }) => {
-  const imgs = images.map(({imgSrc, _id}) => {
+  const imgs = images.map(({_id}) => {
     return (
       <div className="img-container" key={_id}>
         {/* <img src={`http://localhost:5000/uploads/${imgSrc}`} alt={imgSrc} /> */}
@@ -69,7 +69,7 @@ const Workshop = () => {
   return (
     <React.Fragment>
       <Content>
-        <ConmpanyInfo imgSrc="http://localhost:5000/uploads/workshop/2.jpg" />
+        <ConmpanyInfo imgSrc="http://localhost:5000/uploads/workshop/ATO-bel.jpg" />
 
         <Gallery images={listOfPhoto} />
       </Content>

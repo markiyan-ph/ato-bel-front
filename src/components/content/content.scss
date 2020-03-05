@@ -2,5 +2,5 @@
 
 .content {
   min-height: $content-height;
-  padding: 0 $content-indent 0 $content-indent;
+  padding: $header-height $container-indent 0 $container-indent;
 }
