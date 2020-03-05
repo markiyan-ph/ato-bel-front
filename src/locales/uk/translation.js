@@ -1,7 +1,7 @@
 export default {
   header: {
     menu: {
-      home: "Проектна майстерня Бєляєвих",
+      home: "Проектна Майстерня Бєляєвих",
       projects: "Проекти",
       workshop: "Майстерня",
       blog: "Блог",

@@ -3,7 +3,7 @@ export default {
     menu: {
       home: "Home",
       projects: "Gallery",
-      workshop: "Workshop",
+      workshop: "Office",
       blog: "Blog",
       contacts: "Contacts",
       language: "укр"

@@ -9,7 +9,7 @@ const Contacts = () => {
     <React.Fragment>
       <Content>
         <div className="contacts d-flex flex-column align-items-start justify-content-center">
-          <h3>Проектна майстерня Бєляєвих</h3>
+          <h3>Проектна Майстерня Бєляєвих</h3>
           <br />
           <h5>м. Львів, вул. Алли Горської 5а</h5>
           <h5>79000, Україна</h5>

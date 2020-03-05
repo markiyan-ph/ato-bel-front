@@ -1,8 +1,14 @@
 @import "../../assets/styles/shared";
 
 .header {
+  background-color: #ffffff;
   height: $header-height;
-  line-height: 2.5rem;
+  // line-height: 2.5rem;
+  padding: 0 $container-indent 0 $container-indent;
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  
 
   %menu-links {
     
@@ -47,21 +53,29 @@
   }
 
   .logo {
-    width: $content-indent;
+    left: 0;
+    position: absolute;
     text-align: center;
+    top: 0;
+    width: $container-indent;
 
     div {
-      padding-left: 20px;
       width: 100%;
+
+      img {
+        height: 75px;
+      }
     }
   }
   
   .menu {
     @extend %menu-links;
 
-    border-bottom: 2px solid #eee;
-    margin: 0 1rem 0 1rem;
-    width: $content-width;
+    &.underscore {
+      border-bottom: 2px solid #eee;
+    }
+    
+    width: $container-width;
 
     ul {
       li {
@@ -79,7 +93,10 @@
   .language {
     @extend %menu-links;
 
+    position: absolute;
+    right: 0;
+
     text-align: center;
-    width: $content-indent;
+    width: $container-indent;
   }
 }

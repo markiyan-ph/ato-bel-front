@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 import logo from "../../assets/images/fbLogoTrans.png";
 import "./header.scss";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,7 @@ const LinkMenu = ({ title, link, click, className }) => {
   );
 };
 
-const Header = () => {
+const Header = ({ location: { pathname } }) => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
 
@@ -49,10 +49,10 @@ const Header = () => {
     <header className="header d-flex align-items-center">
       <div className="logo">
         <div>
-          <img src={logo} alt="Logo" width="100" />
+          <img src={logo} alt="Logo" />
         </div>
       </div>
-      <div className="menu">
+      <div className={`menu ${pathname === '/' ? '' : 'underscore'}`}>
         <ul className="d-flex align-items-baseline">
           <LinkMenu
             title={t("header.menu.home")}
@@ -77,4 +77,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
