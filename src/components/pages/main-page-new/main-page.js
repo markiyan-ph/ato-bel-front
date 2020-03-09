@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
-import Slider from "../../slider";
 import NewSlider from "../../new-slider";
-import { getRandomInt } from "../../../tools/helpers";
+import { getRandomInt, getIndexById, reorderList } from "../../../tools/helpers";
 import "./main-page.scss";
 
-class MainPage extends Component {
+class NewMainPage extends Component {
 
   state = {
     projectId: null,
@@ -52,9 +51,13 @@ class MainPage extends Component {
       projects: { loading, projectsList }
     } = this.props;
     const { projectId } = this.state;
+    const slideIndex = getIndexById(projectsList, projectId);
+
+    const orderedProjectList = reorderList(projectsList, slideIndex);
+
     const content =
       !loading && projectId ? (
-        <Slider slides={projectsList} slideId={projectId} />
+        <NewSlider projects={orderedProjectList} />
       ) : (
         <p>Loading... </p>
       );
@@ -76,4 +79,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(NewMainPage);

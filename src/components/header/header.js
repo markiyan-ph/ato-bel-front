@@ -24,6 +24,7 @@ const Header = ({ location: { pathname } }) => {
   };
 
   const menuItems = [
+    { title: "newMainPage", link: "/newMain/", click: null },
     { title: t("header.menu.projects"), link: "/projects/", click: null },
     { title: t("header.menu.workshop"), link: "/workshop/", click: null },
     { title: t("header.menu.blog"), link: "/blog/", click: null },
@@ -52,7 +53,7 @@ const Header = ({ location: { pathname } }) => {
           <img src={logo} alt="Logo" />
         </div>
       </div>
-      <div className={`menu ${pathname === '/' ? '' : 'underscore'}`}>
+      <div className={`menu ${(pathname === '/' || pathname ===  '/newMain/') ? '' : 'underscore'}`}>
         <ul className="d-flex align-items-baseline">
           <LinkMenu
             title={t("header.menu.home")}

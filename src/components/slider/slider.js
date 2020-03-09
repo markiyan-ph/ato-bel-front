@@ -19,12 +19,12 @@ const Slider = ({ slides, slideId }) => {
   useEffect(() => {
     setSlideIndex(getIndexById(slides, slideId));
 
-    const interval = setInterval(() => {
-      onNext();
-    }, 5000);
+    // const interval = setInterval(() => {
+    //   onNext();
+    // }, 7000);
 
     return () => {
-      clearInterval(interval);
+      // clearInterval(interval);
     };
 
   }, [slides, slideId]);
@@ -65,7 +65,7 @@ const Slider = ({ slides, slideId }) => {
         unmountOnExit
         in={showSlide}
         appear={true}
-        timeout={350}
+        timeout={500}
         classNames="fade"
         onExited={() => {
           changeSlide(slideState);
