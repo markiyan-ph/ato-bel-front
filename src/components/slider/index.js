@@ -1,3 +1,3 @@
-import Slider from './slider';
+import MSlider from './slider';
 
-export default Slider;
+export default MSlider;

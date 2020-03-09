@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
-import Slider from "../../slider";
-import NewSlider from "../../new-slider";
-import { getRandomInt } from "../../../tools/helpers";
+import MSlider from "../../slider";
+import {
+  getRandomInt,
+  getIndexById,
+  reorderList
+} from "../../../tools/helpers";
 import "./main-page.scss";
 
-class MainPage extends Component {
-
+class NewMainPage extends Component {
   state = {
     projectId: null,
     loadProjects: false
@@ -24,7 +26,7 @@ class MainPage extends Component {
       this.setState({ loadProjects: true });
     } else {
       const randProject = getRandomInt(0, projectsList.length);
-      this.setState(({projectId}) => {
+      this.setState(({ projectId }) => {
         const id = projectId ? projectId : projectsList[randProject]._id;
         return { projectId: id };
       });
@@ -52,9 +54,13 @@ class MainPage extends Component {
       projects: { loading, projectsList }
     } = this.props;
     const { projectId } = this.state;
+    const slideIndex = getIndexById(projectsList, projectId);
+
+    const orderedProjectList = reorderList(projectsList, slideIndex);
+
     const content =
       !loading && projectId ? (
-        <Slider slides={projectsList} slideId={projectId} />
+        <MSlider projects={orderedProjectList} />
       ) : (
         <p>Loading... </p>
       );
@@ -76,4 +82,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(NewMainPage);

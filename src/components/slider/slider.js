@@ -1,82 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
+import Slider from "react-slick";
+import SliderBar from "./slider-bar";
 
-import { CSSTransition } from "react-transition-group";
-import SliderControl from "./slider-control";
+import { isMobile } from '../../tools/helpers';
 
 import "./slider.scss";
 
-const getIndexById = (array, id) => array.findIndex((proj) => proj._id === id);
-
-const Slider = ({ slides, slideId }) => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const [showSlide, setShowSlide] = useState(true);
-  const [slideState, setSlideState] = useState("shown");
-  
-  //console.log(slideIndex);
-  const { title, imgSrc } = slides[slideIndex];
-  const showButtons = slides.length > 1 ? true : false;
-
-  useEffect(() => {
-    setSlideIndex(getIndexById(slides, slideId));
-
-    // const interval = setInterval(() => {
-    //   onNext();
-    // }, 7000);
-
-    return () => {
-      // clearInterval(interval);
-    };
-
-  }, [slides, slideId]);
-
-  const changeSlide = state => {
-    switch (state) {
-      case "next":
-        setSlideIndex(slideIndex =>
-          slideIndex === slides.length - 1 ? 0 : slideIndex + 1
-        );
-        break;
-      case "prev":
-        setSlideIndex(slideIndex =>
-          slideIndex === 0 ? slides.length - 1 : slideIndex - 1
-        );
-        break;
-      default:
-        setSlideState("shown");
-    }
-  };
-
-  
-
-  const onNext = () => {
-    setShowSlide(false);
-    setSlideState("next");
-  };
-
-  const onPrev = () => {
-    setShowSlide(false);
-    setSlideState("prev");
-  };
+const CustomSlide = props => {
+  const { imgSrc, title } = props;
 
   return (
-    <div className="slider">
-      <CSSTransition
-        mountOnEnter
-        unmountOnExit
-        in={showSlide}
-        appear={true}
-        timeout={500}
-        classNames="fade"
-        onExited={() => {
-          changeSlide(slideState);
-          setShowSlide(true);
-        }}
-      >
-        <img src={`data:image/png;base64,${imgSrc}`} alt="Projects" />
-      </CSSTransition>
-      <SliderControl title={title} onNext={onNext} onPrev={onPrev} showButtons={showButtons} />
+    <div>
+      <img
+        src={`data:image/png;base64,${imgSrc}`}
+        alt={title}
+      />
     </div>
   );
 };
 
-export default Slider;
+export default class MSlider extends Component {
+  state = {
+    title: this.props.projects[0].title
+  };
+
+  next = () => {
+    this.slider.slickNext();
+  };
+
+  previous = () => {
+    this.slider.slickPrev();
+  };
+
+  render() {
+    const { projects } = this.props;
+
+    const settings = {
+      accessibility: true,
+      dots: false,
+      // fade: true,
+      infinite: true,
+      speed: 500,
+      // autoplay: true,
+      // autoplaySpeed: 3000,
+      pauseOnHover: false,
+      // cssEase: "linear",
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      touchMove: isMobile(),
+      focusOnSelect: true,
+      beforeChange: (_oldIndex, newIndex) => {
+        this.setState({ title: this.props.projects[newIndex].title });
+      }
+    };
+
+    const slides = projects.map(({ _id, imgSrc, title }) => (
+      <CustomSlide key={_id} imgSrc={imgSrc} title={title} />
+    ));
+
+    return (
+      <div
+        className="slider"
+        onKeyDown={(e) => {
+          if (window.event && window.event.keyCode == 9) {
+            e.preventDefault();
+            return false;
+          }
+        }}
+      >
+        <Slider
+          style={{ overflow: "hidden" }}
+          ref={c => (this.slider = c)}
+          {...settings}
+        >
+          {slides}
+        </Slider>
+        <SliderBar
+          prev={this.previous}
+          next={this.next}
+          showButtons={true}
+          title={this.state.title}
+        />
+      </div>
+    );
+  }
+}

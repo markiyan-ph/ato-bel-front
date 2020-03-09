@@ -24,7 +24,6 @@ const Header = ({ location: { pathname } }) => {
   };
 
   const menuItems = [
-    { title: "newMainPage", link: "/newMain/", click: null },
     { title: t("header.menu.projects"), link: "/projects/", click: null },
     { title: t("header.menu.workshop"), link: "/workshop/", click: null },
     { title: t("header.menu.blog"), link: "/blog/", click: null },

@@ -4,7 +4,7 @@ import Header from "../header";
 import Contacts from "../pages/contacts";
 import MainPage from "../pages/main-page";
 import Workshop from "../pages/workshop";
-import NewMainPage from "../pages/main-page-new";
+
 import "./app.scss";
 
 function App() {
@@ -13,7 +13,6 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" component={MainPage} exact />
-        <Route path="/newMain" component={NewMainPage} exact />
         <Route path="/main" component={MainPage} exact />
         <Route path="/contacts" component={Contacts} exact />
         <Route path="/workshop" component={Workshop} exact />

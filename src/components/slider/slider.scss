@@ -1,49 +1,10 @@
-@import "slider-constants";
-
 .slider {
-  height: 100%;
-  overflow: hidden;
-
   img {
-    display: block;
-    height: 100%;
-    margin: 0 auto;
-    max-height: 100%;
-    max-width: 100%;
     object-fit: cover;
     object-position: left bottom;
-    padding: 0;
+    overflow: hidden;
+    // padding: 0 15px 0 15px;
+    height: 100vh;
     width: 100%;
-
-    &.fade-appear {
-      opacity: 0;
-    }
-
-    &.fade-appear-active {
-      opacity: 1;
-      transition: opacity $fade-transition-time linear;
-    }
-
-    &.fade-exit {
-      opacity: 1;
-    }
-
-    &.fade-exit-active {
-      opacity: 0;
-      transition: opacity $fade-transition-time linear;
-    }
-
-    &.fade-exit-done {
-      opacity: 0;
-    }
-
-    &.fade-enter {
-      opacity: 0;
-    }
-
-    &.fade-enter-active {
-      opacity: 1;
-      transition: opacity $fade-transition-time ease-in;
-    }
   }
 }
