@@ -1,6 +1,7 @@
 import React from "react";
 import Content from "../../content";
 import Footer from "../../footer";
+import Gallery from '../../gallery';
 import "./workshop.scss";
 
 const ConmpanyInfo = ({ imgSrc }) => {
@@ -45,50 +46,63 @@ const ConmpanyInfo = ({ imgSrc }) => {
   );
 };
 
-// TODO: Move Gallery to other file.
-const Gallery = ({ images }) => {
-  const imgs = images.map(({ _id }) => {
-    return (
-      <div className="img-container" key={_id}>
-        {/* <img src={`http://localhost:5000/uploads/${imgSrc}`} alt={imgSrc} /> */}
-      </div>
-    );
-  });
-
-  return (
-    <div className="galery-container d-flex flex-wrap justify-content-between">
-      {imgs}
-    </div>
-  );
-};
-
 // TODO: Load data from the server
 const Workshop = () => {
   const listOfPhoto = [
     {
       _id: 1,
-      title: "Реконструкція аквапарку!!!!!",
-      imgSrc: "04.jpg",
+      title: "Андрій",
+      imgSrc: "people/Андрій ФБ_1.jpg",
       description: "image description"
     },
     {
       _id: 2,
-      title: "Приватна резиденція в м. Дубно",
-      imgSrc: "03.jpg",
+      title: "Тарас",
+      imgSrc: "people/Тарас_ФБ_1.jpg",
       description: "Second Image"
     },
     {
       _id: 3,
-      title: "Апартамент готель. Зелена 67",
-      imgSrc: "final01.jpg",
+      title: "ОксанаК",
+      imgSrc: "people/ОксанаК_ФБ_1.jpg",
       description: "Third Image"
     },
     {
       _id: 4,
-      title: "Магнолія Spring",
-      imgSrc: "2.jpg",
+      title: "Дмитро",
+      imgSrc: "people/Дмитро_ФБ_1.jpg",
       description: "4th Image"
-    }
+    },
+    {
+      _id: 5,
+      title: "Липа",
+      imgSrc: "people/Липа_ФБ_1.jpg",
+      description: "Second Image"
+    },
+    {
+      _id: 6,
+      title: "Марічка",
+      imgSrc: "people/Марічка_ФБ_1.jpg",
+      description: "Third Image"
+    },
+    {
+      _id: 7,
+      title: "Остап",
+      imgSrc: "people/Остап_ФБ_1.jpg",
+      description: "4th Image"
+    },
+    {
+      _id: 8,
+      title: "Галя",
+      imgSrc: "people/Галя_ФБ_1.jpg",
+      description: "4th Image"
+    },
+    {
+      _id: 9,
+      title: "Оксана",
+      imgSrc: "people/Оксана_ФБ_1.jpg",
+      description: "4th Image"
+    },
   ];
 
   return (

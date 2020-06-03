@@ -1,0 +1,19 @@
+.galery-container {
+  // width: $content-width;
+
+  .img-container {
+    border: 3px double black;
+    height: 200px;
+    overflow: hidden;
+    margin: 10px;
+    width: 300px;
+    // width: calc(#{$content-width} / 2);
+
+    img {
+      display: block;
+      object-fit: scale-down;
+      width: 300px;
+      height: 200px;
+    }
+  }
+}

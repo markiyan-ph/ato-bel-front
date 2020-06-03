@@ -62,7 +62,7 @@ export default class MSlider extends Component {
       <div
         className="slider"
         onKeyDown={(e) => {
-          if (window.event && window.event.keyCode == 9) {
+          if (window.event && window.event.keyCode === 9) {
             e.preventDefault();
             return false;
           }

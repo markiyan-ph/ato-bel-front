@@ -10,6 +10,7 @@ export function* fetchProjectsSaga() {
   
   } catch (err) {
     console.log(err);
+    yield put(actions.fetchProjectsFail());
   }
 }
 
@@ -22,5 +23,6 @@ export function* fetchRandomProjectSaga() {
   
   } catch (err) {
     console.log(err);
+    yield put(actions.fetchProjectsFail());
   }
 }

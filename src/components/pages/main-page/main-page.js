@@ -51,13 +51,18 @@ class NewMainPage extends Component {
 
   render() {
     const {
-      projects: { loading, projectsList }
+      projects: { loading, projectsList },
+      error
     } = this.props;
     const { projectId } = this.state;
     const slideIndex = getIndexById(projectsList, projectId);
 
     const orderedProjectList = reorderList(projectsList, slideIndex);
 
+    if (error) {
+      return <h5>Just error.</h5>;
+    }
+    
     const content =
       !loading && projectId ? (
         <MSlider projects={orderedProjectList} />

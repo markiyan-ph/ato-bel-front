@@ -4,7 +4,14 @@ export const fetchProjects = () => ({ type: actionTypes.FETCH_PROJECTS });
 
 export const fetchProjectsSuccess = projects => ({
   type: actionTypes.FETCH_PROJECTS_SUCCESS,
-  projects: projects
+  projects: projects,
+});
+
+export const fetchProjectsFail = () => ({
+  type: actionTypes.FETCH_PROJECTS_FAIL,  
+  projects: [],
+  error: true
+  
 });
 
 export const fetchRandomProject = () => ({ type: actionTypes.FETCH_RANDOM_PROJECT });

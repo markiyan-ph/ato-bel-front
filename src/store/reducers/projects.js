@@ -10,14 +10,24 @@ const initialState = {
 const fetchProjectsSuccess = (state, action) => {
   return updateObject(state, {
     projectsList: [...action.projects],
-    loading: false
+    loading: false,
+    error: false
   });
 };
 
 const fetchRandomProjectSuccess = (state, action) => {
   return updateObject(state, {
     projectsList: [...action.projects],
-    loading: false
+    loading: false,
+    error: false
+  });
+};
+
+const fetchRandomProjectFail = (state, action) => {
+  return updateObject(state, {
+    projectsList: [...action.projects],
+    loading: false,
+    error: true
   });
 };
 
@@ -25,6 +35,7 @@ const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PROJECTS_SUCCESS: return fetchProjectsSuccess(state, action);
     case actionTypes.FETCH_RANDOM_PROJECT_SUCCESS: return fetchRandomProjectSuccess(state, action);
+    case actionTypes.FETCH_PROJECTS_FAIL: return fetchRandomProjectFail(state, action);
     default:
       return state;
   }
