@@ -1,7 +1,7 @@
 import React from "react";
 import Content from "../../content";
 import Footer from "../../footer";
-import Gallery from '../../gallery';
+import Gallery from "../../gallery";
 import "./workshop.scss";
 
 const ConmpanyInfo = ({ imgSrc }) => {
@@ -52,65 +52,70 @@ const Workshop = () => {
     {
       _id: 1,
       title: "Андрій",
-      imgSrc: "people/Андрій ФБ_1.jpg",
-      description: "image description"
+      imgSrc: "workshop/people/Андрій ФБ_1.jpg",
+      description: "image description",
     },
     {
       _id: 2,
       title: "Тарас",
-      imgSrc: "people/Тарас_ФБ_1.jpg",
-      description: "Second Image"
+      imgSrc: "workshop/people/Тарас_ФБ_1.jpg",
+      description: "Second Image",
     },
     {
       _id: 3,
       title: "ОксанаК",
-      imgSrc: "people/ОксанаК_ФБ_1.jpg",
-      description: "Third Image"
+      imgSrc: "workshop/people/ОксанаК_ФБ_1.jpg",
+      description: "Third Image",
     },
     {
       _id: 4,
       title: "Дмитро",
-      imgSrc: "people/Дмитро_ФБ_1.jpg",
-      description: "4th Image"
+      imgSrc: "workshop/people/Дмитро_ФБ_1.jpg",
+      description: "4th Image",
     },
     {
       _id: 5,
       title: "Липа",
-      imgSrc: "people/Липа_ФБ_1.jpg",
-      description: "Second Image"
+      imgSrc: "workshop/people/Липа_ФБ_1.jpg",
+      description: "Second Image",
     },
     {
       _id: 6,
       title: "Марічка",
-      imgSrc: "people/Марічка_ФБ_1.jpg",
-      description: "Third Image"
+      imgSrc: "workshop/people/Марічка_ФБ_1.jpg",
+      description: "Third Image",
     },
     {
       _id: 7,
       title: "Остап",
-      imgSrc: "people/Остап_ФБ_1.jpg",
-      description: "4th Image"
+      imgSrc: "workshop/people/Остап_ФБ_1.jpg",
+      description: "4th Image",
     },
     {
       _id: 8,
       title: "Галя",
-      imgSrc: "people/Галя_ФБ_1.jpg",
-      description: "4th Image"
+      imgSrc: "workshop/people/Галя_ФБ_1.jpg",
+      description: "4th Image",
     },
     {
       _id: 9,
       title: "Оксана",
-      imgSrc: "people/Оксана_ФБ_1.jpg",
-      description: "4th Image"
+      imgSrc: "workshop/people/Оксана_ФБ_1.jpg",
+      description: "4th Image",
     },
   ];
 
   return (
     <div className="wrapper">
       <Content classNames={"flex-child"}>
-        <ConmpanyInfo imgSrc="http://localhost:5000/uploads/workshop/ATO-bel.jpg" />
+        <ConmpanyInfo imgSrc="http://localhost:5000/uploads/workshop/ATO-Bel-Team.jpg" />
 
-        <Gallery images={listOfPhoto} />
+        <Gallery
+          images={listOfPhoto}
+          columns={5}
+          relationship={{ height: 1, width: 1 }}
+          placement={'order'}
+        />
       </Content>
       <Footer />
     </div>

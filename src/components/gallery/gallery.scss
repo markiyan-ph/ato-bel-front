@@ -1,19 +1,25 @@
+@import "../../assets/styles/shared";
+
 .galery-container {
-  // width: $content-width;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
 
   .img-container {
-    border: 3px double black;
-    height: 200px;
+    padding: 0 0 30% 0;
+    margin-bottom: 2rem;
     overflow: hidden;
-    margin: 10px;
-    width: 300px;
-    // width: calc(#{$content-width} / 2);
+    position: relative;
+    width: 30%;
 
     img {
-      display: block;
-      object-fit: scale-down;
-      width: 300px;
-      height: 200px;
+      height: 100%;
+      left: 0;
+      object-fit: cover;
+      object-position: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
     }
   }
 }

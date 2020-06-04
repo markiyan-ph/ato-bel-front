@@ -49,18 +49,15 @@ const Gallery = ({
   const imgs = images.map(({ _id, imgSrc }, index) => {
     let imgStyle = {};
     
-    if (placement === "order" && columns !== 1) {
-      const padding = 3;
-      let pL = padding,
-        pR = padding;
+    if (placement === "order") {
+      let pL = 5,
+        pR = 5;
 
       if ((index + 1) % columns === 1) pL = 0;
       if ((index + 1) % columns === 0) pR = 0;
 
-      imgStyle.paddingLeft = `${pL}%`;
-      imgStyle.paddingRight = `${pR}%`;
-      imgStyle.paddingTop = `${padding}%`;
-      imgStyle.paddingBot = `${padding}%`;
+      imgStyle.paddingLeft = `${pL}px`;
+      imgStyle.paddingRight = `${pR}px`;
     }
     
     return (
