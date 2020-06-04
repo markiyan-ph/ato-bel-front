@@ -43,7 +43,7 @@ const Gallery = ({
   // Define size of image using container width and container padding bottom
   const imgSizeStyle = {
     paddingBottom: `${imgPaddingBot}%`,
-    width: `${imgWidth}%`,
+    width: `${imgWidth}%`
   };
 
   const imgs = images.map(({ _id, imgSrc }, index) => {
@@ -58,6 +58,8 @@ const Gallery = ({
 
       imgStyle.paddingLeft = `${pL}px`;
       imgStyle.paddingRight = `${pR}px`;
+    } else {
+      imgSizeStyle.marginBottom = `${2}rem`;
     }
     
     return (

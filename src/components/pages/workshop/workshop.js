@@ -112,7 +112,7 @@ const Workshop = () => {
 
         <Gallery
           images={listOfPhoto}
-          columns={5}
+          columns={3}
           relationship={{ height: 1, width: 1 }}
           placement={'order'}
         />

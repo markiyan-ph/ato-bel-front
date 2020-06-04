@@ -1,9 +1,10 @@
 @import "../../assets/styles/shared";
 
-.galery-container {
+.gallery-container {
   display: flex;
   justify-content: center;
   padding-top: 1rem;
+  margin-bottom: 0;
 
   .img-container {
     padding: 0 0 30% 0;
