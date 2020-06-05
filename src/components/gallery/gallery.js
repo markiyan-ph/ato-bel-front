@@ -44,7 +44,7 @@ const Gallery = ({
       break;
   }
 
-  imgPaddingBot = (imgWidth * relationship.height) / relationship.width;
+  imgPaddingBot = ((imgWidth * relationship.height) / relationship.width)+3;
 
   // Define size of image using container width and container padding bottom
   const imgContainerStyle = {
@@ -52,14 +52,14 @@ const Gallery = ({
     width: `${imgWidth}%`,
   };
 
-  const imgs = images.map(({ _id, imgSrc }, index) => {
+  const imgs = images.map(({ _id, imgSrc, title }, index) => {
     let imgStyle = {},
       mr,
       mb,
       lastRow;
 
     if (placement === "order" && columns !== 1) {
-      lastRow = images.length - columns;
+      lastRow = images.length - columns + (images.length % columns);
       columns = columns > 5 ? 3 : columns;
       mr = (100 - imgWidth * columns) / (columns - 1);
       mb = mr;
@@ -83,6 +83,8 @@ const Gallery = ({
           src={`http://localhost:5000/uploads/${imgSrc}`}
           alt={imgSrc}
         />
+
+        <span>{title}</span>
       </div>
     );
   });
