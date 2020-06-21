@@ -71,7 +71,8 @@ const Workshop = () => {
       _id: 4,
       title: "Дмитро",
       imgSrc: "workshop/people/Дмитро_ФБ_1.jpg",
-      description: "4th Image",
+      description: "loremAmet officia et et laboris eiusmod excepteur consectetur eiusmod fugiat ipsum labore aliqua aliquip. Lorem voluptate quis laborum qui laborum deserunt anim sunt elit.",
+      // description: "1234",
     },
     {
       _id: 5,
@@ -112,7 +113,7 @@ const Workshop = () => {
 
         <Gallery
           images={listOfPhoto}
-          columns={2}
+          columns={5}
           relationship={{ height: 1, width: 1 }}
           placement={'order'}
         />

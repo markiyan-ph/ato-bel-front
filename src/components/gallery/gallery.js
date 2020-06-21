@@ -4,13 +4,13 @@ import "./gallery.scss";
 const Gallery = ({
   images,
   columns = 3,
-  relationship = { height: 1, width: 1 },
+  // relationship = { height: 1, width: 1 },
   placement = "between",
 }) => {
   let imgWidth = 30,
-    imgPaddingBot = 30,
+    // imgPaddingBot = 30,
     justifyType = placement === "between" ? "between" : "start",
-    galleryStyle = placement === 'between' ? {} : {marginBottom: '2rem'};
+    galleryStyle = placement === "between" ? {} : { marginBottom: "2rem" };
 
   // Change width depend on amount of pictures in a row
   // TODO: remove not needed comments
@@ -44,47 +44,53 @@ const Gallery = ({
       break;
   }
 
-  imgPaddingBot = ((imgWidth * relationship.height) / relationship.width)+3;
+  // imgPaddingBot = (imgWidth * relationship.height) / relationship.width;
 
   // Define size of image using container width and container padding bottom
-  const imgContainerStyle = {
-    paddingBottom: `${imgPaddingBot}%`,
+  const imgCardStyle = {
+    // paddingBottom: `${imgPaddingBot}%`,
     width: `${imgWidth}%`,
   };
 
-  const imgs = images.map(({ _id, imgSrc, title }, index) => {
+  const imgs = images.map(({ _id, imgSrc, title, description }, index) => {
     let imgStyle = {},
       mr,
       mb,
-      lastRow;
+      lastRowStartIndex;
 
     if (placement === "order" && columns !== 1) {
-      lastRow = images.length - columns + (images.length % columns);
       columns = columns > 5 ? 3 : columns;
+      const lastRowAmount = images.length % columns;
+      const lastRow = lastRowAmount === 0 ? columns : lastRowAmount;
+      lastRowStartIndex = images.length - lastRow;
       mr = (100 - imgWidth * columns) / (columns - 1);
       mb = mr;
 
       if ((index + 1) % columns === 0) mr = 0;
-      if (index + 1 > lastRow) mb = 0;
+      if (index + 1 > lastRowStartIndex) mb = 0;
     }
 
     return (
       <div
-        className="img-container"
-        style={{
-          ...imgContainerStyle,
-          marginBottom: mb === 0 ? 0 : `${mb}%`,
-          marginRight: mr === 0 ? 0 : `${mr}%`
-        }}
+        className="img-card"
         key={_id}
+        style={{
+          ...imgCardStyle,
+          marginBottom: mb === 0 ? 0 : `${mb}%`,
+          marginRight: mr === 0 ? 0 : `${mr}%`,
+        }}
       >
-        <img
-          style={imgStyle}
-          src={`http://localhost:5000/uploads/${imgSrc}`}
-          alt={imgSrc}
-        />
-
-        <span>{title}</span>
+        <div className="img-container">
+          <img
+            style={imgStyle}
+            src={`http://localhost:5000/uploads/${imgSrc}`}
+            alt={imgSrc}
+          />
+        </div>
+        <div className="img-text">
+          <span>{title}</span>
+          <span>{description}</span>
+        </div>
       </div>
     );
   });
