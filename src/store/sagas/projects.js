@@ -3,7 +3,20 @@ import * as actions from '../actions';
 
 export function* fetchProjectsSaga() {
   try {
-    const resp = yield fetch('http://localhost:5000/api/projects/');
+    const resp = yield fetch('http://localhost:5000/api/projects');
+    // const resp = yield fetch('http://192.168.2.116:5000/api/projects/');
+    const respJson = yield resp.json();
+    yield put(actions.fetchProjectsSuccess(respJson.projects));
+  
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
+export function* fetchMainPageProjectsSaga() {
+  try {
+    const resp = yield fetch('http://localhost:5000/api/projects?mainPage=true');
     // const resp = yield fetch('http://192.168.2.116:5000/api/projects/');
     const respJson = yield resp.json();
     yield put(actions.fetchProjectsSuccess(respJson.projects));

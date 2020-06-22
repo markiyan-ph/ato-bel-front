@@ -82,7 +82,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchProjects: () => dispatch(actions.fetchProjects()),
+    onFetchProjects: () => dispatch(actions.fetchMainPageProjects()),
     onFetchRandomProject: () => dispatch(actions.fetchRandomProject())
   };
 };

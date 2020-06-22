@@ -1,5 +1,6 @@
 export { 
   fetchProjects,
+  fetchMainPageProjects,
   fetchProjectsSuccess,
   fetchProjectsFail,
   fetchRandomProject,
