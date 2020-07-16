@@ -4,7 +4,7 @@ import "./gallery.scss";
 const Gallery = ({
   images,
   columns = 3,
-  // relationship = { height: 1, width: 1 },
+  containerHeight = 100,
   placement = "between",
 }) => {
   let imgWidth = 30,
@@ -80,7 +80,7 @@ const Gallery = ({
           marginRight: mr === 0 ? 0 : `${mr}%`,
         }}
       >
-        <div className="img-container">
+        <div className="img-container" style={{ paddingBottom: `${containerHeight}%` }}>
           <img
             style={imgStyle}
             src={`http://localhost:5000/uploads/${imgSrc}`}

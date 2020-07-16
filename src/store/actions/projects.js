@@ -1,19 +1,26 @@
 import * as actionTypes from "./actionTypes";
 
-export const fetchProjects = () => ({ type: actionTypes.FETCH_PROJECTS });
+export const fetchProjects = (page_size, page_num) => ({ type: actionTypes.FETCH_PROJECTS, page_size, page_num });
 
 export const fetchMainPageProjects = () => ({ type: actionTypes.FETCH_MAIN_PAGE_PROJECTS });
+
+export const fetchProjectsLoading = () => ({ type: actionTypes.FETCH_PROJECTS_LOADING });
 
 export const fetchProjectsSuccess = projects => ({
   type: actionTypes.FETCH_PROJECTS_SUCCESS,
   projects: projects,
 });
 
+export const fetchMainPageProjectsSuccess = projects => ({
+  type: actionTypes.FETCH_MAIN_PAGE_PROJECTS_SUCCESS,
+  projects: projects,
+});
+
 export const fetchProjectsFail = () => ({
-  type: actionTypes.FETCH_PROJECTS_FAIL,  
+  type: actionTypes.FETCH_PROJECTS_FAIL,
   projects: [],
   error: true
-  
+
 });
 
 export const fetchRandomProject = () => ({ type: actionTypes.FETCH_RANDOM_PROJECT });

@@ -13,6 +13,7 @@ const CustomSlide = props => {
     <div>
       <img
         src={`data:image/png;base64,${imgSrc}`}
+        // src={`http://localhost:5000/uploads${imgSrc}`}
         alt={title}
       />
     </div>

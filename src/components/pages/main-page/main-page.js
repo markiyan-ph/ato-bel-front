@@ -17,17 +17,17 @@ class NewMainPage extends Component {
 
   componentDidMount() {
     const {
-      projects: { projectsList },
+      projects: { mainPageProjects },
       onFetchRandomProject
     } = this.props;
 
-    if (projectsList.length === 0) {
+    if (mainPageProjects.length === 0) {
       onFetchRandomProject();
       this.setState({ loadProjects: true });
     } else {
-      const randProject = getRandomInt(0, projectsList.length);
+      const randProject = getRandomInt(0, mainPageProjects.length);
       this.setState(({ projectId }) => {
-        const id = projectId ? projectId : projectsList[randProject]._id;
+        const id = projectId ? projectId : mainPageProjects[randProject]._id;
         return { projectId: id };
       });
     }
@@ -35,29 +35,29 @@ class NewMainPage extends Component {
 
   componentDidUpdate(prevState) {
     const {
-      projects: { projectsList },
+      projects: { mainPageProjects },
       onFetchProjects
     } = this.props;
 
     const { loadProjects } = this.state;
 
-    if (prevState.projects.projectsList.length !== projectsList.length) {
-      if (projectsList.length === 1 && loadProjects) {
+    if (prevState.projects.mainPageProjects.length !== mainPageProjects.length) {
+      if (mainPageProjects.length === 1 && loadProjects) {
         onFetchProjects();
-        this.setState({ projectId: projectsList[0]._id });
+        this.setState({ projectId: mainPageProjects[0]._id });
       }
     }
   }
 
   render() {
     const {
-      projects: { loading, projectsList },
+      projects: { loading, mainPageProjects },
       error
     } = this.props;
     const { projectId } = this.state;
-    const slideIndex = getIndexById(projectsList, projectId);
+    const slideIndex = getIndexById(mainPageProjects, projectId);
 
-    const orderedProjectList = reorderList(projectsList, slideIndex);
+    const orderedProjectList = reorderList(mainPageProjects, slideIndex);
 
     if (error) {
       return <h5>Just error.</h5>;
