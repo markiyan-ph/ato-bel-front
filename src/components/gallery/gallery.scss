@@ -16,6 +16,12 @@
       position: relative;
       width: 100%;
 
+      &:hover {
+        .img-text-over {
+          display: flex;
+        }
+      }
+
       img {
         // height: 100%;
         left: 0;
@@ -25,12 +31,29 @@
         top: 0;
         width: 100%;
       }
+
+      .img-text-over {
+        align-items: center;
+        background: #ffffffcc;
+        display: none;
+        font-size: 1.5vw;
+        font-weight: 600;
+        justify-content: center;
+        height: 100%;
+        left: 0;
+        margin: 0 auto;
+        position: absolute;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+
+        & > div {
+          text-align: center;
+        }
+      }
     }
 
-    .img-text {
-      // position: relative;
-      // top: -50%;
-      // color: yellow;
+    .img-text-below {
       z-index: 100;
       text-align: center;
       width: 100%;

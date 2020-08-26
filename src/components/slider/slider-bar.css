@@ -1,0 +1,15 @@
+.slider-bar {
+  background: #00000080;
+  bottom: 0;
+  height: 40px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+}
+
+.slider-bar .slider-title {
+  color: #ffffffbb;
+  font-size: 20px;
+  padding: 5px 10px 0 10px;
+}
+/*# sourceMappingURL=slider-bar.css.map */

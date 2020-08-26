@@ -3,22 +3,24 @@ import Content from "../../content";
 import Gallery from "../../gallery";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
+import { withRouter } from 'react-router-dom';
+import { compose } from "redux";
 
 class GalleryPage extends Component {
- 
+
   componentDidMount() {
     const {
       onFetchProjects,
     } = this.props;
 
-    onFetchProjects(2, 2);
+    onFetchProjects(2, 1);
   }
 
   // componentDidUpdate(prevProps, prevState) {
   //   const {
   //     projects: { projectsList },
   //   } = this.props;
-    
+
   //   console.log('====prevState', prevState.projects.length);
   //   console.log('====projectsList',projectsList.length);
   //   if (prevState.projects.length !== projectsList.length) {
@@ -30,10 +32,15 @@ class GalleryPage extends Component {
   //   }
   // }
 
+  onImageCardClick = (id) => {
+    const { history } = this.props;
+
+    history.push(id);
+  }
+
   render() {
     const {
-      projects: { projectsList },
-      loading
+      projectsList,
     } = this.props;
     const listOfPhoto = projectsList;
 
@@ -42,19 +49,20 @@ class GalleryPage extends Component {
         <Gallery
           images={listOfPhoto}
           columns={2}
-          containerHeight={70}
+          containerHeight={100}
           placement={"order"}
+          imageCardClick={this.onImageCardClick}
         />
       </Content>
     );
   }
 }
 
-const mapStateToProps = ({ projects, loading, error }) => {
+const mapStateToProps = ({ projects: { projectsList, loading, error } }) => {
   return {
-    projects,
+    projectsList,
     loading,
-    error,
+    error
   };
 };
 
@@ -65,4 +73,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GalleryPage);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(GalleryPage);

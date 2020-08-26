@@ -43,3 +43,18 @@ export function* fetchRandomProjectSaga() {
     yield put(actions.fetchProjectsFail());
   }
 }
+
+export function* fetchProjectByIdSaga({id}) {
+  try {
+    yield put(actions.fetchProjectsLoading());
+
+    const resp = yield fetch('http://localhost:5000/api/projects/random');
+    
+    const respJson = yield resp.json();
+    yield put(actions.fetchRandomProjectSuccess(respJson.projects));
+
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}

@@ -1,11 +1,24 @@
 import React from "react";
 import "./gallery.scss";
 
+/**
+ *
+ * @param {
+ * images: list of images
+ * columns: amount of gallery columns
+ * containerHeight: height of container in %. Max 100% then container is square
+ * placement: relation of image placement
+ * titlePlacement: position of image title. Below image or over image.
+ * imageCardClick: on click function
+ * } param0
+ */
 const Gallery = ({
   images,
   columns = 3,
   containerHeight = 100,
   placement = "between",
+  titlePlacement = "over",
+  imageCardClick = null
 }) => {
   let imgWidth = 30,
     // imgPaddingBot = 30,
@@ -70,6 +83,19 @@ const Gallery = ({
       if (index + 1 > lastRowStartIndex) mb = 0;
     }
 
+    const imageTitle = (
+      <div
+        className={
+          titlePlacement === "over" ? "img-text-over" : "img-text-below"
+        }
+      >
+        <div>
+          <span>{title}</span>
+          <span>{description}</span>
+        </div>
+      </div>
+    );
+
     return (
       <div
         className="img-card"
@@ -79,18 +105,20 @@ const Gallery = ({
           marginBottom: mb === 0 ? 0 : `${mb}%`,
           marginRight: mr === 0 ? 0 : `${mr}%`,
         }}
+        onClick={imageCardClick ? () => imageCardClick(_id) : null}
       >
-        <div className="img-container" style={{ paddingBottom: `${containerHeight}%` }}>
+        <div
+          className="img-container"
+          style={{ paddingBottom: `${containerHeight}%` }}
+        >
           <img
             style={imgStyle}
             src={`http://localhost:5000/uploads/${imgSrc}`}
             alt={imgSrc}
           />
+          {titlePlacement === "over" ? imageTitle : null}
         </div>
-        <div className="img-text">
-          <span>{title}</span>
-          <span>{description}</span>
-        </div>
+        {titlePlacement === "over" ? null : imageTitle}
       </div>
     );
   });

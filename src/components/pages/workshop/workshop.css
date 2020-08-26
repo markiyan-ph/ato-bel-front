@@ -1,0 +1,23 @@
+.company-info {
+  border-bottom: 2px solid #eee;
+  margin-bottom: 1rem;
+  padding: 1rem 0 1rem 0;
+}
+
+.company-info .group-photo {
+  padding-right: 1rem;
+  width: 50%;
+}
+
+.company-info .group-photo img {
+  width: 100%;
+}
+
+.company-info .description {
+  font-size: 1rem;
+  padding-left: 40px;
+  height: 100%;
+  text-align: justify;
+  width: 50%;
+}
+/*# sourceMappingURL=workshop.css.map */

@@ -51,8 +51,7 @@ class NewMainPage extends Component {
 
   render() {
     const {
-      projects: { loading, mainPageProjects },
-      error
+      projects: { loading, mainPageProjects, error },
     } = this.props;
     const { projectId } = this.state;
     const slideIndex = getIndexById(mainPageProjects, projectId);
@@ -75,8 +74,7 @@ class NewMainPage extends Component {
 }
 const mapStateToProps = state => {
   return {
-    projects: state.projects,
-    error: state.error
+    projects: state.projects
   };
 };
 

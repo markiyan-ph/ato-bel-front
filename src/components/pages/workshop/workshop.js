@@ -116,6 +116,7 @@ const Workshop = () => {
           columns={5}
           relationship={{ height: 1, width: 1 }}
           placement={'order'}
+          titlePlacement='below'
         />
       </Content>
       <Footer />

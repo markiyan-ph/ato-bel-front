@@ -1,0 +1,10 @@
+.slider img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: left bottom;
+     object-position: left bottom;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+}
+/*# sourceMappingURL=slider.css.map */

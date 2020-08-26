@@ -1,0 +1,58 @@
+.gallery-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 1rem;
+  margin-bottom: 0;
+}
+
+.gallery-container .img-card {
+  margin-bottom: 2rem;
+}
+
+.gallery-container .img-card .img-container {
+  padding: 0 0 100% 0;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.gallery-container .img-card .img-container img {
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.gallery-container .img-card .img-container .img-text-over {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.gallery-container .img-card .img-text-below {
+  z-index: 100;
+  text-align: center;
+  width: 100%;
+}
+/*# sourceMappingURL=gallery.css.map */

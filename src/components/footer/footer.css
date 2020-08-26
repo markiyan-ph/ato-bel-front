@@ -1,0 +1,21 @@
+.footer {
+  height: 75px;
+  padding: 0 150px 0 150px;
+  width: 100%;
+}
+
+.footer .footer-container {
+  border-top: 2px solid #eee;
+  height: 100%;
+  width: 100%;
+}
+
+.footer .footer-container p {
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.footer .footer-container a {
+  padding: 3px;
+}
+/*# sourceMappingURL=footer.css.map */

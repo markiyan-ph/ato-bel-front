@@ -1,0 +1,85 @@
+.header {
+  background-color: #ffffff;
+  height: 75px;
+  padding: 0 150px 0 150px;
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+}
+
+.header .menu ul, .header .language ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.header .menu ul li, .header .language ul li {
+  color: #444;
+  font-size: 1.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 1rem 2rem 1rem 1rem;
+}
+
+.header .menu ul li a, .header .language ul li a {
+  color: inherit;
+}
+
+.header .menu ul li a.is-active, .header .language ul li a.is-active {
+  border-bottom: 1px solid #444;
+}
+
+.header .menu ul li.home-link > a, .header .language ul li.home-link > a {
+  border: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header .menu ul li.home-link > a:hover, .header .language ul li.home-link > a:hover {
+  border: 0;
+}
+
+.header .menu a:hover, .header .language a:hover {
+  border-bottom: 1px solid #444;
+  text-decoration: none;
+}
+
+.header .logo {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 150px;
+}
+
+.header .logo div {
+  width: 100%;
+}
+
+.header .logo div img {
+  height: 75px;
+}
+
+.header .menu {
+  width: 100%;
+}
+
+.header .menu.underscore {
+  border-bottom: 2px solid #eee;
+}
+
+.header .menu ul li:first-child {
+  padding-left: 0;
+}
+
+.header .menu ul li:last-child {
+  padding-right: 0;
+}
+
+.header .language {
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 150px;
+}
+/*# sourceMappingURL=header.css.map */
