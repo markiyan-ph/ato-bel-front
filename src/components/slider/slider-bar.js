@@ -5,7 +5,7 @@ import "./slider-bar.scss";
 
 const SliderBar = ({ prev, next, showButtons, title }) => {
   return (
-    <div className="slider-bar d-flex justify-content-between">
+    <div className={`slider-bar d-flex justify-content-${showButtons ? 'between' : 'center'}`}>
       {showButtons ? (
         <SliderButton
           onClickAction={prev}
