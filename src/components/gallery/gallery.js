@@ -18,7 +18,8 @@ const Gallery = ({
   containerHeight = 100,
   placement = "between",
   titlePlacement = "over",
-  imageCardClick = null
+  imageCardClick = null,
+  showDescription = false
 }) => {
   let imgWidth = 30,
     // imgPaddingBot = 30,
@@ -83,6 +84,8 @@ const Gallery = ({
       if (index + 1 > lastRowStartIndex) mb = 0;
     }
 
+    const imageTitleDescription = showDescription ? <span><br />{description}</span> : null;
+
     const imageTitle = (
       <div
         className={
@@ -91,7 +94,7 @@ const Gallery = ({
       >
         <div>
           <span>{title}</span>
-          <span>{description}</span>
+          {imageTitleDescription}
         </div>
       </div>
     );
