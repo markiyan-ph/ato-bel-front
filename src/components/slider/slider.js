@@ -7,14 +7,15 @@ import { isMobile } from '../../tools/helpers';
 import "./slider.scss";
 
 const CustomSlide = props => {
-  const { imgSrc, title } = props;
+  const { imgSrc, title, imgOnload } = props;
 
   return (
     <div>
       <img
-        src={`data:image/png;base64,${imgSrc}`}
-        // src={`http://localhost:5000/uploads${imgSrc}`}
+        // src={`data:image/png;base64,${imgSrc}`}
+        src={`http://localhost:5000/uploads${imgSrc}`}
         alt={title}
+        onLoad={() => imgOnload('done')}
       />
     </div>
   );
@@ -34,7 +35,7 @@ export default class MSlider extends Component {
   };
 
   render() {
-    const { projects } = this.props;
+    const { projects, imgOnload, showButtons } = this.props;
 
     const settings = {
       accessibility: true,
@@ -56,7 +57,7 @@ export default class MSlider extends Component {
     };
 
     const slides = projects.map(({ _id, imgSrc, title }) => (
-      <CustomSlide key={_id} imgSrc={imgSrc} title={title} />
+      <CustomSlide key={_id} imgSrc={imgSrc} title={title} imgOnload={imgOnload} />
     ));
 
     return (
@@ -79,7 +80,7 @@ export default class MSlider extends Component {
         <SliderBar
           prev={this.previous}
           next={this.next}
-          showButtons={true}
+          showButtons={showButtons}
           title={this.state.title}
         />
       </div>

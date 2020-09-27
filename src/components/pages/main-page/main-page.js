@@ -12,7 +12,8 @@ import "./main-page.scss";
 class NewMainPage extends Component {
   state = {
     projectId: null,
-    loadProjects: false
+    loadProjects: false,
+    showControlButtons: false
   };
 
   componentDidMount() {
@@ -36,16 +37,29 @@ class NewMainPage extends Component {
   componentDidUpdate(prevState) {
     const {
       projects: { mainPageProjects },
-      onFetchProjects
     } = this.props;
 
     const { loadProjects } = this.state;
 
     if (prevState.projects.mainPageProjects.length !== mainPageProjects.length) {
       if (mainPageProjects.length === 1 && loadProjects) {
-        onFetchProjects();
         this.setState({ projectId: mainPageProjects[0]._id });
       }
+    }
+  }
+
+  imgOnload = (loaded) => {
+    const { loadProjects } = this.state;
+    const {
+      projects: { mainPageProjects },
+    } = this.props;
+    const { onFetchProjects } = this.props;
+
+    if (loaded && loadProjects) {
+      onFetchProjects(); 
+      this.setState({ loadProjects: false });
+    } else if(loaded && mainPageProjects.length > 1) {
+      this.setState({ showControlButtons: true });
     }
   }
 
@@ -53,7 +67,7 @@ class NewMainPage extends Component {
     const {
       projects: { loading, mainPageProjects, error },
     } = this.props;
-    const { projectId } = this.state;
+    const { projectId, showControlButtons } = this.state;
     const slideIndex = getIndexById(mainPageProjects, projectId);
 
     const orderedProjectList = reorderList(mainPageProjects, slideIndex);
@@ -61,10 +75,10 @@ class NewMainPage extends Component {
     if (error) {
       return <h5>Just error.</h5>;
     }
-    
+
     const content =
       !loading && projectId ? (
-        <MSlider projects={orderedProjectList} />
+        <MSlider projects={orderedProjectList} imgOnload={this.imgOnload} showButtons={showControlButtons} />
       ) : (
         <p>Loading... </p>
       );
