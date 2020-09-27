@@ -1,7 +1,8 @@
 .slider {
   img {
     object-fit: cover;
-    object-position: left bottom;
+    // object-position: left bottom;
+    object-position: center;
     overflow: hidden;
     // padding: 0 15px 0 15px;
     height: 100vh;
