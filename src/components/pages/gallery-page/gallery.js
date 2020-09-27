@@ -69,7 +69,7 @@ const mapStateToProps = ({ projects: { projectsList, loading, error } }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchProjects: (page_size, page_num) =>
-      dispatch(actions.fetchProjects(page_size, page_num)),
+      dispatch(actions.fetchProjects(page_size, page_num))
   };
 };
 

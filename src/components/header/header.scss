@@ -20,6 +20,7 @@
       li {
         color: $header-color;
         font-size: 1.2rem;
+        line-height: 2.5rem;
         list-style: none;
         margin: 0;
         padding: 1rem 2rem 1rem 1rem;
@@ -71,6 +72,8 @@
   .menu {
     @extend %menu-links;
 
+    height: 100%;
+
     &.underscore {
       border-bottom: 2px solid #eee;
     }
@@ -93,6 +96,7 @@
   .language {
     @extend %menu-links;
 
+    height: 100%;
     position: absolute;
     right: 0;
 

@@ -3,7 +3,7 @@
 .company-info {
   border-bottom: 2px solid #eee;
   margin-bottom: 1rem;
-  padding: 1rem 0 1rem 0;
+  padding: 2rem 0 3rem 0;
 
   .group-photo {
     padding-right: 1rem;
@@ -20,5 +20,11 @@
     height: 100%;
     text-align: justify;
     width: 50%;
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 }
