@@ -95,7 +95,7 @@ const ProjectsDetails = (props) => {
             console.log('Focus.', editor);
           }}
         />
-        <button onClick={() => {console.log(editorData)}}>Save button</button>
+        <button onClick={() => {console.log(editorData);}}>Save button</button>
       </div>
     </Content>
   );
