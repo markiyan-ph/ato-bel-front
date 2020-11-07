@@ -7,7 +7,7 @@ import createSagaMiddleware from "redux-saga";
 import App from "./components/app/";
 import "./i18n";
 import "./index.scss";
-import { projectsReducer } from "./store/reducers";
+import { projectsReducer, projectDataReducer } from "./store/reducers";
 import { watchProjects } from './store/sagas/index';
 
 const composeEnhancers =
@@ -17,7 +17,8 @@ const composeEnhancers =
     : null || compose;
 
 const rootReducer = combineReducers({
-  projects: projectsReducer
+  projects: projectsReducer,
+  projectData: projectDataReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

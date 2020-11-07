@@ -1,5 +1,4 @@
 {
-    "eslint.enable": true,
     "editor.tabSize": 2,
     "files.associations": {
         "*.ts": "typescript",

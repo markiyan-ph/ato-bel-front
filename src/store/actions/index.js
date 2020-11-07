@@ -9,3 +9,10 @@ export {
   fetchRandomProject,
   fetchRandomProjectSuccess
 } from './projects';
+
+export {
+  saveProjectDetails,
+  fetchProjectDetails,
+  fetchProjectDetailsLoading,
+  fetchProjectDetailsSuccess
+} from './project-data';
