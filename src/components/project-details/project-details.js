@@ -57,7 +57,7 @@ const ProjectsDetails = () => {
         toolbarWidth: "auto",
         resizingBar: false,
         showPathLabel: false,
-        imageUploadUrl: "http://localhost:5000/api/projects/editor/images",
+        imageUploadUrl: `http://localhost:5000/api/projects/editor/images/${id}`,
         defaultStyle:
           'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; font-size: 1.3em;',
       }}
