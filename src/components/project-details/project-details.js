@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SunEditor from "suneditor-react";
@@ -10,11 +10,9 @@ import "./project-details.scss";
 
 const ProjectsDetails = () => {
   const { id } = useParams();
-  console.log(id);
-  // const id = props.match.params.id;
-  // const projects = useSelector((state) => state.projects);
   const data = useSelector((state) => state.projectData.data);
   const loading = useSelector((state) => state.projectData.loading);
+  const [isAdmin, setIsAdmin] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,13 +44,14 @@ const ProjectsDetails = () => {
       placeholder="Please type here..."
       setContents={data}
       // appendContents={data}
-      disable={false}
-      showToolbar={true}
+      hide={loading ? true : false}
+      disable={!isAdmin}
+      showToolbar={isAdmin}
       setOptions={{
         buttonList: buttonList,
         // mode: "inline",
-        callBackSave: (content) => {
-          console.log(JSON.stringify(content));
+        callBackSave: (data) => {
+          dispatch(actions.saveProjectDetails(id, data));
         },
         stickyToolbar: "75px",
         toolbarWidth: "auto",
@@ -62,15 +61,16 @@ const ProjectsDetails = () => {
         defaultStyle:
           'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; font-size: 1.3em;',
       }}
-      // onChange={(content) => { console.log(JSON.stringify(content)); }}
     />
   );
 
   return (
     <Content classNames={"flex-child"}>
+      <button onClick={ () => { setIsAdmin(currState => !currState); } }>Toggle is admin</button>
       <div className="project-details">
         <h1>Hello Project Details! Your Id is {id}</h1>
-        {loading ? <h3>Loading...</h3> : editor}
+        {loading ? <h3>Loading...</h3> : null}
+        {editor}
       </div>
     </Content>
   );

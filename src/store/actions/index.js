@@ -11,8 +11,9 @@ export {
 } from './projects';
 
 export {
-  saveProjectDetails,
   fetchProjectDetails,
-  fetchProjectDetailsLoading,
-  fetchProjectDetailsSuccess
+  fetchProjectDetailsSuccess,
+  projectDetailsLoading,
+  saveProjectDetails,
+  saveProjectDetailsSuccess
 } from './project-data';

@@ -1,9 +1,9 @@
-import { put } from "redux-saga/effects";
+import { delay, put } from "redux-saga/effects";
 import * as actions from "../actions";
 
 export function* fetchProjectDetailsSaga({ projectId }) {
   try {
-    yield put(actions.fetchProjectDetailsLoading());
+    yield put(actions.projectDetailsLoading());
 
     const resp = yield fetch(
       `http://localhost:5000/api/projects/details/${projectId}`
@@ -15,6 +15,39 @@ export function* fetchProjectDetailsSaga({ projectId }) {
       actions.fetchProjectDetailsSuccess(
         respJson.projectDetails.projectId,
         respJson.projectDetails.data
+      )
+    );
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
+export function* saveProjectDetailsSaga({ projectId, data }) {
+  try {
+    yield put(actions.projectDetailsLoading());
+    
+    yield delay(1000);
+    
+    const reqBody = JSON.stringify({
+      projectId,
+      data
+    });
+
+    const resp = yield fetch('http://localhost:5000/api/projects/details', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json' 
+      },
+      body: reqBody
+    });
+
+    const respJson = yield resp.json();
+
+    yield put(
+      actions.saveProjectDetailsSuccess(
+        respJson.projectId,
+        respJson.data
       )
     );
   } catch (err) {

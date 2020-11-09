@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects';
+import { delay, put } from 'redux-saga/effects';
 import * as actions from '../actions';
 
 export function* fetchProjectsSaga({page_size, page_num}) {
@@ -49,6 +49,8 @@ export function* fetchProjectByIdSaga({id}) {
     yield put(actions.fetchProjectsLoading());
 
     const resp = yield fetch(`http://localhost:5000/api/projects/show/${id}`);
+
+    yield delay(5000);
     
     const respJson = yield resp.json();
     yield put(actions.fetchProjectsSuccess(respJson.projects));
