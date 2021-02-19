@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "i18next": "^19.8.3",
-    "node-sass": "^4.14.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-i18next": "^11.7.3",
+    "i18next": "^19.8.9",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-i18next": "^11.8.7",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.4",
-    "react-slick": "^0.25.2",
+    "react-scripts": "^4.0.2",
+    "react-slick": "^0.28.0",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
-    "suneditor-react": "^2.14.4"
+    "suneditor-react": "^2.15.2"
   },
   "scripts": {
     "start": "react-scripts start",

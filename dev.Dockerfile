@@ -1,5 +1,5 @@
 #base image
-FROM node:12.14.1-slim
+FROM node:14.15.3-alpine
 WORKDIR '/app'
 
 COPY package.json .
