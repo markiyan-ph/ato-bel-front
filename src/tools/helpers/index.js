@@ -12,7 +12,7 @@ export const updateObject = (oldObject, newProperties) => {
 };
 
 export const getIndexById = (array, id) =>
-  array.findIndex(item => item._id === id);
+  array.findIndex(item => item?._id === id);
 
 export const reorderList = (array, index) => {
   const firstPart = array.slice(index);
