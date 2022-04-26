@@ -36,7 +36,7 @@ class GalleryPage extends Component {
     const { history } = this.props;
 
     history.push(id);
-  }
+  };
 
   render() {
     const {

@@ -61,7 +61,7 @@ class NewMainPage extends Component {
     } else if(loaded && mainPageProjects.length > 1) {
       this.setState({ showControlButtons: true });
     }
-  }
+  };
 
   render() {
     const {
