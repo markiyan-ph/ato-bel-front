@@ -38,3 +38,5 @@ export const isMobile = () => {
 
   return isMobile;
 };
+
+export const getServerAPI = () => process.env.REACT_APP_SERVER_HOST;

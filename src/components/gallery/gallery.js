@@ -1,4 +1,5 @@
 import React from "react";
+import { getServerAPI } from "../../tools/helpers";
 import "./gallery.scss";
 
 /**
@@ -116,7 +117,7 @@ const Gallery = ({
         >
           <img
             style={imgStyle}
-            src={`http://localhost:5000/uploads/${imgSrc}`}
+            src={`${getServerAPI()}/uploads/${imgSrc}`}
             alt={imgSrc}
           />
           {titlePlacement === "over" ? imageTitle : null}

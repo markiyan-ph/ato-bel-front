@@ -2,9 +2,12 @@ import React from "react";
 import Content from "../../content";
 import Footer from "../../footer";
 import Gallery from "../../gallery";
+import { getServerAPI } from '../../../tools/helpers';
 import "./workshop.scss";
 
 const ConmpanyInfo = ({ imgSrc }) => {
+  // const 
+
   return (
     <div className="company-info d-flex align-items-center">
       <div className="group-photo">
@@ -109,7 +112,7 @@ const Workshop = () => {
   return (
     <div className="wrapper">
       <Content classNames={"flex-child"}>
-        <ConmpanyInfo imgSrc="http://localhost:5000/uploads/workshop/ATO-Bel-Team.jpg" />
+        <ConmpanyInfo imgSrc={`${getServerAPI()}/uploads/workshop/ATO-Bel-Team.jpg`} />
 
         <Gallery
           images={listOfPhoto}

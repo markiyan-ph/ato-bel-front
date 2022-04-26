@@ -1,12 +1,13 @@
 import { delay, put } from "redux-saga/effects";
 import * as actions from "../actions";
+import { getServerAPI } from '../../tools/helpers';
 
 export function* fetchProjectDetailsSaga({ projectId }) {
   try {
     yield put(actions.projectDetailsLoading());
 
     const resp = yield fetch(
-      `http://localhost:5000/api/projects/details/${projectId}`
+      `${getServerAPI()}/api/projects/details/${projectId}`
     );
     // const resp = yield fetch('http://192.168.2.116:5000/api/projects/');
     const respJson = yield resp.json();
@@ -34,7 +35,7 @@ export function* saveProjectDetailsSaga({ projectId, data }) {
       data
     });
 
-    const resp = yield fetch('http://localhost:5000/api/projects/details', {
+    const resp = yield fetch(`${getServerAPI()}/api/projects/details`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json' 

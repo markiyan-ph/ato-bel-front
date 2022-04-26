@@ -5,6 +5,7 @@ import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import * as actions from "../../store/actions";
 import Content from "../content";
+import { getServerAPI } from '../../tools/helpers';
 import "./project-details.scss";
 
 
@@ -57,7 +58,7 @@ const ProjectsDetails = () => {
         toolbarWidth: "auto",
         resizingBar: false,
         showPathLabel: false,
-        imageUploadUrl: `http://localhost:5000/api/projects/editor/images/${id}`,
+        imageUploadUrl: `${getServerAPI()}/api/projects/editor/images/${id}`,
         defaultStyle:
           'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; font-size: 1.3em;',
       }}
