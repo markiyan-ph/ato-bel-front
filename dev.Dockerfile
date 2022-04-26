@@ -2,7 +2,7 @@
 FROM node:14.15.3-alpine
 WORKDIR '/app'
 
-COPY package.json .
+COPY package*.json .
 
 #insatall and cache app dependencies
 RUN npm install
