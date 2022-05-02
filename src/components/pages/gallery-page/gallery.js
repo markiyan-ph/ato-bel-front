@@ -1,79 +1,34 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import Content from "../../content";
 import Gallery from "../../gallery";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../store/actions";
-import { withRouter } from 'react-router-dom';
-import { compose } from "redux";
+import { useNavigate } from 'react-router-dom';
 
-class GalleryPage extends Component {
-
-  componentDidMount() {
-    const {
-      onFetchProjects,
-    } = this.props;
-
-    onFetchProjects(2, 1);
-  }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const {
-  //     projects: { projectsList },
-  //   } = this.props;
-
-  //   console.log('====prevState', prevState.projects.length);
-  //   console.log('====projectsList',projectsList.length);
-  //   if (prevState.projects.length !== projectsList.length) {
-  //     this.setState(({projects}) => {
-  //       return {
-  //         projects: [...projects, ...projectsList]
-  //       };
-  //     });
-  //   }
-  // }
-
-  onImageCardClick = (id) => {
-    const { history } = this.props;
-
-    history.push(id);
+const GalleryPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();  
+  const fetchProjects = (page_size, page_num) => {
+    dispatch(actions.fetchProjects(page_size, page_num));
   };
+  const listOfPhoto = useSelector(state => state.projects?.projectsList);
+  const onImageCardClick = (id) => navigate(id);
 
-  render() {
-    const {
-      projectsList,
-    } = this.props;
-    const listOfPhoto = projectsList;
+  useEffect(() => {
+    fetchProjects(2, 1);
+  }, []);
 
-    return (
-      <Content classNames={"flex-child"}>
-        <Gallery
-          images={listOfPhoto}
-          columns={2}
-          containerHeight={100}
-          placement={"order"}
-          imageCardClick={this.onImageCardClick}
-        />
-      </Content>
-    );
-  }
-}
-
-const mapStateToProps = ({ projects: { projectsList, loading, error } }) => {
-  return {
-    projectsList,
-    loading,
-    error
-  };
+  return (
+    <Content classNames={"flex-child"}>
+      <Gallery
+        images={listOfPhoto}
+        columns={2}
+        containerHeight={100}
+        placement={"order"}
+        imageCardClick={onImageCardClick}
+      />
+    </Content>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchProjects: (page_size, page_num) =>
-      dispatch(actions.fetchProjects(page_size, page_num))
-  };
-};
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(GalleryPage);
+export default GalleryPage;
