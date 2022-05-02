@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "../header";
 import Contacts from "../pages/contacts";
 import GalleryPage from "../pages/gallery-page";
@@ -13,14 +13,14 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <Switch>
-        <Route path="/" component={MainPage} exact />
-        <Route path="/main" component={MainPage} exact />
-        <Route path="/projects" component={GalleryPage} exact />
-        <Route path="/projects/:id" component={ProjectsDetails} exact />
-        <Route path="/contacts" component={Contacts} exact />
-        <Route path="/workshop" component={Workshop} exact />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/projects" element={<GalleryPage />} />
+        <Route path="/projects/:id" element={<ProjectsDetails />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/workshop" element={<Workshop />} />
+      </Routes>
     </div>
   );
 }

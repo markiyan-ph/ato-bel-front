@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/images/fbLogoTrans.png";
 import "./header.scss";
 import { useTranslation } from "react-i18next";
@@ -14,9 +14,10 @@ const LinkMenu = ({ title, link, click, className }) => {
   );
 };
 
-const Header = ({ location: { pathname } }) => {
+const Header = () => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
+  const { pathname } = useLocation();
 
   const switchLanguage = () => {
     i18n.changeLanguage(language === "uk" ? "en" : "uk");
@@ -34,8 +35,7 @@ const Header = ({ location: { pathname } }) => {
     return (
       <li key={title}>
         <NavLink
-          exact={true}
-          activeClassName="is-active"
+          className={({isActive}) => (isActive ? "is-active" : "")}
           to={link}
           onClick={click}
         >
@@ -77,4 +77,4 @@ const Header = ({ location: { pathname } }) => {
   );
 };
 
-export default withRouter(Header);
+export default Header;
