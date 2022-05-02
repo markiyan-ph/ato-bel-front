@@ -27,7 +27,7 @@ const Header = () => {
   const menuItems = [
     { title: t("header.menu.projects"), link: "/projects/", click: null },
     { title: t("header.menu.workshop"), link: "/workshop/", click: null },
-    { title: t("header.menu.blog"), link: "/blog/", click: null },
+    // { title: t("header.menu.blog"), link: "/blog/", click: null },
     { title: t("header.menu.contacts"), link: "/contacts/", click: null }
   ];
 
