@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { getServerAPI } from "../../tools/helpers";
 import "./gallery.scss";
 
@@ -11,6 +11,8 @@ import "./gallery.scss";
  * placement: relation of image placement
  * titlePlacement: position of image title. Below image or over image.
  * imageCardClick: on click function
+ * infinitiveScroll: boolean
+ * infinitiveScrollParams: {setPage: function, isLoading:boolean, pageNum: number}
  * } param0
  */
 const Gallery = ({
@@ -20,15 +22,30 @@ const Gallery = ({
   placement = "between",
   titlePlacement = "over",
   imageCardClick = null,
-  showDescription = false
+  showDescription = false,
+  infinitiveScroll = false,
+  infinitiveScrollParams = {}
 }) => {
   let imgWidth = 30,
-    // imgPaddingBot = 30,
     justifyType = placement === "between" ? "between" : "start",
     galleryStyle = placement === "between" ? {} : { marginBottom: "2rem" };
+  
+  
+  // eslint-disable-next-line no-unused-vars
+  const {isLoading, pageNum, setPage} = infinitiveScrollParams;
+  const observer = infinitiveScroll ? useRef() : null;
+  const lastItemRef = infinitiveScroll ? useCallback(node => {
+    if (isLoading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        setPage(pageNum+1);
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, [isLoading]) : null;
 
   // Change width depend on amount of pictures in a row
-  // TODO: remove not needed comments
   switch (columns) {
     case 1:
       imgWidth = 100;
@@ -36,16 +53,13 @@ const Gallery = ({
 
     case 2:
       imgWidth = 48;
-      // imgWidth = placement === "between" ? 48 : 50;
       break;
 
     case 3:
       imgWidth = 27;
-      // imgWidth = placement === "between" ? 30 : 33.33;
       break;
 
     case 4:
-      // imgWidth = placement === "between" ? 22 : 25;
       imgWidth = 22;
       break;
 
@@ -55,15 +69,11 @@ const Gallery = ({
 
     default:
       imgWidth = 31;
-      // imgWidth = placement === "between" ? 30 : 33.33;
       break;
   }
 
-  // imgPaddingBot = (imgWidth * relationship.height) / relationship.width;
-
   // Define size of image using container width and container padding bottom
   const imgCardStyle = {
-    // paddingBottom: `${imgPaddingBot}%`,
     width: `${imgWidth}%`,
   };
 
@@ -102,6 +112,7 @@ const Gallery = ({
 
     return (
       <div
+        ref={ images.length === index+1 ? lastItemRef : null }
         className="img-card"
         key={_id}
         style={{

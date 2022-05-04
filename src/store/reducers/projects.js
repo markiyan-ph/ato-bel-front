@@ -4,13 +4,19 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   projectsList: [],
   mainPageProjects: [],
+  pages: 1,
+  lastPage: 0,
   error: false,
   loading: false
 };
 
 const fetchProjectsSuccess = (state, action) => {
+  const mergedList = [...state.projectsList, ...action.projects.projectsList];
+  
   return updateObject(state, {
-    projectsList: [...action.projects],
+    projectsList: [...new Map(mergedList.map(project => [project._id, project])).values()],
+    pages: action.projects.pages,
+    lastPage: action.projects.lastPage,
     loading: false,
     error: false
   });
@@ -25,7 +31,7 @@ const fetchProjectsLoading = (state) => {
 
 const fetchRandomProjectSuccess = (state, action) => {
   return updateObject(state, {
-    mainPageProjects: [...action.projects],
+    mainPageProjects: [...action.projects.projectsList],
     loading: false,
     error: false
   });
@@ -33,7 +39,7 @@ const fetchRandomProjectSuccess = (state, action) => {
 
 const fetchMainPageProjectSuccess = (state, action) => {
   return updateObject(state, {
-    mainPageProjects: [...action.projects],
+    mainPageProjects: [...action.projects.projectsList],
     loading: false,
     error: false
   });
@@ -41,7 +47,7 @@ const fetchMainPageProjectSuccess = (state, action) => {
 
 const fetchRandomProjectFail = (state, action) => {
   return updateObject(state, {
-    projectsList: [...action.projects],
+    projectsList: [...action.projects.projectsList],
     loading: false,
     error: true
   });
