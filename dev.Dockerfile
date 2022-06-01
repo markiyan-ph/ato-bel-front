@@ -1,11 +1,11 @@
 #base image
-FROM node:14.15.3-alpine
+FROM node:14-alpine
 WORKDIR '/app'
 
-COPY package*.json .
+COPY package.json .
 
 #insatall and cache app dependencies
-RUN npm install
+RUN npm i
 
 COPY . .
 
