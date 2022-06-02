@@ -5,9 +5,7 @@ export {
   fetchMainPageProjects,
   fetchProjectsSuccess,
   fetchMainPageProjectsSuccess,
-  fetchProjectsFail,
-  fetchRandomProject,
-  fetchRandomProjectSuccess
+  fetchProjectsFail
 } from './projects';
 
 export {

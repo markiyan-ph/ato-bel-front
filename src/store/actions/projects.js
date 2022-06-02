@@ -24,10 +24,3 @@ export const fetchProjectsFail = () => ({
   error: true
 
 });
-
-export const fetchRandomProject = () => ({ type: actionTypes.FETCH_RANDOM_PROJECT });
-
-export const fetchRandomProjectSuccess = projects => ({
-  type: actionTypes.FETCH_RANDOM_PROJECT_SUCCESS,
-  projects: projects
-});

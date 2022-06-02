@@ -17,6 +17,13 @@ const fetchProjectDetailsSuccess = (state, action) => {
   });
 };
 
+const fetchProjectDetailsFail = (state) => {
+  return updateObject(state, {
+    loading: false,
+    error: true
+  });
+};
+
 const projectDetailsLoading = (state) => {
   return updateObject(state, {
     loading: true,
@@ -41,8 +48,8 @@ const projectDataReducer = (state = initialState, action) => {
       return projectDetailsLoading(state);
     case actionTypes.SAVE_PROJECT_DETAILS_SUCCESS:
       return saveProjectDetailsSuccess(state, action);
-    //   case actionTypes.FETCH_RANDOM_PROJECT_SUCCESS: return fetchRandomProjectSuccess(state, action);
-    //   case actionTypes.FETCH_PROJECTS_FAIL: return fetchRandomProjectFail(state, action);
+    case actionTypes.FETCH_PROJECTS_FAIL: 
+      return fetchProjectDetailsFail(state);
     default:
       return state;
   }

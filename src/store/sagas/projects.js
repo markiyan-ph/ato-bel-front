@@ -32,21 +32,6 @@ export function* fetchMainPageProjectsSaga() {
   }
 }
 
-export function* fetchRandomProjectSaga() {
-  try {
-    yield put(actions.fetchProjectsLoading());
-
-    const resp = yield fetch(`${SERVER_API}/projects/random`);
-    
-    const respJson = yield resp.json();
-    yield put(actions.fetchRandomProjectSuccess(respJson.projects));
-  
-  } catch (err) {
-    console.log(err);
-    yield put(actions.fetchProjectsFail());
-  }
-}
-
 export function* fetchProjectByIdSaga({id}) {
   try {
     yield put(actions.fetchProjectsLoading());
