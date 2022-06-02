@@ -31,17 +31,18 @@ const Gallery = ({
     galleryStyle = placement === "between" ? {} : { marginBottom: "2rem" };
   
   
-  // eslint-disable-next-line no-unused-vars
   const {isLoading, pageNum, setPage} = infinitiveScrollParams;
   const observer = infinitiveScroll ? useRef() : null;
   const lastItemRef = infinitiveScroll ? useCallback(node => {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
+    
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         setPage(pageNum+1);
       }
     });
+
     if (node) observer.current.observe(node);
   }, [isLoading]) : null;
 
@@ -139,7 +140,6 @@ const Gallery = ({
   });
 
   return (
-    // <div style={galleryStyle} className={`gallery-container d-flex flex-wrap justify-content-${justifyType}`}>
     <div
       style={galleryStyle}
       className={`gallery-container d-flex flex-wrap justify-content-${justifyType}`}
