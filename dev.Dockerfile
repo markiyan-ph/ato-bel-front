@@ -1,5 +1,5 @@
 #base image
-FROM node:14-alpine
+FROM node:14-alpine as ato-bel-front
 WORKDIR '/app'
 
 COPY package.json .
