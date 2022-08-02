@@ -47,7 +47,7 @@ const ProjectsDetails = () => {
       // appendContents={data}
       hide={loading ? true : false}
       disable={!isAdmin}
-      showToolbar={isAdmin}
+      hideToolbar={!isAdmin}
       setOptions={{
         buttonList: buttonList,
         // mode: "inline",
