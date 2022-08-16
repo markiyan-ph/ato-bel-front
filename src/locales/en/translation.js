@@ -1,11 +1,11 @@
 export default {
   header: {
     menu: {
-      home: "Home",
-      projects: "Gallery",
-      workshop: "Office",
+      home: "home",
+      projects: "projects",
+      studio: "studio",
       blog: "Blog",
-      contacts: "Contacts",
+      contacts: "contact",
       language: "укр"
     }
   },
