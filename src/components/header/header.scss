@@ -2,44 +2,56 @@
 
 .header {
   background-color: #ffffff;
+  color: $header-color;
   height: $header-height;
-  // line-height: 2.5rem;
   padding: 0 $container-indent 0 $container-indent;
   position: fixed;
   width: 100%;
   z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    li {
+      list-style: none;
+    }
+  }
+
   
 
   %menu-links {
+    color: $header-color;
+    font-family: 'GothicA1';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
     
     ul {
       margin: 0;
       padding: 0;
-      width: 100%;
 
       li {
         color: $header-color;
-        font-size: 1.2rem;
-        line-height: 2.5rem;
         list-style: none;
         margin: 0;
-        padding: 1rem 2rem 1rem 1rem;
 
         a {
           color: inherit;
 
           &.is-active {
-            border-bottom: 1px solid $header-color;
+            color: $header-color-active;
+            font-weight: 700;
           }
         }
 
         &.home-link > a {
           border: 0;
-          font-size: 1.5rem;
-          font-weight: bold;
 
           &:hover {
-            border: 0;
+            color: $header-color-hover;
+            font-weight: 700;
           }
         }
       }
@@ -47,24 +59,9 @@
 
     a {
       &:hover {
-        border-bottom: 1px solid $header-color;
+        color: $header-color-hover;
+        font-weight: 700;
         text-decoration: none;
-      }
-    }
-  }
-
-  .logo {
-    left: 0;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    width: $container-indent;
-
-    div {
-      width: 100%;
-
-      img {
-        height: 75px;
       }
     }
   }
@@ -72,15 +69,15 @@
   .menu {
     @extend %menu-links;
 
+    display: flex;
+    justify-content: center;
     height: 100%;
-
-    &.underscore {
-      border-bottom: 2px solid #eee;
-    }
     
     width: $container-width;
 
     ul {
+      gap: 45px;
+
       li {
         &:first-child {
           padding-left: 0;
@@ -93,14 +90,22 @@
     }
   }
 
-  .language {
+  .language-container {
     @extend %menu-links;
-
-    height: 100%;
-    position: absolute;
-    right: 0;
-
     text-align: center;
-    width: $container-indent;
+    gap: 25px;
+
+    a {
+      color: inherit;
+
+      &.is-active {
+        color: $header-color-active;
+        font-weight: 700;
+      }
+    }
+
+    .social-networks {
+      gap: 12px;
+    }
   }
 }
