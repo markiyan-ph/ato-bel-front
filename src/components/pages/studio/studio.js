@@ -3,7 +3,7 @@ import Content from "../../content";
 import Footer from "../../footer";
 import Gallery from "../../gallery";
 import { getServerAPI } from '../../../tools/helpers';
-import "./workshop.scss";
+import "./studio.scss";
 
 const ConmpanyInfo = ({ imgSrc }) => {
   // const 
@@ -50,7 +50,7 @@ const ConmpanyInfo = ({ imgSrc }) => {
 };
 
 // TODO: Load data from the server
-const Workshop = () => {
+const Studio = () => {
   const listOfPhoto = [
     {
       _id: 1,
@@ -128,4 +128,4 @@ const Workshop = () => {
   );
 };
 
-export default Workshop;
+export default Studio;
