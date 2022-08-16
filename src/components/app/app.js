@@ -4,7 +4,7 @@ import Header from "../header";
 import Contacts from "../pages/contacts";
 import GalleryPage from "../pages/gallery-page";
 import MainPage from "../pages/main-page";
-import Workshop from "../pages/workshop";
+import Studio from "../pages/studio";
 import "./app.scss";
 import ProjectsDetails from "../project-details";
 
@@ -19,7 +19,7 @@ function App() {
         <Route path="/projects" element={<GalleryPage />} />
         <Route path="/projects/:id" element={<ProjectsDetails />} />
         <Route path="/contacts" element={<Contacts />} />
-        <Route path="/workshop" element={<Workshop />} />
+        <Route path="/studio" element={<Studio />} />
       </Routes>
     </div>
   );
