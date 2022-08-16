@@ -21,7 +21,8 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     resources,
-    lng: 'uk',
+    lng: 'en',
+    // lng: 'uk',
     debug: false,
 
     interpolation: {
