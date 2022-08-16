@@ -3,15 +3,14 @@
 .gallery-container {
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
   margin-bottom: 0;
 
   .img-card {
-    margin-bottom: 2rem;
+    height: auto;
+    width: 25%;
 
     .img-container {
       padding: 0 0 100% 0;
-      margin-bottom: 1rem;
       overflow: hidden;
       position: relative;
       width: 100%;
@@ -23,7 +22,6 @@
       }
 
       img {
-        // height: 100%;
         left: 0;
         object-fit: cover;
         object-position: center;

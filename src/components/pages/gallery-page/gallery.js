@@ -28,9 +28,6 @@ const GalleryPage = () => {
     <Content classNames={"flex-child"}>
       <Gallery
         images={listOfPhoto}
-        columns={2}
-        containerHeight={100}
-        placement={"order"}
         imageCardClick={onImageCardClick}
         infinitiveScroll = {true}
         infinitiveScrollParams = {{
