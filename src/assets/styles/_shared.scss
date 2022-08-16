@@ -1,16 +1,18 @@
 $main-color: #444;
 
 $container-width: 100%;
-$container-indent: 150px;
+$container-indent: 50px;
 
-$header-color: $main-color;
-$header-height: 75px;
+$header-color: #707070;
+$header-color-active: #333;
+$header-color-hover: $header-color-active;
+$header-height: 77px;
 
 $footer-height: 75px;
 
 $main-page-width: 100%;
 $main-page-height: calc(100vh - #{$header-height});
 
-$container-indent: 150px;
+// $container-indent: 150px;
 $content-width: calc(100% - #{$container-indent});
 $content-height: calc(#{$main-page-height} - #{$footer-height});
