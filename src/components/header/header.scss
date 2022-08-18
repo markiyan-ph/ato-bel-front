@@ -36,32 +36,30 @@
         color: $header-color;
         list-style: none;
         margin: 0;
-
-        a {
-          color: inherit;
-
-          &.is-active {
-            color: $header-color-active;
-            font-weight: 700;
-          }
-        }
-
-        &.home-link > a {
-          border: 0;
-
-          &:hover {
-            color: $header-color-hover;
-            font-weight: 700;
-          }
-        }
       }
     }
 
     a {
+      color: inherit;
+
+      &.is-active {
+        color: $header-color-active;
+        font-weight: 700;
+      }
+
       &:hover {
         color: $header-color-hover;
         font-weight: 700;
         text-decoration: none;
+      }
+
+      &::before {
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
       }
     }
   }
@@ -77,16 +75,6 @@
 
     ul {
       gap: 45px;
-
-      li {
-        &:first-child {
-          padding-left: 0;
-        }
-
-        &:last-child {
-          padding-right: 0;
-        }
-      }
     }
   }
 
@@ -94,15 +82,6 @@
     @extend %menu-links;
     text-align: center;
     gap: 25px;
-
-    a {
-      color: inherit;
-
-      &.is-active {
-        color: $header-color-active;
-        font-weight: 700;
-      }
-    }
 
     .social-networks {
       gap: 12px;

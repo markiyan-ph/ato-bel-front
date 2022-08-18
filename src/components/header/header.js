@@ -52,6 +52,7 @@ const Header = () => {
           className={({isActive}) => (isActive ? "is-active" : "")}
           to={link}
           onClick={click}
+          title={title}
         >
           {title}
         </NavLink>
