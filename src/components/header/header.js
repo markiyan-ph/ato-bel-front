@@ -81,22 +81,28 @@ const Header = () => {
   });
 
   return (
-    <header className="header d-flex align-items-center">
-      <div className="logo-container">
-        <LinkMenu content={<Logo />} title="company-logo" link={'/'} click={null} className="home-link mr-auto" />
-      </div>
-
-      <div className={`menu ${pathname === '/' || pathname === '/newMain/' ? '' : 'underscore'}`}>
-        <ul className="d-flex align-items-center">{menu}</ul>
-      </div>
-
-      <div className="language-container d-flex align-items-center">
-        <div className="d-flex align-items-center">
-          <LinkMenu content="UA" title="UA" link={'#'} className={language === 'uk' ? 'is-active' : ''} click={() => switchLanguage('uk')} /> &nbsp;/&nbsp;
-          <LinkMenu content="EN" title="EN" link={'#'} className={language === 'en' ? 'is-active' : ''} click={() => switchLanguage('en')} />
+    <header className="header">
+      <div className="main-block d-flex align-items-center">
+        <div className="logo-container">
+          <LinkMenu content={<Logo />} title="company-logo" link={'/'} click={null} className="home-link mr-auto" />
         </div>
 
-        <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
+        <div className="menu">
+          <ul className="d-flex align-items-center">{menu}</ul>
+        </div>
+
+        <div className="language-container d-flex align-items-center">
+          <div className="d-flex align-items-center">
+            <LinkMenu content="UA" title="UA" link={'#'} className={language === 'uk' ? 'is-active' : ''} click={() => switchLanguage('uk')} /> &nbsp;/&nbsp;
+            <LinkMenu content="EN" title="EN" link={'#'} className={language === 'en' ? 'is-active' : ''} click={() => switchLanguage('en')} />
+          </div>
+
+          <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
+        </div>
+      </div>
+
+      <div className={`secondary-block ${['/', '/main'].includes(pathname) ? 'hide-block' : ''}`}>
+        
       </div>
     </header>
   );

@@ -3,14 +3,27 @@
 .header {
   background-color: #ffffff;
   color: $header-color;
-  height: $header-height;
+  // height: $header-height;
   padding: 0 $container-indent 0 $container-indent;
   position: fixed;
   width: 100%;
   z-index: 50;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+
+  .main-block {
+    width: 100%;
+    height: $header-main-height;
+  }
+
+  .secondary-block {
+    width: 100%;
+    height: $header-secondary-height;
+    
+    &.hide-block {
+      display: none;
+    }
+  }
 
   div {
     li {
@@ -19,7 +32,6 @@
   }
 
   
-
   %menu-links {
     color: $header-color;
     font-family: 'GothicA1';
