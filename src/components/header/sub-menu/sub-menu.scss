@@ -1,0 +1,29 @@
+@import '../../../assets/styles/shared';
+
+.submenu-block {
+  height: $header-main-height;
+  font-size: 13px;
+  line-height: 16px;
+  position: fixed;
+  z-index: 49;
+  display: flex;
+  align-items: flex-end;
+  
+  &.hide-block {
+    display: none;
+  }
+
+  a {
+    &.is-active {
+      font-weight: $header-sub-font-weight-hover;
+    }
+
+    &:hover {
+      font-weight: $header-sub-font-weight-hover;
+    }
+
+    &::before {
+      font-weight: $header-sub-font-weight-hover;
+    }
+  }
+}

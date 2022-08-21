@@ -39,4 +39,8 @@ export const isMobile = () => {
   return isMobile;
 };
 
+export const hideHeaderSubMenu = pathname => {
+  return ['/', '/main/', '/contacts/'].includes(pathname);
+};
+
 export const getServerAPI = () => process.env.REACT_APP_SERVER_HOST;

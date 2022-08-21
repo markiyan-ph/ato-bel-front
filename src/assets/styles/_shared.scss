@@ -8,7 +8,8 @@ $header-color-active: #333;
 $header-color-hover: $header-color-active;
 $header-full-height: 105px;
 $header-main-height: 79px;
-$header-secondary-height: calc($header-full-height - $header-main-height);
+$header-main-font-weight-hover: 700;
+$header-sub-font-weight-hover: 600;
 
 $footer-height: 75px;
 

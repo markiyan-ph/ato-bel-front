@@ -1,0 +1,22 @@
+@import '../../../assets/styles/shared';
+
+.main-menu {
+  height: $header-main-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    &.is-active {
+      font-weight: $header-main-font-weight-hover;
+    }
+
+    &:hover {
+      font-weight: $header-main-font-weight-hover;
+    }
+
+    &::before {
+      font-weight: $header-main-font-weight-hover;
+    }
+  }
+}

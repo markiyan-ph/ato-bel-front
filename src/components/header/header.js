@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Instagram, Facebook, Behance } from '../social-icons';
 
-import './header.scss';
+import SubMenu from './sub-menu';
 import logo from '../../assets/images/atoBelLogo.svg';
+import './header.scss';
+import MainMenu from './main-menu';
+import { hideHeaderSubMenu } from '../../tools/helpers';
 
 const LinkMenu = ({ content, title, link, click, className = '' }) => {
   content = content ?? title;
@@ -45,16 +48,6 @@ const Header = () => {
     { title: t('header.menu.contacts'), link: '/contacts/', click: null },
   ];
 
-  const menu = menuItems.map(({ title, link, click }) => {
-    return (
-      <li key={title}>
-        <NavLink className={({ isActive }) => (isActive ? 'is-active' : '')} to={link} onClick={click} title={title}>
-          {title}
-        </NavLink>
-      </li>
-    );
-  });
-
   const listOfSocialNetworks = [
     {
       icon: <Facebook />,
@@ -81,14 +74,15 @@ const Header = () => {
   });
 
   return (
-    <header className="header">
-      <div className="main-block d-flex align-items-center">
+    <header className = {`header ${hideHeaderSubMenu(pathname) ? '' : 'expand'}`}>
+      <div className="header-block d-flex align-items-center">
         <div className="logo-container">
           <LinkMenu content={<Logo />} title="company-logo" link={'/'} click={null} className="home-link mr-auto" />
         </div>
 
         <div className="menu">
-          <ul className="d-flex align-items-center">{menu}</ul>
+          <MainMenu menuItems={menuItems} />
+          <SubMenu pathname={pathname} />
         </div>
 
         <div className="language-container d-flex align-items-center">
@@ -99,10 +93,6 @@ const Header = () => {
 
           <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
         </div>
-      </div>
-
-      <div className={`secondary-block ${['/', '/main'].includes(pathname) ? 'hide-block' : ''}`}>
-        
       </div>
     </header>
   );
