@@ -59,8 +59,9 @@ const ProjectsDetails = () => {
         resizingBar: false,
         showPathLabel: false,
         imageUploadUrl: `${getServerAPI()}/api/projects/editor/images/${id}`,
+        font: ['Arial', 'Comic Sans MS', 'Courier New', 'Georgia', 'GothicA1', 'Impact', 'tahoma', 'Trebuchet MS', 'Verdana'],
         defaultStyle:
-          'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; font-size: 1.3em;',
+          'font-family: GothicA1; font-size: 1em;',
       }}
     />
   );
