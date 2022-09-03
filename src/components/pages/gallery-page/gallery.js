@@ -27,7 +27,9 @@ const GalleryPage = () => {
   return (
     <Content classNames={"flex-child"}>
       <Gallery
-        images={listOfPhoto}
+        images={listOfPhoto.map(
+          project => ({...project, imgSrc: `${project._id}/project-img/${project.image}`})
+        )}
         imageCardClick={onImageCardClick}
         infinitiveScroll = {true}
         infinitiveScrollParams = {{
