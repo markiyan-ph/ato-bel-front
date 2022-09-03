@@ -1,7 +1,6 @@
 export { 
   fetchProjects,
   fetchProjectsLoading,
-  fetchProjectById,
   fetchMainPageProjects,
   fetchProjectsSuccess,
   fetchMainPageProjectsSuccess,

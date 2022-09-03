@@ -1,4 +1,4 @@
-import { delay, put } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import * as actions from '../actions';
 import { getServerAPI } from '../../tools/helpers';
 
@@ -26,23 +26,6 @@ export function* fetchMainPageProjectsSaga() {
     const respJson = yield resp.json();
     yield put(actions.fetchMainPageProjectsSuccess(respJson.projects));
   
-  } catch (err) {
-    console.log(err);
-    yield put(actions.fetchProjectsFail());
-  }
-}
-
-export function* fetchProjectByIdSaga({id}) {
-  try {
-    yield put(actions.fetchProjectsLoading());
-
-    const resp = yield fetch(`${SERVER_API}/projects/show/${id}`);
-
-    yield delay(5000);
-    
-    const respJson = yield resp.json();
-    yield put(actions.fetchProjectsSuccess(respJson.projects));
-
   } catch (err) {
     console.log(err);
     yield put(actions.fetchProjectsFail());
