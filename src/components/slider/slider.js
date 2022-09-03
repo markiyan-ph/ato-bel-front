@@ -8,12 +8,12 @@ import { isMobile } from '../../tools/helpers';
 import "./slider.scss";
 
 const CustomSlide = props => {
-  const { imgSrc, title } = props;
+  const { _id, imgSrc, title } = props;
 
   return (
-    <div>
+    <div key={_id}>
       <img
-        src={`${getServerAPI()}/uploads${imgSrc}`}
+        src={`${getServerAPI()}/uploads/${imgSrc}`}
         alt={title}
       />
     </div>

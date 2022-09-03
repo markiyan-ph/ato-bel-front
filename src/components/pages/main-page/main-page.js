@@ -20,7 +20,13 @@ const MainPage = () => {
   const initialSlide = randomInt(0, mainPageProjects.length-1);
 
   const content = mainPageProjects.length > 0 ? 
-    (<MSlider projects={mainPageProjects} showButtons={true} initialSlide={initialSlide} />)
+    (<MSlider 
+      projects={
+        mainPageProjects.map(
+          project => ({...project, imgSrc: `${project._id}/project-main-img/${project.image}`})
+        )} 
+      showButtons={true} 
+      initialSlide={initialSlide} />)
     : <p>Loading...</p>;
   
   return content;
