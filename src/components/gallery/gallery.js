@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { getServerAPI } from "../../tools/helpers";
 import "./gallery.scss";
 
@@ -23,8 +24,10 @@ const Gallery = ({
 }) => {
   const {isLoading, pageNum, setPage} = infinitiveScrollParams;
   const observer = infinitiveScroll ? useRef() : null;
-  const spaceBetween = 5; // space between cards in px
+  const spaceBetween = 10; // space between cards in px
   const columns = 4; // amount of columns
+  const {i18n} = useTranslation();
+  const lang = i18n.language;
   const lastItemRef = infinitiveScroll ? useCallback(node => {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
@@ -46,7 +49,7 @@ const Gallery = ({
     const imageTitle = (
       <div className="img-text-over" >
         <div>
-          <span>{title}</span>
+          <span>{title[lang]}</span>
           {imageTitleDescription}
         </div>
       </div>
@@ -79,7 +82,7 @@ const Gallery = ({
 
   return (
     <div
-      className="gallery-container d-flex flex-wrap justify-content-between"
+      className="gallery-container d-flex flex-wrap justify-content-start"
     >
       {imgs}
     </div>
