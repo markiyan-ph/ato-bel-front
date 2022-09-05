@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SunEditor from "suneditor-react";
@@ -11,16 +11,17 @@ import "./project-details.scss";
 
 const ProjectsDetails = () => {
   const { id } = useParams();
-  const {loading, data} = useSelector((state) => state.projectData);
+  const {data} = useSelector((state) => state.projectData);
   const {isAdmin} = useSelector((state) => state.authorization);
   const dispatch = useDispatch();
+  const [showEditor, setShowEditor] = useState(false);
+
+  // setTimeout(() => {setShowEditor(true);}, 0);
 
   useEffect(() => {
     dispatch(actions.fetchProjectDetails(id));
     // eslint-disable-next-line
   }, [id]);
-
-  // const project = projects.projectsList[0] ?? {};
 
   const buttonList = [
     ["undo", "redo"],
@@ -39,14 +40,15 @@ const ProjectsDetails = () => {
   const editor = (
     <SunEditor
       width="100%"
+      className="sun-mark"
       height="auto"
       autoFocus={true}
       placeholder="Please type here..."
       setContents={data}
       // appendContents={data}
-      hide={loading ? true : false}
-      disable={!isAdmin}
+      disableToolbar={!isAdmin}
       hideToolbar={!isAdmin}
+      onLoad={() => setShowEditor(true)}
       setOptions={{
         buttonList: buttonList,
         // mode: "inline",
@@ -69,8 +71,10 @@ const ProjectsDetails = () => {
     <Content classNames={"flex-child"}>
       <div className="project-details">
         <h1>Hello Project Details! Your Id is {id}</h1>
-        {loading ? <h3>Loading...</h3> : null}
-        {editor}
+        {/* {loading ? <h3>Loading...</h3> : null} */}
+        <div className="editor-wrapper" style={showEditor ? {display: 'block'} : {display: 'none'}}>
+          {editor}
+        </div>
       </div>
     </Content>
   );
