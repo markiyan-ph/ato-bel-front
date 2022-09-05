@@ -4,7 +4,7 @@ export {
   fetchMainPageProjects,
   fetchProjectsSuccess,
   fetchMainPageProjectsSuccess,
-  fetchProjectsFail
+  fetchProjectsFail,
 } from './projects';
 
 export {
@@ -14,3 +14,12 @@ export {
   saveProjectDetails,
   saveProjectDetailsSuccess
 } from './project-data';
+
+export {
+  authorizeUser,
+  authorizeUserSuccess,
+  authorizeUserFail,
+  unAuthorizeUser,
+  unAuthorizeUserSuccess,
+  unAuthorizeUserFail
+} from './authorization';

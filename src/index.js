@@ -5,13 +5,14 @@ import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import App from "./components/app/";
 import createSagaMiddleware from "redux-saga";
-import { projectsReducer, projectDataReducer } from "./store/reducers";
+import { projectsReducer, projectDataReducer, authorizationReducer } from "./store/reducers";
 import { watchProjects } from './store/sagas/index';
 
 import "./i18n";
 import "./index.scss";
 
 const rootReducer = {
+  authorization: authorizationReducer,
   projects: projectsReducer,
   projectData: projectDataReducer
 };
