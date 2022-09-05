@@ -21,7 +21,7 @@ const CustomSlide = props => {
 };
 
 function MSlider ({projects, showButtons, initialSlide}) {
-  const [title, setTitle] = useState(`${projects[initialSlide].title}`);
+  const [title, setTitle] = useState(projects[initialSlide].title);
   const slider = useRef(null);
 
   const next = () => {

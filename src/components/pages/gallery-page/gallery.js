@@ -9,8 +9,8 @@ import AddProject from '../../add-project';
 const GalleryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isAdmin, setIsAdmin] = useState(false);
   const [show, popup] = useState(false);
+  const {isAdmin} = useSelector(state => state.authorization);
   const modalOpen = () => popup(true);
   const modalClose = () => popup(false);
 
@@ -21,6 +21,7 @@ const GalleryPage = () => {
   const [pageNum, setPage] = useState(1);
   const projects = useSelector(state => state.projects);
   const listOfPhoto = projects?.projectsList;
+  const list = [...listOfPhoto];
   const onImageCardClick = id => navigate(id);
 
   useEffect(() => {
@@ -29,27 +30,19 @@ const GalleryPage = () => {
     }
   }, [pageNum]);
 
-  if (isAdmin && listOfPhoto?.[0]?._id !== "AddNewProject") {
-    listOfPhoto.unshift({"_id": "AddNewProject", "title": "AddNewProject", image: "add-512.gif"});
+  if (isAdmin && list?.[0]?._id !== "AddNewProject") {
+    list.unshift({"_id": "AddNewProject", "title": {uk: "Додати новий проект", en: "Add new project"}, image: "add-512.gif"});
   } 
     
-  if (!isAdmin && listOfPhoto?.[0]?._id === "AddNewProject") {
-    listOfPhoto.shift();
+  if (!isAdmin && list?.[0]?._id === "AddNewProject") {
+    list.shift();
   }
 
   return (
     <Content classNames={'flex-child'}>
-      <button
-        onClick={() => {
-          setIsAdmin(currState => !currState);
-        }}
-      >
-        Toggle is admin
-      </button>
-
       <AddProject show={show} modalClose={modalClose} />
       <Gallery
-        images={listOfPhoto.map(project => ({ ...project, imgSrc: `${project._id}/project-img/${project.image}` }))}
+        images={list.map(project => ({ ...project, imgSrc: `${project._id}/project-img/${project.image}` }))}
         imageCardClick={onImageCardClick}
         addNewProjectClick={modalOpen}
         infinitiveScroll={true}
