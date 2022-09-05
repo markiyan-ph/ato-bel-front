@@ -26,7 +26,8 @@ const MainPage = () => {
           project => ({...project, imgSrc: `${project._id}/project-main-img/${project.image}`})
         )} 
       showButtons={true} 
-      initialSlide={initialSlide} />)
+      initialSlide={initialSlide}
+    />)
     : <p>Loading...</p>;
   
   return content;

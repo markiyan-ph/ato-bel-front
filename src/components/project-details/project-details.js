@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SunEditor from "suneditor-react";
@@ -11,9 +11,8 @@ import "./project-details.scss";
 
 const ProjectsDetails = () => {
   const { id } = useParams();
-  const data = useSelector((state) => state.projectData.data);
-  const loading = useSelector((state) => state.projectData.loading);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const {loading, data} = useSelector((state) => state.projectData);
+  const {isAdmin} = useSelector((state) => state.authorization);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -68,7 +67,6 @@ const ProjectsDetails = () => {
 
   return (
     <Content classNames={"flex-child"}>
-      <button onClick={ () => { setIsAdmin(currState => !currState); } }>Toggle is admin</button>
       <div className="project-details">
         <h1>Hello Project Details! Your Id is {id}</h1>
         {loading ? <h3>Loading...</h3> : null}

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../store/actions';
 import { Instagram, Facebook, Behance } from '../social-icons';
 
 import SubMenu from './sub-menu';
@@ -8,6 +10,7 @@ import logo from '../../assets/images/atoBelLogo.svg';
 import './header.scss';
 import MainMenu from './main-menu';
 import { hideHeaderSubMenu } from '../../tools/helpers';
+import { Button } from 'react-bootstrap';
 
 const LinkMenu = ({ content, title, link, click, className = '' }) => {
   content = content ?? title;
@@ -31,7 +34,17 @@ const Logo = () => {
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const {isAdmin} = useSelector(state => state.authorization);
+
+  const autorize = () => {
+    dispatch(actions.authorizeUserSuccess());
+  };
+
+  const unAutorize = () => {
+    dispatch(actions.unAuthorizeUserSuccess());
+  };
 
   // lang "uk" or "en"
   const switchLanguage = lang => {
@@ -74,7 +87,7 @@ const Header = () => {
   });
 
   return (
-    <header className = {`header ${hideHeaderSubMenu(pathname) ? '' : 'expand'}`}>
+    <header className={`header ${hideHeaderSubMenu(pathname) ? '' : 'expand'}`}>
       <div className="header-block d-flex align-items-center">
         <div className="logo-container">
           <LinkMenu content={<Logo />} title="company-logo" link={'/'} click={null} className="home-link mr-auto" />
@@ -92,6 +105,15 @@ const Header = () => {
           </div>
 
           <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
+          <Button 
+            size='sm'
+            variant={isAdmin ? 'warning' : 'primary'}
+            onClick={() => {
+              isAdmin ? unAutorize() : autorize();
+            }}
+          >
+            {isAdmin ? 'Logout' : 'Login'}
+          </Button>
         </div>
       </div>
     </header>
