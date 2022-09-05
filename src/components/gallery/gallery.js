@@ -7,7 +7,8 @@ import "./gallery.scss";
  * @param {
  * images: list of images
  * imageCardClick: on click function
- * showDescription: define if description should be shown.
+ * addNewProjectClick: on click function, to add new project
+ * showDescription: define if description should be shown
  * infinitiveScroll: boolean
  * infinitiveScrollParams: {setPage: function, isLoading:boolean, pageNum: number}
  * } param0
@@ -15,6 +16,7 @@ import "./gallery.scss";
 const Gallery = ({
   images,
   imageCardClick = null,
+  addNewProjectClick = null,
   showDescription = false,
   infinitiveScroll = false,
   infinitiveScrollParams = {}
@@ -50,12 +52,14 @@ const Gallery = ({
       </div>
     );
 
-    return (
+    const clickFunction = _id === "AddNewProject" ? addNewProjectClick : imageCardClick;
+    
+    const projectData = (
       <div
         ref={ images.length === index+1 ? lastItemRef : null }
         className="img-card"
         key={_id}
-        onClick={imageCardClick ? () => imageCardClick(_id) : null}
+        onClick={clickFunction ? () => clickFunction(_id) : null}
         style={{paddingRight: `${pr}px`, paddingBottom: `${pb}px`}}
       >
         <div
@@ -69,6 +73,8 @@ const Gallery = ({
         </div>
       </div>
     );
+
+    return projectData;
   });
 
   return (
