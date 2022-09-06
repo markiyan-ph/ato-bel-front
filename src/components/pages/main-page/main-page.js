@@ -23,7 +23,7 @@ const MainPage = () => {
     (<MSlider 
       projects={
         mainPageProjects.map(
-          project => ({...project, imgSrc: `${project._id}/project-main-img/${project.image}`})
+          project => ({...project, imgSrc: `${project.projectId}/project-main-img/${project.image}`})
         )} 
       showButtons={true} 
       initialSlide={initialSlide}
