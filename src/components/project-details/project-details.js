@@ -47,6 +47,7 @@ const ProjectsDetails = () => {
       setContents={data}
       // appendContents={data}
       disableToolbar={!isAdmin}
+      disable={!isAdmin}
       hideToolbar={!isAdmin}
       onLoad={() => setShowEditor(true)}
       setOptions={{
