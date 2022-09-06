@@ -24,8 +24,6 @@ const Gallery = ({
 }) => {
   const {isLoading, pageNum, setPage} = infinitiveScrollParams;
   const observer = infinitiveScroll ? useRef() : null;
-  const spaceBetween = 10; // space between cards in px
-  const columns = 4; // amount of columns
   const {i18n} = useTranslation();
   const lang = i18n.language;
   const lastItemRef = infinitiveScroll ? useCallback(node => {
@@ -43,8 +41,6 @@ const Gallery = ({
 
   const imgs = images.map(({ _id, imgSrc, title, description }, index) => {
     const imageTitleDescription = showDescription ? <span><br />{description}</span> : null;
-    let pr = spaceBetween,
-      pb = index + 1 > images.length - columns ? 0 : spaceBetween;
 
     const imageTitle = (
       <div className="img-text-over" >
@@ -63,7 +59,6 @@ const Gallery = ({
         className="img-card"
         key={_id}
         onClick={clickFunction ? () => clickFunction(_id) : null}
-        style={{paddingRight: `${pr}px`, paddingBottom: `${pb}px`}}
       >
         <div
           className="img-container"
@@ -82,7 +77,7 @@ const Gallery = ({
 
   return (
     <div
-      className="gallery-container d-flex flex-wrap justify-content-start"
+      className="gallery-container"
     >
       {imgs}
     </div>

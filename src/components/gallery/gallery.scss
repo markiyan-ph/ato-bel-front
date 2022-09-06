@@ -2,12 +2,15 @@
 
 .gallery-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
+  gap: $gallery-space-between;
   margin-bottom: 0;
 
   .img-card {
     height: auto;
-    width: 25%;
+    width: calc((100% - ($gallery-space-between * 3)) / 4);
 
     .img-container {
       padding: 0 0 100% 0;
