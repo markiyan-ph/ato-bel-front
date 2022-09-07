@@ -1,12 +1,13 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import AddProjectForm from './add-project-form';
 
 const AddProject = ({show, modalClose}) => {
   
   return (
     <Modal show={show} onHide={modalClose}>
       <Modal.Body>
-        <h1>Hello modal!</h1>
+        <AddProjectForm />
       </Modal.Body>
     </Modal>
   );
