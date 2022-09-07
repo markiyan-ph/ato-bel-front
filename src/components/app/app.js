@@ -7,6 +7,7 @@ import MainPage from "../pages/main-page";
 import Studio from "../pages/studio";
 import "./app.scss";
 import ProjectsDetails from "../project-details";
+import LoginPage from "../pages/login-page";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/projects/:id" element={<ProjectsDetails />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/studio" element={<Studio />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </div>
   );
