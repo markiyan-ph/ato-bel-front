@@ -1,0 +1,15 @@
+.edit-panel {
+  display: flex;
+  justify-content: flex-end;
+  
+  .tags {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    background-color: #00000077;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+  }
+}
