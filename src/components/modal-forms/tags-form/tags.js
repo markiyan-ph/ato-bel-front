@@ -4,26 +4,36 @@ import { Button, Form } from 'react-bootstrap';
 import './tags.scss';
 
 const TagsForm = () => {
+  
   return (
     <Form className='tags-form'>
-      <Form.Group className="mb-3" controlId="titles">
-        <Form.Label>Project title</Form.Label>
-        <div className='inline-input'>
-          <Form.Control type="text" placeholder="Enter english title" />
-          <Form.Control type="text" placeholder="Enter ukraine title" />
-        </div>
-        {/* <Form.Text className="text-muted">
-          We&apos;ll never share your email with anyone else.
-        </Form.Text> */}
+      <Form.Group className="mb-3" controlId="tagsList">
+        <Form.Label>Select tag or add new tag</Form.Label>
+        <Form.Select>
+          <option value='AddNewTag'>Add new tag</option>
+          <option value='tag1'>Tag1</option>
+          <option value='tag2'>Tag2</option>
+          <option value='tag3'>Tag3</option>
+        </Form.Select>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formFile">
-        <Form.Label>Project image</Form.Label>
-        <Form.Control type="file" accept='image/*' />
+      <Form.Group className="mb-3" controlId="tagId">
+        <Form.Label>Tag ID</Form.Label>
+        <Form.Control type="input" />
       </Form.Group>
-      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
+      
+      <div className='inline-input'>
+        <Form.Group className="mb-3 inline-input-child" controlId="ukLabel">
+          <Form.Label>UK</Form.Label>
+          <Form.Control type="input" />
+        </Form.Group>
+        
+        <Form.Group className="mb-3 inline-input-child" controlId="enLabel">
+          <Form.Label>EN</Form.Label>
+          <Form.Control type="input" />
+        </Form.Group>
+      </div>
+      
       <Button variant="primary" type="submit">
         Submit
       </Button>
