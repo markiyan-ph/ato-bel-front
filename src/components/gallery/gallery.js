@@ -1,5 +1,8 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import EditTool from "./edit-tool";
+import EditPanel from './edit-panel';
+import { ModalForm, TagsForm } from '../modal-forms';
 import { getServerAPI } from "../../tools/helpers";
 import "./gallery.scss";
 
@@ -20,12 +23,16 @@ const Gallery = ({
   addNewProjectClick = null,
   showDescription = false,
   infinitiveScroll = false,
-  infinitiveScrollParams = {}
+  infinitiveScrollParams = {},
+  isAdmin = false
 }) => {
   const {isLoading, pageNum, setPage} = infinitiveScrollParams;
   const observer = infinitiveScroll ? useRef() : null;
   const {i18n} = useTranslation();
   const lang = i18n.language;
+  const [show, popup] = useState(false);
+  const modalOpen = () => popup(true);
+  const modalClose = () => popup(false);
   const lastItemRef = infinitiveScroll ? useCallback(node => {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
@@ -39,6 +46,8 @@ const Gallery = ({
     if (node) observer.current.observe(node);
   }, [isLoading]) : null;
 
+  const tagsForm = <TagsForm />;
+  
   const imgs = images.map(({ _id, imgSrc, title, description }, index) => {
     const imageTitleDescription = showDescription ? <span><br />{description}</span> : null;
 
@@ -60,6 +69,9 @@ const Gallery = ({
         key={_id}
         onClick={clickFunction ? () => clickFunction(_id) : null}
       >
+
+        {(isAdmin && _id !== "AddNewProject") ? <EditTool /> : null}
+      
         <div
           className="img-container"
         >
@@ -76,10 +88,14 @@ const Gallery = ({
   });
 
   return (
-    <div
-      className="gallery-container"
-    >
-      {imgs}
+    <div className="gallery">
+      {isAdmin ? <EditPanel openForm={modalOpen} /> : null}
+      <ModalForm show={show} modalClose={modalClose} form={tagsForm} />
+      <div
+        className="gallery-container"
+      >
+        {imgs}
+      </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Gallery from '../../gallery';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/actions';
 import { useNavigate } from 'react-router-dom';
-import AddProject from '../../add-project';
+import { ModalForm, AddProjectForm } from '../../modal-forms';
 
 const GalleryPage = () => {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ const GalleryPage = () => {
   const listOfPhoto = projects?.projectsList;
   const list = [...listOfPhoto];
   const onImageCardClick = id => navigate(id);
+  const addprojectForm = <AddProjectForm />;
 
   useEffect(() => {
     if (pageNum <= projects?.pages && pageNum > projects?.lastPage) {
@@ -40,7 +41,7 @@ const GalleryPage = () => {
 
   return (
     <Content classNames={'flex-child'}>
-      <AddProject show={show} modalClose={modalClose} />
+      <ModalForm show={show} modalClose={modalClose} form={addprojectForm} />
       <Gallery
         images={list.map(project => ({ ...project, imgSrc: `${project._id}/project-img/${project.image}` }))}
         imageCardClick={onImageCardClick}
@@ -51,6 +52,7 @@ const GalleryPage = () => {
           isLoading: projects.loading,
           pageNum: pageNum > projects?.lastPage ? +pageNum : +projects?.lastPage,
         }}
+        isAdmin={isAdmin}
       />
     </Content>
   );
