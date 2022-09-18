@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions';
-import { Instagram, Facebook, Behance } from '../social-icons';
+import { Facebook, Instagram, Behance } from 'react-bootstrap-icons';
 
 import SubMenu from './sub-menu';
 import logo from '../../assets/images/atoBelLogo.svg';
@@ -63,17 +63,17 @@ const Header = () => {
 
   const listOfSocialNetworks = [
     {
-      icon: <Facebook />,
+      icon: <Facebook size={16} />,
       link: 'https://www.facebook.com/atobeldesign',
       title: 'facebook-icon',
     },
     {
-      icon: <Instagram />,
+      icon: <Instagram size={16} />,
       link: 'https://www.instagram.com/ato_bel_architects/',
       title: 'instagram-icon',
     },
     {
-      icon: <Behance />,
+      icon: <Behance size={16} />,
       link: 'https://www.behance.net/ATO-Bel',
       title: 'behance-icon',
     },
