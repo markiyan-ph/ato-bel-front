@@ -10,7 +10,7 @@ import logo from '../../assets/images/atoBelLogo.svg';
 import './header.scss';
 import MainMenu from './main-menu';
 import { hideHeaderSubMenu } from '../../tools/helpers';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 const LinkMenu = ({ content, title, link, click, className = '' }) => {
   content = content ?? title;
@@ -36,7 +36,7 @@ const Header = () => {
   const [language, setLanguage] = useState(i18n.language);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const {isAdmin} = useSelector(state => state.authorization);
+  const {isAdmin, isAuthorized} = useSelector(state => state.authorization);
 
   const autorize = () => {
     dispatch(actions.authorizeUser());
@@ -44,6 +44,14 @@ const Header = () => {
 
   const unAutorize = () => {
     dispatch(actions.unAuthorizeUser());
+  };
+  
+  const userPreview = () => {
+    dispatch(actions.userPreview());
+  };
+  
+  const userAdmin = () => {
+    dispatch(actions.userAdmin());
   };
 
   // lang "uk" or "en"
@@ -86,6 +94,32 @@ const Header = () => {
     );
   });
 
+  const buttonsGroup = (
+    <ButtonGroup aria-label="Admin buttons">
+      {
+        isAuthorized ?
+          <Button
+            size="sm"
+            variant={isAdmin ? 'warning' : 'primary'}
+            onClick={() => {
+              isAdmin ? userPreview() : userAdmin();
+            }}
+          >
+            {isAdmin ? 'Preview' : 'Admin'}
+          </Button> : null
+      }
+      <Button
+        size="sm"
+        variant='warning'
+        onClick={() => {
+          isAuthorized ? unAutorize() : autorize();
+        }}
+      >
+        {isAuthorized ? 'Logout' : 'Login'}
+      </Button>
+    </ButtonGroup>
+  );
+
   return (
     <header className={`header ${hideHeaderSubMenu(pathname) ? '' : 'expand'}`}>
       <div className="header-block d-flex align-items-center">
@@ -105,15 +139,7 @@ const Header = () => {
           </div>
 
           <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
-          <Button 
-            size='sm'
-            variant={isAdmin ? 'warning' : 'primary'}
-            onClick={() => {
-              isAdmin ? unAutorize() : autorize();
-            }}
-          >
-            {isAdmin ? 'Logout' : 'Login'}
-          </Button>
+          {isAuthorized ? buttonsGroup : buttonsGroup}
         </div>
       </div>
     </header>

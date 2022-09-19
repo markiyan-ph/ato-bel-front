@@ -10,7 +10,7 @@ const GalleryPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [show, popup] = useState(false);
-  const {isAdmin} = useSelector(state => state.authorization);
+  const {isAdmin, isAuthorized} = useSelector(state => state.authorization);
   const modalOpen = () => popup(true);
   const modalClose = () => popup(false);
 
@@ -19,6 +19,7 @@ const GalleryPage = () => {
   };
 
   const [pageNum, setPage] = useState(1);
+  const showControls = isAdmin && isAuthorized;
   const projects = useSelector(state => state.projects);
   const listOfPhoto = projects?.projectsList;
   const list = [...listOfPhoto];
@@ -31,11 +32,11 @@ const GalleryPage = () => {
     }
   }, [pageNum]);
 
-  if (isAdmin && list?.[0]?._id !== "AddNewProject") {
+  if (showControls && list?.[0]?._id !== "AddNewProject") {
     list.unshift({"_id": "AddNewProject", "title": {uk: "Додати новий проект", en: "Add new project"}, image: "add-512.gif"});
   } 
     
-  if (!isAdmin && list?.[0]?._id === "AddNewProject") {
+  if (!showControls && list?.[0]?._id === "AddNewProject") {
     list.shift();
   }
 
@@ -52,7 +53,7 @@ const GalleryPage = () => {
           isLoading: projects.loading,
           pageNum: pageNum > projects?.lastPage ? +pageNum : +projects?.lastPage,
         }}
-        isAdmin={isAdmin}
+        isAdmin={showControls}
       />
     </Content>
   );

@@ -18,10 +18,24 @@ const unAuthorizeUserSuccess = (state) => {
   });
 };
 
+const userPreview = (state) => {
+  return updateObject(state, {
+    isAdmin: false
+  });
+};
+
+const userAdmin = (state) => {
+  return updateObject(state, {
+    isAdmin: true
+  });
+};
+
 const authorizationReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTHORIZE_USER: return authorizeUserSuccess(state);
     case actionTypes.UNAUTHORIZE_USER: return unAuthorizeUserSuccess(state);
+    case actionTypes.USER_PREVIEW: return userPreview(state);
+    case actionTypes.USER_ADMIN: return userAdmin(state);
     default:
       return state;
   }
