@@ -20,8 +20,8 @@ const unAuthorizeUserSuccess = (state) => {
 
 const authorizationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.AUTHORIZE_USER_SUCCESS: return authorizeUserSuccess(state);
-    case actionTypes.UNAUTHORIZE_USER_SUCCESS: return unAuthorizeUserSuccess(state);
+    case actionTypes.AUTHORIZE_USER: return authorizeUserSuccess(state);
+    case actionTypes.UNAUTHORIZE_USER: return unAuthorizeUserSuccess(state);
     default:
       return state;
   }

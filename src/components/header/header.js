@@ -39,11 +39,11 @@ const Header = () => {
   const {isAdmin} = useSelector(state => state.authorization);
 
   const autorize = () => {
-    dispatch(actions.authorizeUserSuccess());
+    dispatch(actions.authorizeUser());
   };
 
   const unAutorize = () => {
-    dispatch(actions.unAuthorizeUserSuccess());
+    dispatch(actions.unAuthorizeUser());
   };
 
   // lang "uk" or "en"
