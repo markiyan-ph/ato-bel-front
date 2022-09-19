@@ -4,6 +4,18 @@ import { Button, Form } from 'react-bootstrap';
 import './tags.scss';
 
 const TagsForm = () => {
+  const onAddTag = () => {
+    console.log('+++ Add tag +++');
+  };
+  
+  const onUpdateTag = () => {
+    console.log('=== Update tag ===');
+  };
+  
+  const onDeleteTag = () => {
+    console.log('--- Delete tag ---');
+  };
+  
   
   return (
     <Form className='tags-form'>
@@ -34,8 +46,14 @@ const TagsForm = () => {
         </Form.Group>
       </div>
       
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="primary" className="mr-3" onClick={onAddTag}>
+        Add tag
+      </Button>{' '}
+      <Button variant="warning" className="mr-3" onClick={onUpdateTag}>
+        Update
+      </Button>{' '}
+      <Button variant="danger" className="mr-3" onClick={onDeleteTag}>
+        Delete
       </Button>
     </Form>
   );
