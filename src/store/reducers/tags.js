@@ -2,12 +2,13 @@ import { updateObject } from '../../tools/helpers';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  tags: [],
-  error: false
+  tagsList: [],
+  error: false,
+  loading: false
 };
 
 const fetchTagsSuccess = (state, action) => {
-  return updateObject(state, {tags: [...action.tags]});
+  return updateObject(state, {tagsList: [...action.tags]});
 };
 
 const fetchTagsFail = (state) => {
@@ -15,9 +16,12 @@ const fetchTagsFail = (state) => {
 };
 
 const saveTagSuccess = (state, action) => {
-  const mergedList = [...state.tags, action.tags];
+  const mergedList = [...state.tagsList, {...action.tag}];
+  return updateObject(state, {tagsList: mergedList, loading: false});
+};
 
-  return updateObject(state, {tags: mergedList});
+const saveTag = (state) => {
+  return updateObject(state, {loading: true});
 };
 
 // const unAuthorizeUserSuccess = (state) => {
@@ -31,6 +35,7 @@ const tagsReducer = (state = initialState, action) => {
     case actionTypes.FETCH_TAGS_SUCCESS: return fetchTagsSuccess(state, action);
     case actionTypes.FETCH_TAGS_FAIL: return fetchTagsFail(state);
     case actionTypes.SAVE_TAGS_SUCCESS: return saveTagSuccess(state, action);
+    case actionTypes.SAVE_TAGS: return saveTag(state);
     default:
       return state;
   }

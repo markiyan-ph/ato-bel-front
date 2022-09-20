@@ -22,9 +22,8 @@ const SERVER_API = `${getServerAPI()}/api`;
 export function* saveTagSaga({tag}) {
   try {
     const resp = yield postJson(`${SERVER_API}/tags/save`, JSON.stringify(tag));
-    // const resp = yield fetch('http://192.168.2.116:5000/api/projects/');
     const respJson = yield resp.json();
-    yield put(actions.saveTagSuccess(respJson.projects));
+    yield put(actions.saveTagSuccess(respJson));
   
   } catch (err) {
     console.log(err);
