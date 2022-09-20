@@ -90,7 +90,7 @@ const Gallery = ({
   return (
     <div className="gallery">
       {isAdmin ? <EditPanel openForm={modalOpen} /> : null}
-      <ModalForm show={show} modalClose={modalClose} form={tagsForm} />
+      <ModalForm show={show} modalClose={modalClose} form={tagsForm} formTitle="Tags" />
       <div
         className="gallery-container"
       >
