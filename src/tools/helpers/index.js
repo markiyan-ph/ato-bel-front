@@ -44,3 +44,14 @@ export const hideHeaderSubMenu = pathname => {
 };
 
 export const getServerAPI = () => process.env.REACT_APP_SERVER_HOST;
+
+export const postJson = (url, body) => {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: body
+  });
+};
