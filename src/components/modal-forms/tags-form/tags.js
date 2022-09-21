@@ -16,6 +16,7 @@ const TagsForm = () => {
   const [enLabel, setEnLabel] = useState('');
 
   const saveTag = tag => dispatch(actions.saveTag(tag));
+  const deleteTag = tagId => dispatch(actions.deleteTag(tagId));
 
   const cleanFields = () => {
     setTagId('');
@@ -59,9 +60,12 @@ const TagsForm = () => {
   const onUpdateTag = () => {
     console.log('=== Update tag ===');
   };
-
+  
   const onDeleteTag = () => {
-    console.log('--- Delete tag ---');
+    const tagId = tagSelector;
+    deleteTag(tagId);
+    setTagSelector(defaultSelectorValue);
+    cleanFields();
   };
 
   const tagsOptions = tags.map(currTag => (

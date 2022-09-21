@@ -29,3 +29,17 @@ export const saveTagFail = tag => ({
   type: actionTypes.SAVE_TAGS_FAIL,
   tag
 });
+
+export const deleteTag = tagId => ({
+  type: actionTypes.DELETE_TAG,
+  tagId
+});
+
+export const deleteTagSuccess = ({tagId}) => ({
+  type: actionTypes.DELETE_TAG_SUCCESS,
+  tagId
+});
+
+export const deleteTagFail = () => ({
+  type: actionTypes.DELETE_TAG_FAIL
+});

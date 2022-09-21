@@ -55,3 +55,9 @@ export const postJson = (url, body) => {
     body: body
   });
 };
+
+export const removeItemFromList = (list, index) => {
+  const firstArr = list.slice(0, index);
+  const secondArr = list.slice(index + 1);
+  return [...firstArr , ...secondArr];
+}

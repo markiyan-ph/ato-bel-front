@@ -30,3 +30,16 @@ export function* saveTagSaga({tag}) {
     yield put(actions.saveTagFail());
   }
 }
+
+export function* deleteTagSaga({tagId}) {
+  try {
+    const resp = yield postJson(`${SERVER_API}/tags/delete`, JSON.stringify({tagId}));
+    console.log('saga resp', resp);
+    const respJson = yield resp.json();
+    yield put(actions.deleteTagSuccess(respJson));
+  
+  } catch (err) {
+    console.log(err);
+    yield put(actions.deleteTagFail());
+  }
+}

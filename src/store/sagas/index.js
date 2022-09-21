@@ -2,7 +2,7 @@ import { takeEvery } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
 import { fetchProjectDetailsSaga, saveProjectDetailsSaga } from './project-data';
 import { fetchMainPageProjectsSaga, fetchProjectsSaga } from './projects';
-import { saveTagSaga } from './tags';
+import { saveTagSaga, deleteTagSaga } from './tags';
 
 export function* watchProjects() {
   yield takeEvery(actionTypes.FETCH_PROJECTS, fetchProjectsSaga);
@@ -10,4 +10,5 @@ export function* watchProjects() {
   yield takeEvery(actionTypes.FETCH_PROJECT_DETAILS, fetchProjectDetailsSaga);
   yield takeEvery(actionTypes.SAVE_PROJECT_DETAILS, saveProjectDetailsSaga);
   yield takeEvery(actionTypes.SAVE_TAGS, saveTagSaga);
+  yield takeEvery(actionTypes.DELETE_TAG, deleteTagSaga);
 }
