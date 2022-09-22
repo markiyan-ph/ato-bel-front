@@ -43,3 +43,13 @@ export const deleteTagSuccess = ({tagId}) => ({
 export const deleteTagFail = () => ({
   type: actionTypes.DELETE_TAG_FAIL
 });
+
+export const updateTag = tag => ({
+  type: actionTypes.UPDATE_TAGS,
+  tag
+});
+
+export const updateTagSuccess = tag => ({
+  type: actionTypes.UPDATE_TAGS_SUCCESS,
+  tag
+});

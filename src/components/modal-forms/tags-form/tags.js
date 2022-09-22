@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/actions';
@@ -15,7 +15,14 @@ const TagsForm = () => {
   const [ukLable, setUkLabel] = useState('');
   const [enLabel, setEnLabel] = useState('');
 
+  useEffect(() => {
+    if (tags.length === 0) {
+      dispatch(actions.fetchTags());
+    }
+  }, []);
+  
   const saveTag = tag => dispatch(actions.saveTag(tag));
+  const updateTag = tag => dispatch(actions.updateTag(tag));
   const deleteTag = tagId => dispatch(actions.deleteTag(tagId));
 
   const cleanFields = () => {
@@ -58,7 +65,21 @@ const TagsForm = () => {
   };
 
   const onUpdateTag = () => {
-    console.log('=== Update tag ===');
+    const tagId = tagSelector;
+    const tag = {
+      tagId,
+      labels: {
+        uk: ukLable,
+        en: enLabel,
+      },
+    };
+
+    if (notValidTagId) {
+      return;
+    }
+
+    // cleanFields();
+    updateTag(tag);
   };
   
   const onDeleteTag = () => {
