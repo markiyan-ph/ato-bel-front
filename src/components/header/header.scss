@@ -1,5 +1,6 @@
 @import "../../assets/styles/shared";
 
+// TODO: remove commented out code
 .header {
   background-color: #ffffff;
   color: $header-color;
@@ -7,7 +8,7 @@
   height: $header-main-height;
   padding: 0 $container-indent 0 $container-indent;
   position: fixed;
-  z-index: 50;
+  z-index: 100;
   display: flex;
   flex-direction: column;
 
@@ -45,7 +46,7 @@
       margin: 0;
       padding: 0;
       position: relative;
-      z-index: 50;
+      // z-index: 50;
 
       li {
         color: $header-color;
@@ -57,7 +58,8 @@
     a {
       color: inherit;
       position: relative;
-      z-index: 50;
+      // z-index: 50;
+      text-decoration: none;
 
       &.is-active {
         color: $header-color-active;
