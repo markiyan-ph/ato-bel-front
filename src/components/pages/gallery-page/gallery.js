@@ -42,7 +42,7 @@ const GalleryPage = () => {
 
   return (
     <Content classNames={'flex-child'}>
-      <ModalForm show={show} modalClose={modalClose} form={addprojectForm} />
+      <ModalForm show={show} modalClose={modalClose} form={addprojectForm} formTitle="Add new project" />
       <Gallery
         images={list.map(project => ({ ...project, imgSrc: `${project._id}/project-img/${project.image}` }))}
         imageCardClick={onImageCardClick}
