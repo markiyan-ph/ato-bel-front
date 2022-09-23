@@ -24,13 +24,13 @@ const SubHeader = ({ pathname }) => {
   let menuList = [];
   
   useEffect(() => {
-    if (pathname === '/projects/') {
-      if (tags.length === 0) {
-        dispatch(actions.fetchTags());
-      }
+    dispatch(actions.fetchTags());
+    // if (pathname === '/projects/') {
+    //   if (tags.length === 0) {
+    //   }
   
-      menuList = tags;
-    }
+    //   menuList = tags;
+    // }
   }, [tags.length]);
 
   if (pathname === '/projects/') {
