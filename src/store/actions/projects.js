@@ -24,3 +24,7 @@ export const fetchProjectsFail = () => ({
   error: true
 
 });
+
+export const addProject = formData => ({type: actionTypes.ADD_PROJECT, formData});
+
+export const addProjectSuccess = project => ({type: actionTypes.ADD_PROJECT_SUCCESS, project});
