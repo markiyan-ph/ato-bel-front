@@ -7,6 +7,7 @@ import App from "./components/app/";
 import createSagaMiddleware from "redux-saga";
 import { projectsReducer, projectDataReducer, authorizationReducer, tagsReducer } from "./store/reducers";
 import { watchProjects } from './store/sagas/index';
+import * as actionTypes from './store/actions/actionTypes';
 
 import "./i18n";
 import "./index.scss";
@@ -22,7 +23,12 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({thunk: false}).concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    thunk: false, 
+    serializableCheck: {
+      ignoredActions: [actionTypes.ADD_PROJECT]
+    }
+  }).concat(sagaMiddleware),
   devTools: process.env.NODE_ENV !== 'production'
 });
 
