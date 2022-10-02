@@ -24,7 +24,7 @@ const GalleryPage = () => {
   const listOfPhoto = projects?.projectsList;
   const list = [...listOfPhoto];
   const onImageCardClick = id => navigate(id);
-  const addprojectForm = <AddProjectForm />;
+  const addprojectForm = <AddProjectForm showModal={popup} />;
 
   useEffect(() => {
     if (pageNum <= projects?.pages && pageNum > projects?.lastPage) {
