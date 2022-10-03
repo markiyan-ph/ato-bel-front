@@ -49,7 +49,7 @@ const addProject = state => {
 };
 
 const addProjectSuccess = (state, action) => {
-  const mergedList = [...state.projectsList, action.project];
+  const mergedList = [action.project, ...state.projectsList].sort((a,b) => (a.date > b.date ? -1 : 1));
   return updateObject(state, { projectsList: mergedList, loading: false });
 };
 
