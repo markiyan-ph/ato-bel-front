@@ -70,7 +70,7 @@ const Gallery = ({
         onClick={clickFunction ? () => clickFunction(_id) : null}
       >
 
-        {(isAdmin && _id !== "AddNewProject") ? <EditTool /> : null}
+        {(isAdmin && _id !== "AddNewProject") ? <EditTool projectId={_id} /> : null}
       
         <div
           className="img-container"
