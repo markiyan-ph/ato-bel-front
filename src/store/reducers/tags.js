@@ -51,10 +51,6 @@ const updateTagSuccess = (state, action) => {
   const updatedElementIndex = newList.findIndex(t => t.tagId === tag.tagId);
   newList[updatedElementIndex] = tag;
   
-
-  // console.log('======== state =======', state);
-  // console.log('action ',action);
-
   return updateObject(state, {tagsList: newList, loading: false});
 };
 
