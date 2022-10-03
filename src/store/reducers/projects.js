@@ -59,12 +59,8 @@ const addProjectSuccess = (state, action) => {
 
 const deleteProjectSuccess = (state, action) => {
   const {projectsList} = state;
-  console.log('action', action);
   const projectIndex = projectsList.findIndex(p => p._id === action.projectId);
-  console.log('projectIndex', projectIndex);
-  // const newListOfTags = removeItemFromList(tagsList, tagIndex);
   const newProjectList = removeItemFromList(projectsList, projectIndex);
-  console.log('newProjectList', newProjectList);
   return updateObject(state, { projectsList: newProjectList, loading: false });
 };
 
