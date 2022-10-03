@@ -25,4 +25,4 @@ export const addProject = formData => ({type: actionTypes.ADD_PROJECT, formData}
 export const addProjectSuccess = project => ({type: actionTypes.ADD_PROJECT_SUCCESS, project});
 
 export const deleteProject = projectId => ({type: actionTypes.DELETE_PROJECT, projectId});
-// export const deleteProjectSuccess = projectId => ({type: actionTypes.DELETE_PROJECT_SUCCESS, projectId});
+export const deleteProjectSuccess = ({projectId}) => ({type: actionTypes.DELETE_PROJECT_SUCCESS, projectId});
