@@ -1,12 +1,12 @@
 import { put } from 'redux-saga/effects';
 import * as actions from '../actions';
-import { getServerAPI } from '../../tools/helpers';
+import { getServerAPI, postJson } from '../../tools/helpers';
 
 const SERVER_API = `${getServerAPI()}/api`;
 
 export function* fetchProjectsSaga({page_size, page_num}) {
   try {
-    yield put(actions.fetchProjectsLoading());
+    // yield put(actions.fetchProjectsLoading());
     
     const resp = yield fetch(`${SERVER_API}/projects?page_size=${page_size}&page_num=${page_num}`);
     const respJson = yield resp.json();
@@ -38,6 +38,18 @@ export function* addProjectSaga({formData}) {
     });
     const respJson = yield resp.json();
     yield put(actions.addProjectSuccess(respJson));
+  
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
+export function* deleteProjectSaga(projectId) {
+  try {
+    const resp = yield postJson(`${SERVER_API}/projects/delete`, JSON.stringify(projectId));
+    const respJson = yield resp.json();
+    yield put(actions.deleteProjectSuccess(respJson));
   
   } catch (err) {
     console.log(err);
