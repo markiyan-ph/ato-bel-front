@@ -1,4 +1,4 @@
-import { updateObject, removeItemFromList } from '../../tools/helpers';
+import { updateObject, updateDeleteListItem } from '../../tools/helpers';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
@@ -35,7 +35,7 @@ const deleteTag = (state) => {
 const deleteTagSuccess = (state, action) => {
   const { tagsList } = state;
   const tagIndex = tagsList.findIndex(t => t.tagId === action.tagId);
-  const newListOfTags = removeItemFromList(tagsList, tagIndex);
+  const newListOfTags = updateDeleteListItem(tagsList, tagIndex);
   
   return updateObject(state, {tagsList: newListOfTags, loading: false});
 };
@@ -47,9 +47,8 @@ const updateTag = (state) => {
 const updateTagSuccess = (state, action) => {
   const { tag } = action;
   const { tagsList } = state;
-  const newList = tagsList.slice();
-  const updatedElementIndex = newList.findIndex(t => t.tagId === tag.tagId);
-  newList[updatedElementIndex] = tag;
+  const index = tagsList.findIndex(t => t.tagId === tag.tagId);
+  const newList = updateDeleteListItem(tagsList, index, tag);
   
   return updateObject(state, {tagsList: newList, loading: false});
 };
