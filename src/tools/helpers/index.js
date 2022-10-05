@@ -56,8 +56,12 @@ export const postJson = (url, body) => {
   });
 };
 
-export const removeItemFromList = (list, index) => {
+export const updateDeleteListItem = (list, index, newItem=null) => {
+  if (index === -1) {
+    return list;
+  }
+  
   const firstArr = list.slice(0, index);
   const secondArr = list.slice(index + 1);
-  return [...firstArr , ...secondArr];
+  return newItem ? [...firstArr, newItem, ...secondArr] : [...firstArr, ...secondArr];
 };
