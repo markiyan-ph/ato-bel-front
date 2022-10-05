@@ -60,8 +60,8 @@ const TagsForm = () => {
       return;
     }
 
-    cleanFields();
     saveTag(tag);
+    cleanFields();
   };
 
   const onUpdateTag = () => {
@@ -78,7 +78,6 @@ const TagsForm = () => {
       return;
     }
 
-    // cleanFields();
     updateTag(tag);
   };
   
