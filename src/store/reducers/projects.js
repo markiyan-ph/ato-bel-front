@@ -1,4 +1,4 @@
-import { updateObject, removeItemFromList } from '../../tools/helpers';
+import { updateObject, updateDeleteListItem } from '../../tools/helpers';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
@@ -26,13 +26,6 @@ const fetchProjectsSuccess = (state, action) => {
   });
 };
 
-// const fetchProjectsLoading = state => {
-//   return updateObject(state, {
-//     loading: true,
-//     error: false,
-//   });
-// };
-
 const fetchMainPageProjectSuccess = (state, action) => {
   return updateObject(state, {
     mainPageProjects: [...action.projects.projectsList],
@@ -48,19 +41,22 @@ const fetchProjectFail = state => {
   });
 };
 
-// const addProject = state => {
-//   return updateObject(state, { loading: true });
-// };
-
 const addProjectSuccess = (state, action) => {
   const mergedList = [action.project, ...state.projectsList].sort((a,b) => (a.date > b.date ? -1 : 1));
   return updateObject(state, { projectsList: mergedList, loading: false });
 };
 
+const updateProjectSuccess = (state, action) => {
+  const {projectsList} = state;
+  const projectIndex = projectsList.findIndex(p => p._id === action.project._id);
+  const updatedList = updateDeleteListItem(projectsList, projectIndex, action.project)?.sort((a,b) => (a.date > b.date ? -1 : 1));
+  return updateObject(state, { projectsList: updatedList, loading: false });
+};
+
 const deleteProjectSuccess = (state, action) => {
   const {projectsList} = state;
   const projectIndex = projectsList.findIndex(p => p._id === action.projectId);
-  const newProjectList = removeItemFromList(projectsList, projectIndex);
+  const newProjectList = updateDeleteListItem(projectsList, projectIndex);
   return updateObject(state, { projectsList: newProjectList, loading: false });
 };
 
@@ -84,6 +80,10 @@ const projectsReducer = (state = initialState, action) => {
       return projectsLoading(state);
     case actionTypes.DELETE_PROJECT_SUCCESS:
       return deleteProjectSuccess(state, action);
+    case actionTypes.UPDATE_PROJECT:
+      return projectsLoading(state);
+    case actionTypes.UPDATE_PROJECT_SUCCESS:
+      return updateProjectSuccess(state, action);
     default:
       return state;
   }

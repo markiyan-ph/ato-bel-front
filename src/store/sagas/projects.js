@@ -45,6 +45,21 @@ export function* addProjectSaga({formData}) {
   }
 }
 
+export function* updateProjectSaga({formData}) {
+  try {
+    const resp = yield fetch(`${SERVER_API}/projects/update`, {
+      method: 'post',
+      body: formData
+    });
+    const respJson = yield resp.json();
+    yield put(actions.updateProjectSuccess(respJson));
+  
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
 export function* deleteProjectSaga(projectId) {
   try {
     const resp = yield postJson(`${SERVER_API}/projects/delete`, JSON.stringify(projectId));

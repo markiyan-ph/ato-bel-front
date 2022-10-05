@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { useTranslation } from 'react-i18next';
-// import { useSelector, useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
-// import * as actions from '../../../store/actions';
+import * as actions from '../../../store/actions';
 
 import './update-project-form.scss';
 
@@ -40,7 +39,7 @@ const colourStyles = {
 const regex = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
 
 const UpdateProjectForm = ({showModal, projectId}) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const projectsList = useSelector(state => state.projects.projectsList);
   const tags = useSelector(state => state.tags.tagsList);
   const [projectTags, setProjectTags] = useState([]);
@@ -65,7 +64,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
   } = projectData;
 
   const options = tags.map(tag => ({value: tag.tagId, label: tag.labels[lang]}));
-  
+
   useEffect(() => {
     setProjectData({
       projectDate: updatingProject.date,
@@ -74,37 +73,32 @@ const UpdateProjectForm = ({showModal, projectId}) => {
       projectSubtitleUk: updatingProject.subtitle['uk'],
       projectSubtitleEn: updatingProject.subtitle['en'],
     });
-    setProjectImage(updatingProject.image);
     setProjectTags(options.filter(tag => updatingProject.tags.includes(tag.value)));
   }, []);
-  
-  // const addProject = formData => dispatch(actions.addProject(formData));
+
+  const updateProject = formData => dispatch(actions.updateProject(formData));
   const handleProjectDataChange = e => {
     const name = e.target.name;
     const value = e.target.value;
     setProjectData({...projectData, [name]: value});
   };
   const handleProjectImageChange = e => setProjectImage(e.target.files[0]);
-  const handleProjectTagsChange = e => {console.log(e); return setProjectTags(e);};
+  const handleProjectTagsChange = e => setProjectTags(e);
   
   const handleSubmit = () => {
     const formData = new FormData();
     const formDataTags = JSON.stringify(projectTags.length > 0 ? projectTags.map(opt => opt.value) : []);
-    console.log('projectImage ', projectImage);
-    console.log('projectTitleUk ', projectTitleUk);
-    console.log('projectTitleEn ', projectTitleEn);
-    console.log('projectSubtitleUk ', projectSubtitleUk);
-    console.log('projectSubtitleEn ', projectSubtitleEn);
-    console.log('projectDate ', projectDate);
-    console.log('formDataTags ', formDataTags);
-    formData.append('project-image', projectImage);
+
+    formData.append('project-image', projectImage === '' ? null : projectImage);
     formData.append('project-name-uk', projectTitleUk);
     formData.append('project-name-en', projectTitleEn);
     formData.append('project-subtitle-uk', projectSubtitleUk);
     formData.append('project-subtitle-en', projectSubtitleEn);
     formData.append('project-date', projectDate);
     formData.append('project-tags', formDataTags);
-    // addProject(formData);
+    formData.append('project-id', projectId);
+
+    updateProject(formData);
     showModal(false);
   };
   const notValidProjectDate = !regex.test(projectData.projectDate);
@@ -114,27 +108,27 @@ const UpdateProjectForm = ({showModal, projectId}) => {
       <Form.Group noValidate className="mb-3" controlId="titles">
         <Form.Label>Project title</Form.Label>
         <div className="inline-input">
-          <Form.Control type="text" placeholder="Enter english title" name='projectDate' value={projectTitleEn} onChange={handleProjectDataChange} />
-          <Form.Control type="text" placeholder="Enter ukraine title" name='projectTitleUk' value={projectTitleUk} onChange={handleProjectDataChange} />
+          <Form.Control type="text" placeholder="Enter english title" name="projectTitleEn" value={projectTitleEn} onChange={handleProjectDataChange} />
+          <Form.Control type="text" placeholder="Enter ukraine title" name="projectTitleUk" value={projectTitleUk} onChange={handleProjectDataChange} />
         </div>
       </Form.Group>
       
       <Form.Group noValidate className="mb-3" controlId="titles">
         <Form.Label>Project subtitle</Form.Label>
         <div className="inline-input">
-          <Form.Control type="text" placeholder="Enter english subtitle" value={projectSubtitleEn} onChange={handleProjectDataChange} />
-          <Form.Control type="text" placeholder="Enter ukraine subtitle" value={projectSubtitleUk} onChange={handleProjectDataChange} />
+          <Form.Control type="text" placeholder="Enter english subtitle" name="projectSubtitleEn" value={projectSubtitleEn} onChange={handleProjectDataChange} />
+          <Form.Control type="text" placeholder="Enter ukraine subtitle" name="projectSubtitleUk" value={projectSubtitleUk} onChange={handleProjectDataChange} />
         </div>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formFile">
         <Form.Label>Upload new image</Form.Label>
-        <Form.Control type="file" accept="image/*" onChange={handleProjectImageChange} />
+        <Form.Control type="file" accept="image/*" name="projectImage" onChange={handleProjectImageChange} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="tagId">
         <Form.Label>Project date</Form.Label>
-        <Form.Control type="input" value={projectDate} onChange={handleProjectDataChange} isInvalid={notValidProjectDate} />
+        <Form.Control type="input" name="projectDate" value={projectDate} onChange={handleProjectDataChange} isInvalid={notValidProjectDate} />
         <Form.Control.Feedback type="invalid">Please enter valid date</Form.Control.Feedback>
       </Form.Group>
 
@@ -143,6 +137,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
         <Select
           closeMenuOnSelect={false}
           onChange={handleProjectTagsChange}
+          name="projectTags"
           value={projectTags}
           styles={colourStyles}
           isMulti
