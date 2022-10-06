@@ -51,6 +51,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
     projectTitleEn: '',
     projectSubtitleUk: '',
     projectSubtitleEn: '',
+    projectOldImage: ''
   });
   const {i18n} = useTranslation();
   const lang = i18n.language;
@@ -61,6 +62,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
     projectTitleEn,
     projectSubtitleUk,
     projectSubtitleEn,
+    projectOldImage
   } = projectData;
 
   const options = tags.map(tag => ({value: tag.tagId, label: tag.labels[lang]}));
@@ -72,6 +74,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
       projectTitleEn: updatingProject.title['en'],
       projectSubtitleUk: updatingProject.subtitle['uk'],
       projectSubtitleEn: updatingProject.subtitle['en'],
+      projectOldImage: updatingProject.image
     });
     setProjectTags(options.filter(tag => updatingProject.tags.includes(tag.value)));
   }, []);
@@ -90,6 +93,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
     const formDataTags = JSON.stringify(projectTags.length > 0 ? projectTags.map(opt => opt.value) : []);
 
     formData.append('project-image', projectImage === '' ? null : projectImage);
+    formData.append('project-old-image', projectOldImage);
     formData.append('project-name-uk', projectTitleUk);
     formData.append('project-name-en', projectTitleEn);
     formData.append('project-subtitle-uk', projectSubtitleUk);
