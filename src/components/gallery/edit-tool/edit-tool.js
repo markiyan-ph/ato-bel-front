@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Trash, Pencil, Image } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
 import { ModalForm, UpdateProjectForm } from '../../modal-forms';
 import * as actions from '../../../store/actions';
 
 import './edit-tool.scss';
+import ConfirmationForm from '../../modal-forms/confirmation-form';
 
 const EditTool = ({ projectId }) => {
   const dispatch = useDispatch();
   const [showUpdateForm, popupUpdate] = useState(false);
+  const [showDeleteConfirmation, popupDeleteConfirmation] = useState(false);
   const openUpdate = () => popupUpdate(true);
   const closeUpdate = () => popupUpdate(false);
+  const openConfirmation = () => popupDeleteConfirmation(true);
+  const closeConfirmation = () => popupDeleteConfirmation(false);
 
   const deleteProject = projectId => dispatch(actions.deleteProject(projectId));
 
   const updateProjectForm = <UpdateProjectForm showModal={popupUpdate} projectId={projectId} />;
-  
+
   const editClick = e => {
     e.stopPropagation();
     e.preventDefault();
@@ -26,28 +30,47 @@ const EditTool = ({ projectId }) => {
   const mainPageClick = e => {
     e.stopPropagation();
     e.preventDefault();
-    console.log('=== Add project to main page ===');
+    console.log('+++ Add project to main page +++');
   };
-
+  
   const deleteClick = e => {
     e.stopPropagation();
     e.preventDefault();
-    deleteProject(projectId);
+    console.log('--- Delete project ---');
+    openConfirmation();
   };
 
   return (
     <div className="edit-tools-wrapper">
-      <div onClick={e => e.stopPropagation()}>
-        <ModalForm show={showUpdateForm} modalClose={closeUpdate} form={updateProjectForm} formTitle="Update project data" />
-      </div>
       <div className="edit-tools">
         <div className="edit" onClick={e => editClick(e)}>
+          <div onClick={e => e.stopPropagation()}>
+            <ModalForm
+              show={showUpdateForm}
+              modalClose={closeUpdate}
+              form={updateProjectForm}
+              formTitle="Update project data"
+            />
+          </div>
           <Pencil />
         </div>
         <div className="add-main-page" onClick={e => mainPageClick(e)}>
+          {/* <div onClick={e => e.stopPropagation()}>
+            <ModalForm show={showUpdateForm} modalClose={closeUpdate} form={updateProjectForm} formTitle="Update project data" />
+          </div> */}
           <Image />
         </div>
         <div className="delete" onClick={e => deleteClick(e)}>
+          <div onClick={e => e.stopPropagation()}>
+            <ConfirmationForm
+              show={showDeleteConfirmation}
+              close={closeConfirmation}
+              title="Project delete"
+              bodyText="Are you sure you want delete current project?"
+              confirmAction={deleteProject}
+              actionParams={[projectId]}
+            />
+          </div>
           <Trash />
         </div>
       </div>
