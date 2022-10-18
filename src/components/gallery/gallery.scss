@@ -43,7 +43,7 @@
           background: #ffffffcc;
           display: none;
           font-size: 1.5vw;
-          font-weight: 600;
+          font-weight: 700;
           justify-content: center;
           height: 100%;
           left: 0;
@@ -55,6 +55,11 @@
 
           & > div {
             text-align: center;
+          }
+
+          .img-text-subtitle {
+            font-size: 1.4vw;
+            font-weight: 300;
           }
         }
       }

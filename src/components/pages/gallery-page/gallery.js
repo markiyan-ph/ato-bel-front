@@ -48,6 +48,7 @@ const GalleryPage = () => {
         imageCardClick={onImageCardClick}
         addNewProjectClick={modalOpen}
         infinitiveScroll={true}
+        showSubtitle={true}
         infinitiveScrollParams={{
           setPage: setPage,
           isLoading: projects.loading,

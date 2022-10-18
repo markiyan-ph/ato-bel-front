@@ -12,7 +12,7 @@ import "./gallery.scss";
  * images: list of images
  * imageCardClick: on click function
  * addNewProjectClick: on click function, to add new project
- * showDescription: define if description should be shown
+ * showSubtitle: define if subtitle should be shown
  * infinitiveScroll: boolean
  * infinitiveScrollParams: {setPage: function, isLoading:boolean, pageNum: number}
  * } param0
@@ -21,7 +21,7 @@ const Gallery = ({
   images,
   imageCardClick = null,
   addNewProjectClick = null,
-  showDescription = false,
+  showSubtitle = false,
   infinitiveScroll = false,
   infinitiveScrollParams = {},
   isAdmin = false
@@ -48,14 +48,14 @@ const Gallery = ({
 
   const tagsForm = <TagsForm />;
   
-  const imgs = images.map(({ _id, imgSrc, title, description }, index) => {
-    const imageTitleDescription = showDescription ? <span><br />{description}</span> : null;
+  const imgs = images.map(({ _id, imgSrc, title, subtitle }, index) => {
+    const imageSubtitle = showSubtitle ? <span className="img-text-subtitle"><br />{subtitle[lang]}</span> : null;
 
     const imageTitle = (
       <div className="img-text-over" >
         <div>
           <span>{title[lang]}</span>
-          {imageTitleDescription}
+          {imageSubtitle}
         </div>
       </div>
     );
