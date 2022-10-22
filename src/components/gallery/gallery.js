@@ -49,7 +49,7 @@ const Gallery = ({
   const tagsForm = <TagsForm />;
   
   const imgs = images.map(({ _id, imgSrc, title, subtitle }, index) => {
-    const imageSubtitle = showSubtitle ? <span className="img-text-subtitle"><br />{subtitle[lang]}</span> : null;
+    const imageSubtitle = showSubtitle ? <span className="img-text-subtitle"><br />{subtitle ? subtitle[lang] : null}</span> : null;
 
     const imageTitle = (
       <div className="img-text-over" >
