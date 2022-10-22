@@ -53,6 +53,10 @@ const updateProjectSuccess = (state, action) => {
   return updateObject(state, { projectsList: updatedList, loading: false });
 };
 
+const addMainPageImageSuccess = (state) => {
+  return updateObject(state, {loading: false});
+}
+
 const deleteProjectSuccess = (state, action) => {
   const {projectsList} = state;
   const projectIndex = projectsList.findIndex(p => p._id === action.projectId);
@@ -84,6 +88,10 @@ const projectsReducer = (state = initialState, action) => {
       return projectsLoading(state);
     case actionTypes.UPDATE_PROJECT_SUCCESS:
       return updateProjectSuccess(state, action);
+    case actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE:
+      return projectsLoading(state);
+    case actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE_SUCCESS:
+      return addMainPageImageSuccess(state);
     default:
       return state;
   }

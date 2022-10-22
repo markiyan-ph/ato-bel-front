@@ -7,6 +7,7 @@ import {
   addProjectSaga,
   deleteProjectSaga,
   updateProjectSaga,
+  addMainProjectSaga,
 } from './projects';
 import { saveTagSaga, deleteTagSaga, fetchTagsSaga, updateTagSaga } from './tags';
 
@@ -16,6 +17,7 @@ export function* watchProjects() {
   yield takeEvery(actionTypes.FETCH_PROJECT_DETAILS, fetchProjectDetailsSaga);
   yield takeEvery(actionTypes.SAVE_PROJECT_DETAILS, saveProjectDetailsSaga);
   yield takeEvery(actionTypes.ADD_PROJECT, addProjectSaga);
+  yield takeEvery(actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE, addMainProjectSaga);
   yield takeEvery(actionTypes.UPDATE_PROJECT, updateProjectSaga);
   yield takeEvery(actionTypes.DELETE_PROJECT, deleteProjectSaga);
   yield takeEvery(actionTypes.FETCH_TAGS, fetchTagsSaga);

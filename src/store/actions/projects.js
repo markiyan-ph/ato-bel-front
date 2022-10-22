@@ -29,3 +29,6 @@ export const deleteProjectSuccess = ({projectId}) => ({type: actionTypes.DELETE_
 
 export const updateProject = formData => ({type: actionTypes.UPDATE_PROJECT, formData});
 export const updateProjectSuccess = project => ({type: actionTypes.UPDATE_PROJECT_SUCCESS, project});
+
+export const addMainPageProjectImage = formData => ({type: actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE, formData});
+export const addMainPageProjectImageSuccess = projectId => ({type: actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE_SUCCESS, projectId});

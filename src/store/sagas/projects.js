@@ -45,6 +45,21 @@ export function* addProjectSaga({formData}) {
   }
 }
 
+export function* addMainProjectSaga({formData}) {
+  try {
+    const resp = yield fetch(`${SERVER_API}/projects/main/add`, {
+      method: 'post',
+      body: formData
+    });
+    const respJson = yield resp.json();
+    yield put(actions.addMainPageProjectImageSuccess(respJson));
+  
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
 export function* updateProjectSaga({formData}) {
   try {
     const resp = yield fetch(`${SERVER_API}/projects/update`, {
