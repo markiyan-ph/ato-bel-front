@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 // import { useTranslation } from 'react-i18next';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
 // import Select from 'react-select';
-// import * as actions from '../../../store/actions';
+import * as actions from '../../../store/actions';
 
-const AddToMainPageForm = ({showModal}) => {
-  // const dispatch = useDispatch();
+const AddToMainPageForm = ({showModal, projectId}) => {
+  const dispatch = useDispatch();
   const [projectMainPageImage, setProjectMainPageImage] = useState(null);
   const [checkValidation, setCheckValidation] = useState(false);
   // const {i18n} = useTranslation();
   // const lang = i18n.language;
 
-  // const addImageToMainPage = formData => dispatch(actions.addProject(formData));
+  const addImageToMainPage = formData => dispatch(actions.addMainPageProjectImage(formData));
   const handleProjectMainPageImageChange = e => {
     setProjectMainPageImage(e.target.files[0]);
   };
@@ -20,16 +20,16 @@ const AddToMainPageForm = ({showModal}) => {
   const handleSubmit = () => {
     console.log('Save main page image');
     setCheckValidation(false);
-    // if (projectMainPageImage === null) {
-    //   setCheckValidation(true);
-    // } else {
-    //   const formData = new FormData();
-    //   formData.append('project-main-page-image', projectMainPageImage);
+    if (projectMainPageImage === null) {
+      setCheckValidation(true);
+    } else {
+      const formData = new FormData();
+      formData.append('project-main-image', projectMainPageImage);
+      formData.append('project-id', projectId);
       
-    //   // addImageToMainPage(formData);
-    //   showModal(false);
-    // }
-    showModal(false);
+      addImageToMainPage(formData);
+      showModal(false);
+    }
   };
 
   const handleDelete = () => {
