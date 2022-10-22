@@ -5,8 +5,6 @@ import { Button, Form } from 'react-bootstrap';
 import Select from 'react-select';
 import * as actions from '../../../store/actions';
 
-import './add-project-form.scss';
-
 // Tags related constants
 const color = '#ffffff';
 const backgroundColor = '#0d6efd';
@@ -127,9 +125,11 @@ const AddProjectForm = ({showModal}) => {
           options={options}
         />
       </Form.Group>
-      <Button variant="primary" onClick={handleSubmit}>
-        Submit
-      </Button>
+      <div className='modal-form-buttons'>
+        <Button variant="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </div>
     </div>
   );
 };

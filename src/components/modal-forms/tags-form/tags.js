@@ -153,7 +153,9 @@ const TagsForm = () => {
         </Form.Group>
       </div>
 
-      {tagSelector === defaultSelectorValue ? AddTagButton : UpdDelTagButton}
+      <div className="modal-form-buttons">
+        {tagSelector === defaultSelectorValue ? AddTagButton : UpdDelTagButton}
+      </div>
     </Form>
   );
 };

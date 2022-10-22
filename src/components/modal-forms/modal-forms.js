@@ -1,6 +1,8 @@
 import React from 'react';
 import { Modal, ModalBody, ModalHeader, ModalTitle } from 'react-bootstrap';
 
+import './modal-forms.scss';
+
 const ModalForm = ({show, modalClose, form, formTitle = ''}) => {
   
   return (

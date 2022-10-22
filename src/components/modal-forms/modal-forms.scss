@@ -1,0 +1,12 @@
+.modal-dialog {
+  .inline-input {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .modal-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
