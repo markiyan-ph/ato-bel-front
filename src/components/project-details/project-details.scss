@@ -1,7 +1,103 @@
-.project-details {
-  padding-top: 2rem;
+@import "../../assets/styles/shared";
 
-  .sun-editor {
-    border: 0;
+.project-details {
+  .main-image {
+    img {
+      aspect-ratio:  1920 / 587;
+      height: auto;
+      object-fit: fill;
+      object-position: center;
+      width: 100%;
+    }
+  }
+
+  .project-info {
+    // background-color: cyan;
+    margin: 2.1em auto;
+    width: $project-detail-content-width;
+    max-width: $project-detail-content-max-width;
+
+    .project-title {
+      h4 {
+        color: #333333;
+        font-size: 1.125em;
+        font-weight: 700;
+        line-height: 1.333333em;
+        margin-bottom: 1.3em;
+      }
+    }
+
+    .project-text {
+      font-weight: 400;
+      font-size: 1em;
+      line-height: 1.25em;
+      margin-bottom: 1.3em;
+    }
+
+    .project-specifications {
+      display: flex;
+      justify-content: flex-start;
+      gap: 1.47em;
+
+      .specification-name, .specification-value {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .specification-name {
+        font-weight: 700;
+      }
+    }
+  }
+  
+  .images {
+    .image-data-container {
+      margin-bottom: 2.1em;
+
+      .image {
+        img {
+          aspect-ratio: 16 / 9 ;
+          object-fit: fill;
+          width: 100%;
+        }
+      }
+      
+      .image-title {
+        margin-top: 10px;
+        text-align: center;
+        text-transform: lowercase;
+        font-size: .85em;
+        letter-spacing: .25em;
+      }
+
+      .image-description {
+        margin: 1em auto 0 auto;
+        width: $project-detail-content-width;
+        max-width: $project-detail-content-max-width;
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 1.25em;
+        margin-bottom: 1.3em;
+      }
+    }
+  }
+
+  .back-to-top {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    padding-bottom: 1em;
+    text-align: center;
+    width: 100%;
+
+    .back-to-top-text {
+      line-height: .9em;
+      
+      &:hover {
+        line-height: 1em;
+        text-decoration: underline;
+      }
+    }
   }
 }
