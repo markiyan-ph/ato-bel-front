@@ -43,8 +43,6 @@ export const hideHeaderSubMenu = pathname => {
   return ['/', '/main/', '/contacts/'].includes(pathname);
 };
 
-export const getServerAPI = () => process.env.REACT_APP_SERVER_HOST;
-
 export const postJson = (url, body) => {
   return fetch(url, {
     method: 'POST',
