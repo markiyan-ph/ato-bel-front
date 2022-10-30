@@ -55,7 +55,7 @@ const updateProjectSuccess = (state, action) => {
 
 const addMainPageImageSuccess = (state) => {
   return updateObject(state, {loading: false});
-}
+};
 
 const deleteProjectSuccess = (state, action) => {
   const {projectsList} = state;
