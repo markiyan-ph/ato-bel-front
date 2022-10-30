@@ -2,7 +2,6 @@ import React from "react";
 import Content from "../../content";
 import Footer from "../../footer";
 import Gallery from "../../gallery";
-import { getServerAPI } from '../../../tools/helpers';
 import "./studio.scss";
 
 const ConmpanyInfo = ({ imgSrc }) => {
@@ -112,7 +111,7 @@ const Studio = () => {
   return (
     <div className="wrapper">
       <Content classNames={"flex-child"}>
-        <ConmpanyInfo imgSrc={`${getServerAPI()}/uploads/workshop/ATO-Bel-Team.jpg`} />
+        <ConmpanyInfo imgSrc={`/uploads/workshop/ATO-Bel-Team.jpg`} />
 
         <Gallery
           images={listOfPhoto}

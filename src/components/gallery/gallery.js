@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import EditTool from "./edit-tool";
 import EditPanel from './edit-panel';
 import { ModalForm, TagsForm } from '../modal-forms';
-import { getServerAPI } from "../../tools/helpers";
 import "./gallery.scss";
 
 /**
@@ -76,7 +75,7 @@ const Gallery = ({
           className="img-container"
         >
           <img
-            src={`${getServerAPI()}/uploads/${imgSrc}`}
+            src={`/uploads/${imgSrc}`}
             alt={imgSrc}
           />
           {imageTitle}

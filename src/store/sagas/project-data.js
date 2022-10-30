@@ -1,8 +1,7 @@
 import { delay, put } from "redux-saga/effects";
 import * as actions from "../actions";
-import { getServerAPI } from '../../tools/helpers';
 
-const SERVER_API = `${getServerAPI()}/api`;
+const SERVER_API = `/api`;
 
 export function* fetchProjectDetailsSaga({ projectId }) {
   try {

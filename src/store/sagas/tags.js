@@ -1,8 +1,8 @@
 import { put } from 'redux-saga/effects';
 import * as actions from '../actions';
-import { postJson, getServerAPI } from '../../tools/helpers';
+import { postJson } from '../../tools/helpers';
 
-const SERVER_API = `${getServerAPI()}/api`;
+const SERVER_API = `/api`;
 
 export function* fetchTagsSaga() {
   try {

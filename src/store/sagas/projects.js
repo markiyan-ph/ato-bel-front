@@ -1,8 +1,8 @@
 import { put } from 'redux-saga/effects';
 import * as actions from '../actions';
-import { getServerAPI, postJson } from '../../tools/helpers';
+import { postJson } from '../../tools/helpers';
 
-const SERVER_API = `${getServerAPI()}/api`;
+const SERVER_API = `/api`;
 
 export function* fetchProjectsSaga({page_size, page_num}) {
   try {

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import SliderBar from "./slider-bar";
-import { getServerAPI } from "../../tools/helpers";
 
 import { isMobile } from '../../tools/helpers';
 
@@ -13,7 +12,7 @@ const CustomSlide = props => {
   return (
     <div key={_id}>
       <img
-        src={`${getServerAPI()}/uploads/${imgSrc}`}
+        src={`/uploads/${imgSrc}`}
         alt={title}
       />
     </div>
