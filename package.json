@@ -25,11 +25,12 @@
     "suneditor-react": "^3.4.0"
   },
   "scripts": {
-    "start": "REACT_APP_SERVER_HOST=http://localhost:5005 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://server:5005",
   "eslintConfig": {
     "extends": "react-app"
   },
