@@ -54,7 +54,7 @@ const Studio = () => {
     {
       _id: 1,
       title: "Андрій",
-      imgSrc: "workshop/people/Андрій ФБ_1.jpg",
+      imgSrc: "workshop/people/Андрій_ФБ_1.jpg",
       description: "image description",
     },
     {
