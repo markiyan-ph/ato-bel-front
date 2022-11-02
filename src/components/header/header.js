@@ -95,7 +95,7 @@ const Header = () => {
   });
 
   const buttonsGroup = (
-    <ButtonGroup aria-label="Admin buttons">
+    <ButtonGroup aria-label="Admin buttons" className='adminButtons'>
       {
         isAuthorized ?
           <Button
@@ -133,8 +133,8 @@ const Header = () => {
         </div>
 
         <div className="language-container d-flex align-items-center">
-          <div className="d-flex align-items-center">
-            <LinkMenu content="UA" title="UA" link={'#'} className={language === 'uk' ? 'is-active' : ''} click={() => switchLanguage('uk')} /> &nbsp;/&nbsp;
+          <div className="language-selector d-flex align-items-center">
+            <LinkMenu content="UA" title="UA" link={'#'} className={language === 'uk' ? 'is-active' : ''} click={() => switchLanguage('uk')} /> <span>&nbsp;/&nbsp;</span>
             <LinkMenu content="EN" title="EN" link={'#'} className={language === 'en' ? 'is-active' : ''} click={() => switchLanguage('en')} />
           </div>
 

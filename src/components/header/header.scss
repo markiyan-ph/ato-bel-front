@@ -105,6 +105,18 @@
     .social-networks {
       gap: 12px;
     }
+
+    .language-selector {
+      a, span {
+        padding-top: 2px;
+      }
+    }
+
+    .adminButtons {
+      button {
+        padding-top: 5px;
+      }
+    }
     
     a {
       &.is-active {
