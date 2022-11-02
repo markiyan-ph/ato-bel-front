@@ -25,7 +25,7 @@ const FullWidthTemplate = ({projectDetailsObj}) => {
   const images = projectDetailsObj.images.map(imageData => (
     <div className="image-data-container" key={imageData._id}>
       <div className="image">
-        <img src={imageData.img} alt={imageData.imgTitle} />
+        <img src={imageData.img} alt={imageData.imgTitle} loading='lazy' />
       </div>
       <div className="image-data">
         <div className="image-title">{imageData.imgTitle}</div>
@@ -38,7 +38,7 @@ const FullWidthTemplate = ({projectDetailsObj}) => {
     <Content classNames={'flex-child'}>
       <div className="project-details">
         <div className="main-image">
-          <img src={projectDetailsObj.detailMainImage} alt={projectDetailsObj.projectInfo.title} />
+          <img src={projectDetailsObj.detailMainImage} alt={projectDetailsObj.projectInfo.title} loading='lazy' />
         </div>
         <div className="project-info">
           <div className="project-title">
