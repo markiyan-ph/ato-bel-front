@@ -26,7 +26,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     thunk: false, 
     serializableCheck: {
-      ignoredActions: [actionTypes.ADD_PROJECT, actionTypes.UPDATE_PROJECT]
+      ignoredActions: [actionTypes.ADD_PROJECT, actionTypes.UPDATE_PROJECT, actionTypes.UPDATE_PROJECT_DETAILS_IMAGE]
     }
   }).concat(sagaMiddleware),
   devTools: process.env.NODE_ENV !== 'production'

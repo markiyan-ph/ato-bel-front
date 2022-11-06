@@ -10,7 +10,6 @@ export function* fetchProjectDetailsSaga({ projectId }) {
     const resp = yield fetch(
       `${SERVER_API}/projects/details/${projectId}`
     );
-    // const resp = yield fetch('http://192.168.2.116:5000/api/projects/');
     const respJson = yield resp.json();
 
     yield put(

@@ -46,7 +46,7 @@ const projectDataReducer = (state = initialState, action) => {
       return fetchProjectDetailsSuccess(state, action);
     case actionTypes.PROJECT_DETAILS_LOADING:
       return projectDetailsLoading(state);
-    case actionTypes.SAVE_PROJECT_DETAILS_SUCCESS:
+    case actionTypes.UPDATE_PROJECT_DETAILS_SUCCESS:
       return updateProjectDetailsSuccess(state, action);
     case actionTypes.FETCH_PROJECTS_FAIL: 
       return fetchProjectDetailsFail(state);
