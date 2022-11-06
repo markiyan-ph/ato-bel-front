@@ -25,7 +25,7 @@ export function* fetchProjectDetailsSaga({ projectId }) {
   }
 }
 
-export function* saveProjectDetailsSaga({ projectId, data }) {
+export function* updateProjectDetailsSaga({ projectId, data }) {
   try {
     yield put(actions.projectDetailsLoading());
     
@@ -47,7 +47,7 @@ export function* saveProjectDetailsSaga({ projectId, data }) {
     const respJson = yield resp.json();
 
     yield put(
-      actions.saveProjectDetailsSuccess(
+      actions.updateProjectDetailsSuccess(
         respJson.projectId,
         respJson.data
       )

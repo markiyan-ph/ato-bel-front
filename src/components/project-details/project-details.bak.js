@@ -53,7 +53,7 @@ const ProjectsDetails = () => {
         buttonList: buttonList,
         // mode: "inline",
         callBackSave: (data) => {
-          dispatch(actions.saveProjectDetails(id, data));
+          dispatch(actions.updateProjectDetails(id, data));
         },
         stickyToolbar: "75px",
         toolbarWidth: "auto",

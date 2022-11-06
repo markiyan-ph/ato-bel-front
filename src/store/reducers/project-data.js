@@ -31,7 +31,7 @@ const projectDetailsLoading = (state) => {
   });
 };
 
-const saveProjectDetailsSuccess = (state, action) => {
+const updateProjectDetailsSuccess = (state, action) => {
   return updateObject(state, {
     projectId: action.projectId,
     data: action.data,
@@ -47,7 +47,7 @@ const projectDataReducer = (state = initialState, action) => {
     case actionTypes.PROJECT_DETAILS_LOADING:
       return projectDetailsLoading(state);
     case actionTypes.SAVE_PROJECT_DETAILS_SUCCESS:
-      return saveProjectDetailsSuccess(state, action);
+      return updateProjectDetailsSuccess(state, action);
     case actionTypes.FETCH_PROJECTS_FAIL: 
       return fetchProjectDetailsFail(state);
     default:
