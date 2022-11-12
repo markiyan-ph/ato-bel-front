@@ -2,6 +2,8 @@
 
 .project-details {
   .main-image {
+    position: relative;
+
     img {
       aspect-ratio:  1920 / 587;
       height: auto;
@@ -12,7 +14,6 @@
   }
 
   .project-info {
-    // background-color: cyan;
     margin: 2.1em auto;
     width: $project-detail-content-width;
     max-width: $project-detail-content-max-width;
@@ -48,6 +49,10 @@
         font-weight: 700;
       }
     }
+
+    .edit-project-info-button {
+      margin-top: 10px;
+    }
   }
   
   .images {
@@ -55,6 +60,8 @@
       margin-bottom: 2.1em;
 
       .image {
+        position: relative;
+
         img {
           aspect-ratio: 16 / 9 ;
           object-fit: fill;
