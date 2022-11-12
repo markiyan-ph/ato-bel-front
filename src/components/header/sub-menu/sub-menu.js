@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { hideHeaderSubMenu } from '../../../tools/helpers';
+import { hideHeaderSubMenu } from '../../../tools';
 import * as actions from '../../../store/actions';
 
 import './sub-menu.scss';

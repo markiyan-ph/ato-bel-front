@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
 import * as actions from '../actions';
-import { postJson } from '../../tools/helpers';
+import { postJson } from '../../tools';
 
 const SERVER_API = `/api`;
 

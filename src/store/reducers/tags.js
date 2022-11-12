@@ -1,4 +1,4 @@
-import { updateObject, updateDeleteListItem } from '../../tools/helpers';
+import { updateObject, updateDeleteListItem } from '../../tools';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {

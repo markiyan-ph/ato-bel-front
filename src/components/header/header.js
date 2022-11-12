@@ -9,7 +9,7 @@ import SubMenu from './sub-menu';
 import logo from '../../assets/images/atoBelLogo.svg';
 import './header.scss';
 import MainMenu from './main-menu';
-import { hideHeaderSubMenu } from '../../tools/helpers';
+import { hideHeaderSubMenu } from '../../tools';
 import { Button, ButtonGroup } from 'react-bootstrap';
 
 const LinkMenu = ({ content, title, link, click, className = '' }) => {

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 
-import { isMobile } from '../../tools/helpers';
+import { isMobile } from '../../tools';
 
 import "./slider.scss";
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { placeholders } from '../../../tools'
 import * as actions from '../../../store/actions';
 
 import './tags.scss';
@@ -141,17 +142,18 @@ const TagsForm = () => {
 
       {tagSelector === defaultSelectorValue ? TagIdField : null}
 
-      <div className="inline-input">
-        <Form.Group className="mb-3 inline-input-child" controlId="ukLabel">
-          <Form.Label>UK</Form.Label>
-          <Form.Control type="input" value={ukLable} onChange={handleUaLabelChange} />
-        </Form.Group>
-
-        <Form.Group className="mb-3 inline-input-child" controlId="enLabel">
-          <Form.Label>EN</Form.Label>
-          <Form.Control type="input" value={enLabel} onChange={handleEnLabelChange} />
-        </Form.Group>
-      </div>
+      <Form.Group noValidate className="mb-3">
+        <Form.Label>Tag label</Form.Label>
+        <div className="inline-input">
+          <Form.Group className="mb-3 inline-input-child" controlId="enLabel">
+            <Form.Control type="input" value={enLabel} onChange={handleEnLabelChange} placeholder={placeholders.en} />
+          </Form.Group>
+          
+          <Form.Group className="mb-3 inline-input-child" controlId="ukLabel">
+            <Form.Control type="input" value={ukLable} onChange={handleUaLabelChange} placeholder={placeholders.uk} />
+          </Form.Group>
+        </div>
+      </Form.Group>
 
       <div className="modal-form-buttons">
         {tagSelector === defaultSelectorValue ? AddTagButton : UpdDelTagButton}
