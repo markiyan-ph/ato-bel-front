@@ -15,7 +15,7 @@ import "./index.scss";
 const rootReducer = {
   authorization: authorizationReducer,
   projects: projectsReducer,
-  projectData: projectDataReducer,
+  projectDetails: projectDataReducer,
   tags: tagsReducer
 };
 

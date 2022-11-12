@@ -1,5 +1,7 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import * as actions from '../../store/actions';
 import { FullWidthTemplate } from './templates';
 
 const projectDetailsObj = {
@@ -50,7 +52,23 @@ const projectDetailsObj = {
 console.log(projectDetailsObj);
 
 const ProjectsDetails = () => {
-  return <FullWidthTemplate projectDetailsObj={projectDetailsObj} />;
+  const { projectId } = useParams();
+  const dispatch = useDispatch();
+  const projectDetails = useSelector(state => state.projectDetails);
+  // const {isAdmin, isAuthorized} = useSelector(state => state.authorization);
+
+  console.log(projectDetails);
+
+  const fetchProjectDetails = (projectId) => {
+    dispatch(actions.fetchProjectDetails(projectId));
+  };
+
+  useEffect(() => {
+    fetchProjectDetails(projectId);
+  }, [projectId]);
+
+  // return <FullWidthTemplate projectDetailsObj={projectDetailsObj} />;
+  return <FullWidthTemplate projectId={projectId} projectDetailsObj={projectDetails.details} />;
 };
 
 export default ProjectsDetails;

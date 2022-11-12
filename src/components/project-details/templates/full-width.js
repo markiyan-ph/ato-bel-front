@@ -4,7 +4,9 @@ import { ArrowUpShort } from 'react-bootstrap-icons';
 import Content from '../../content';
 import './full-width.scss';
 
-const FullWidthTemplate = ({projectDetailsObj}) => {
+const FullWidthTemplate = ({ projectId, projectDetailsObj }) => {
+  const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
+  
   const backToTopClick = (e) => {
     e.preventDefault();
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -25,7 +27,7 @@ const FullWidthTemplate = ({projectDetailsObj}) => {
   const images = projectDetailsObj.images.map(imageData => (
     <div className="image-data-container" key={imageData._id}>
       <div className="image">
-        <img src={imageData.img} alt={imageData.imgTitle} loading='lazy' />
+        <img src={`${detailImgsPath}/${imageData.img}` } alt={imageData.imgTitle} loading='lazy' />
       </div>
       <div className="image-data">
         <div className="image-title">{imageData.imgTitle}</div>
@@ -38,7 +40,7 @@ const FullWidthTemplate = ({projectDetailsObj}) => {
     <Content classNames={'flex-child'}>
       <div className="project-details">
         <div className="main-image">
-          <img src={projectDetailsObj.detailMainImage} alt={projectDetailsObj.projectInfo.title} loading='lazy' />
+          <img src={`${detailImgsPath}/${projectDetailsObj.detailMainImage}`} alt={projectDetailsObj.projectInfo.title} loading='lazy' />
         </div>
         <div className="project-info">
           <div className="project-title">

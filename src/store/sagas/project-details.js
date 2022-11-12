@@ -15,7 +15,7 @@ export function* fetchProjectDetailsSaga({ projectId }) {
     yield put(
       actions.fetchProjectDetailsSuccess(
         respJson.projectDetails.projectId,
-        respJson.projectDetails.data
+        respJson.projectDetails.details
       )
     );
   } catch (err) {

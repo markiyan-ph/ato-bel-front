@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
-import { fetchProjectDetailsSaga, updateProjectDetailsSaga } from './project-data';
+import { fetchProjectDetailsSaga, updateProjectDetailsSaga } from './project-details';
 import {
   fetchMainPageProjectsSaga,
   fetchProjectsSaga,

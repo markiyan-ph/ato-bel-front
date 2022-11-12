@@ -1,30 +1,40 @@
-import { updateObject } from "../../tools/helpers";
-import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from '../../tools/helpers';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  projectId: "",
-  data: "",
+  projectId: null,
+  details: {
+    detailMainImage: '',
+    projectInfo: {
+      title: '',
+      text: '',
+      specifications: [],
+    },
+    images: []
+  },
   error: false,
-  loading: true
+  loading: false,
 };
 
 const fetchProjectDetailsSuccess = (state, action) => {
+  console.log(action);
+  
   return updateObject(state, {
     projectId: action.projectId,
-    data: action.data,
+    details: action.details,
     loading: false,
-    error: false
+    error: false,
   });
 };
 
-const fetchProjectDetailsFail = (state) => {
+const fetchProjectDetailsFail = state => {
   return updateObject(state, {
     loading: false,
-    error: true
+    error: true,
   });
 };
 
-const projectDetailsLoading = (state) => {
+const projectDetailsLoading = state => {
   return updateObject(state, {
     loading: true,
     error: false,
@@ -33,10 +43,9 @@ const projectDetailsLoading = (state) => {
 
 const updateProjectDetailsSuccess = (state, action) => {
   return updateObject(state, {
-    projectId: action.projectId,
     data: action.data,
     loading: false,
-    error: false
+    error: false,
   });
 };
 
@@ -48,7 +57,7 @@ const projectDataReducer = (state = initialState, action) => {
       return projectDetailsLoading(state);
     case actionTypes.UPDATE_PROJECT_DETAILS_SUCCESS:
       return updateProjectDetailsSuccess(state, action);
-    case actionTypes.FETCH_PROJECTS_FAIL: 
+    case actionTypes.FETCH_PROJECTS_FAIL:
       return fetchProjectDetailsFail(state);
     default:
       return state;
