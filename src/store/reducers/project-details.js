@@ -46,8 +46,6 @@ const projectDetailsLoading = state => {
 };
 
 const updateProjectDetailsSuccess = (state, action) => {
-  console.log(action);
-  
   return updateObject(state, {
     projectId: action.projectId,
     details: action.details,
