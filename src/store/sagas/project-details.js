@@ -24,7 +24,7 @@ export function* fetchProjectDetailsSaga({ projectId }) {
   }
 }
 
-export function* updateProjectDetailsSaga({ projectId, data }) {
+export function* updateProjectDetailsSaga({ projectId, details }) {
   try {
     yield put(actions.projectDetailsLoading());
     
@@ -32,10 +32,10 @@ export function* updateProjectDetailsSaga({ projectId, data }) {
     
     const reqBody = JSON.stringify({
       projectId,
-      data
+      details
     });
 
-    const resp = yield fetch(`${SERVER_API}/projects/details`, {
+    const resp = yield fetch(`${SERVER_API}/projects/details/update`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json' 
@@ -48,7 +48,7 @@ export function* updateProjectDetailsSaga({ projectId, data }) {
     yield put(
       actions.updateProjectDetailsSuccess(
         respJson.projectId,
-        respJson.data
+        respJson.details
       )
     );
   } catch (err) {

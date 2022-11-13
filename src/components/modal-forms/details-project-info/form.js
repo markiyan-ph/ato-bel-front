@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
-// import { Button, Form, Spinner } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { placeholders, generateUniqueId } from '../../../tools';
-// import * as actions from '../../../store/actions';
+import * as actions from '../../../store/actions';
 
 import './form.scss';
 
 const DetailsProjectInfoForm = ({ projectId }) => {
-  // const defaultSelectorValue = 'AddNewTag';
-  // const dispatch = useDispatch();
-  // const loading = useSelector(state => state.tags.loading);
-  // const tags = useSelector(state => state.tags.tagsList);
+  const dispatch = useDispatch();
+  const projectDetails = useSelector(state => state.projectDetails);
+
   const specificationObj = {
     name: { en: '', uk: '' },
     value: { en: '', uk: '' },
-    id: generateUniqueId()
+    id: generateUniqueId(),
   };
   const [detailsData, setDetailsData] = useState({
     ukTitle: '',
@@ -25,25 +23,26 @@ const DetailsProjectInfoForm = ({ projectId }) => {
   });
 
   const [specifications, setSpecifications] = useState([]);
+  const { enTitle, ukTitle, enText, ukText } = detailsData;
 
-  const {
-    ukTitle,
-    enTitle,
-    ukText,
-    enText,
-  } = detailsData;
-  // const [tagId, setTagId] = useState('');
-  // const [ukLable, setUkLabel] = useState('');
-  // const [enLabel, setEnLabel] = useState('');
+  useEffect(() => {
+    if (projectDetails?.projectId !== null) {
+      const { projectInfo } = projectDetails.details;
+      setDetailsData({
+        enTitle: projectInfo.title.en,
+        ukTitle: projectInfo.title.uk,
+        enText: projectInfo.text.en,
+        ukText: projectInfo.text.uk,
+      });
 
-  // useEffect(() => {
-  //   if (tags.length === 0) {
-  //     dispatch(actions.fetchTags());
-  //   }
-  // }, []);
+      if (projectInfo?.specifications?.length > 0) {
+        setSpecifications(projectInfo.specifications.map(s => ({ name: s.name, value: s.value, id: s._id })));
+      }
+    }
+  }, []);
 
   // const saveTag = tag => dispatch(actions.saveTag(tag));
-  // const updateTag = tag => dispatch(actions.updateTag(tag));
+  const updateProjectDetails = (projectId, details) => dispatch(actions.updateProjectDetails(projectId, details));
   // const deleteTag = tagId => dispatch(actions.deleteTag(tagId));
 
   // const cleanFields = () => {
@@ -76,7 +75,28 @@ const DetailsProjectInfoForm = ({ projectId }) => {
     newSpecs[i][name][lang] = value;
     setSpecifications(newSpecs);
   };
-  console.log(projectId);
+
+  const handleFormSubmit = () => {
+    console.log('Submit');
+    const submitSpecifications = specifications.map(s => ({ name: s.name, value: s.value }));
+    const updatedDetails = {
+      detailMainImage: projectDetails.details.detailMainImage,
+      projectInfo: {
+        title: {
+          en: enTitle,
+          uk: ukTitle,
+        },
+        text: {
+          en: enText,
+          uk: ukText,
+        },
+        specifications: submitSpecifications,
+      },
+      images: projectDetails.details.images
+    };
+
+    updateProjectDetails(projectId, updatedDetails);
+  };
   // const handleUaLabelChange = e => setUkLabel(e.target.value);
   // const handleEnLabelChange = e => setEnLabel(e.target.value);
   // const notValidTagId = tags.findIndex(currTag => currTag.tagId === tagId) !== -1;
@@ -84,8 +104,8 @@ const DetailsProjectInfoForm = ({ projectId }) => {
   const addSpecification = () => {
     setSpecifications([...specifications, specificationObj]);
   };
-  
-  const removeSpecification = (i) => {
+
+  const removeSpecification = i => {
     const newSpecs = [...specifications];
     newSpecs.splice(i, 1);
     setSpecifications(newSpecs);
@@ -175,8 +195,15 @@ const DetailsProjectInfoForm = ({ projectId }) => {
   const specificationsFields = specifications.map((spec, i) => (
     <fieldset key={spec.id}>
       <legend>Specification</legend>
-      <div className='remove-specification-button-wrapper'>
-        <Button className='remove-specification-button' variant='danger' size='sm' onClick={() => removeSpecification(i)}>X</Button>
+      <div className="remove-specification-button-wrapper">
+        <Button
+          className="remove-specification-button"
+          variant="danger"
+          size="sm"
+          onClick={() => removeSpecification(i)}
+        >
+          X
+        </Button>
       </div>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
@@ -233,21 +260,21 @@ const DetailsProjectInfoForm = ({ projectId }) => {
         <Form.Label>Title</Form.Label>
         <div className="inline-input">
           <Form.Group className="mb-3 inline-input-child">
+            {/* <Form.Label>Title EN</Form.Label> */}
             <Form.Control
               type="input"
-              value={ukTitle}
-              name="ukTitle"
+              value={enTitle}
+              name="enTitle"
               onChange={handleDetailsDataChange}
               placeholder={placeholders.en}
             />
           </Form.Group>
 
           <Form.Group className="mb-3 inline-input-child">
-            {/* <Form.Label>Title EN</Form.Label> */}
             <Form.Control
               type="input"
-              value={enTitle}
-              name="enTitle"
+              value={ukTitle}
+              name="ukTitle"
               onChange={handleDetailsDataChange}
               placeholder={placeholders.uk}
             />
@@ -293,7 +320,7 @@ const DetailsProjectInfoForm = ({ projectId }) => {
       </Form.Group>
 
       <div className="modal-form-buttons">
-        <Button variant="primary" onClick={() => console.log('Submit')}>
+        <Button variant="primary" onClick={handleFormSubmit}>
           Submit
         </Button>
       </div>

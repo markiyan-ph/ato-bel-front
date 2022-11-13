@@ -6,8 +6,14 @@ const initialState = {
   details: {
     detailMainImage: '',
     projectInfo: {
-      title: '',
-      text: '',
+      title: {
+        en: '',
+        uk: ''
+      },
+      text: {
+        en: '',
+        uk: ''
+      },
       specifications: [],
     },
     images: []
@@ -40,8 +46,11 @@ const projectDetailsLoading = state => {
 };
 
 const updateProjectDetailsSuccess = (state, action) => {
+  console.log(action);
+  
   return updateObject(state, {
-    data: action.data,
+    projectId: action.projectId,
+    details: action.details,
     loading: false,
     error: false,
   });
