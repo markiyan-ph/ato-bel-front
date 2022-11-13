@@ -6,7 +6,7 @@ import Content from '../../content';
 import './full-width.scss';
 import { Button } from 'react-bootstrap';
 
-const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin }) => {
+const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo }) => {
   const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
   
   const backToTopClick = (e) => {
@@ -41,7 +41,7 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin }) 
 
   const EditProjectInfoButton = () => (
     <div className="edit-project-info-button">
-      <Button>Edit</Button>
+      <Button onClick={editInfo}>Edit</Button>
     </div>
   );
 

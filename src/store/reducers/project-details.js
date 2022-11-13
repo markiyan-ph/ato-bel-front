@@ -17,8 +17,6 @@ const initialState = {
 };
 
 const fetchProjectDetailsSuccess = (state, action) => {
-  console.log(action);
-  
   return updateObject(state, {
     projectId: action.projectId,
     details: action.details,

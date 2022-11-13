@@ -1,30 +1,36 @@
 import React, { useState } from 'react';
 // import { Button, Form, Spinner } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 // import { useDispatch, useSelector } from 'react-redux';
+import { placeholders, generateUniqueId } from '../../../tools';
 // import * as actions from '../../../store/actions';
 
 import './form.scss';
 
-const DetailsProjectInfoForm = () => {
+const DetailsProjectInfoForm = ({ projectId }) => {
   // const defaultSelectorValue = 'AddNewTag';
   // const dispatch = useDispatch();
   // const loading = useSelector(state => state.tags.loading);
   // const tags = useSelector(state => state.tags.tagsList);
+  const specificationObj = {
+    name: { en: '', uk: '' },
+    value: { en: '', uk: '' },
+    id: generateUniqueId()
+  };
   const [detailsData, setDetailsData] = useState({
     ukTitle: '',
     enTitle: '',
     ukText: '',
     enText: '',
-    specifications: []
   });
+
+  const [specifications, setSpecifications] = useState([]);
 
   const {
     ukTitle,
     enTitle,
-    // ukText,
-    // enText,
-    // specifications
+    ukText,
+    enText,
   } = detailsData;
   // const [tagId, setTagId] = useState('');
   // const [ukLable, setUkLabel] = useState('');
@@ -35,7 +41,7 @@ const DetailsProjectInfoForm = () => {
   //     dispatch(actions.fetchTags());
   //   }
   // }, []);
-  
+
   // const saveTag = tag => dispatch(actions.saveTag(tag));
   // const updateTag = tag => dispatch(actions.updateTag(tag));
   // const deleteTag = tagId => dispatch(actions.deleteTag(tagId));
@@ -60,12 +66,24 @@ const DetailsProjectInfoForm = () => {
   const handleDetailsDataChange = e => {
     const name = e.target.name;
     const value = e.target.value;
-    setDetailsData({...detailsData, [name]: value});
+    setDetailsData({ ...detailsData, [name]: value });
   };
+
+  const handleSpecificationsChange = (lang, i, e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const newSpecs = [...specifications];
+    newSpecs[i][name][lang] = value;
+    setSpecifications(newSpecs);
+  };
+  console.log(projectId);
   // const handleUaLabelChange = e => setUkLabel(e.target.value);
   // const handleEnLabelChange = e => setEnLabel(e.target.value);
   // const notValidTagId = tags.findIndex(currTag => currTag.tagId === tagId) !== -1;
 
+  const addSpecification = () => {
+    setSpecifications([...specifications, specificationObj]);
+  };
   // const onAddTag = () => {
   //   const tag = {
   //     tagId,
@@ -99,7 +117,7 @@ const DetailsProjectInfoForm = () => {
 
   //   updateTag(tag);
   // };
-  
+
   // const onDeleteTag = () => {
   //   const tagId = tagSelector;
   //   deleteTag(tagId);
@@ -148,21 +166,131 @@ const DetailsProjectInfoForm = () => {
   //   </>
   // );
 
+  const specificationsFields = specifications.map((spec, i) => (
+    <fieldset key={spec.id}>
+      <legend>Specification {spec.id}</legend>
+      <Form.Group className="mb-3">
+        <Form.Label>Name</Form.Label>
+        <div className="inline-input">
+          <Form.Group className="mb-3 inline-input-child">
+            <Form.Control
+              type="input"
+              value={spec.name.en}
+              name="name"
+              onChange={e => handleSpecificationsChange('en', i, e)}
+              placeholder={placeholders.en}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3 inline-input-child">
+            <Form.Control
+              type="input"
+              value={spec.name.uk}
+              name="name"
+              onChange={e => handleSpecificationsChange('uk', i, e)}
+              placeholder={placeholders.uk}
+            />
+          </Form.Group>
+        </div>
+        <Form.Label>Value</Form.Label>
+        <div className="inline-input">
+          <Form.Group className="mb-3 inline-input-child">
+            <Form.Control
+              type="input"
+              value={spec.value.en}
+              name="value"
+              onChange={e => handleSpecificationsChange('en', i, e)}
+              placeholder={placeholders.en}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3 inline-input-child">
+            <Form.Control
+              type="input"
+              value={spec.value.uk}
+              name="value"
+              onChange={e => handleSpecificationsChange('uk', i, e)}
+              placeholder={placeholders.uk}
+            />
+          </Form.Group>
+        </div>
+      </Form.Group>
+    </fieldset>
+  ));
+
   return (
-    <Form noValidate className="update-project-details-form">
-      <div className="inline-input">
-        <Form.Label>Title</Form.Label>
-        <Form.Group className="mb-3 inline-input-child" name="ukTitle">
-          <Form.Label>UK</Form.Label>
-          <Form.Control type="input" value={ukTitle} onChange={handleDetailsDataChange} />
+    <React.StrictMode>
+      <Form noValidate className="update-project-details-form">
+        <Form.Group noValidate className="mb-3">
+          <Form.Label>Title</Form.Label>
+          <div className="inline-input">
+            <Form.Group className="mb-3 inline-input-child">
+              <Form.Control
+                type="input"
+                value={ukTitle}
+                name="ukTitle"
+                onChange={handleDetailsDataChange}
+                placeholder={placeholders.en}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3 inline-input-child">
+              {/* <Form.Label>Title EN</Form.Label> */}
+              <Form.Control
+                type="input"
+                value={enTitle}
+                name="enTitle"
+                onChange={handleDetailsDataChange}
+                placeholder={placeholders.uk}
+              />
+            </Form.Group>
+          </div>
         </Form.Group>
 
-        <Form.Group className="mb-3 inline-input-child" name="enTitle">
-          <Form.Label>EN</Form.Label>
-          <Form.Control type="input" value={enTitle} onChange={handleDetailsDataChange} />
+        <Form.Group noValidate className="mb-3">
+          <Form.Label>Text</Form.Label>
+          {/* <div className="inline-input"> */}
+          <Form.Group className="mb-3 inline-input-child">
+            <Form.Control
+              as="textarea"
+              value={enText}
+              name="enText"
+              onChange={handleDetailsDataChange}
+              placeholder={placeholders.en}
+              style={{ height: '100px' }}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3 inline-input-child">
+            {/* <Form.Label>Title EN</Form.Label> */}
+            <Form.Control
+              as="textarea"
+              value={ukText}
+              name="ukText"
+              onChange={handleDetailsDataChange}
+              placeholder={placeholders.uk}
+              style={{ height: '100px' }}
+            />
+          </Form.Group>
+          {/* </div> */}
         </Form.Group>
-      </div>
-    </Form>
+
+        <Form.Group noValidate className="mb-3">
+          {specificationsFields}
+          <div className="add-specification">
+            <Button variant="warning" size="sm" className="add-specification-button" onClick={addSpecification}>
+              Add specification
+            </Button>
+          </div>
+        </Form.Group>
+
+        <div className="modal-form-buttons">
+          <Button variant="primary" onClick={() => console.log('Submit')}>
+            Submit
+          </Button>
+        </div>
+      </Form>
+    </React.StrictMode>
   );
 };
 

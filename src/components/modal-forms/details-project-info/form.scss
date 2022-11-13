@@ -1,9 +1,35 @@
-.tags-form {
+.update-project-details-form {
   .inline-input {
     width: 100%;
 
     .inline-input-child {
       width: 100%;
     }
+  }
+
+  fieldset {
+    min-width: revert;
+    padding: revert;
+    margin: revert;
+    border: revert;
+
+    legend {
+      float: revert;
+      width: revert;
+      padding: revert;
+      margin: revert;
+      font-size: revert;
+      line-height: revert;
+    }
+  }
+  
+  .add-specification {
+    margin-top: .3em;
+
+    // .add-specification-button {
+    //   font-weight: 700;
+    //   font-size: 1em;
+    //   width: 35px;
+    // }
   }
 }

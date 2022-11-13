@@ -107,7 +107,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
 
   return (
     <div className="update-project-form">
-      <Form.Group noValidate className="mb-3" controlId="titles">
+      <Form.Group noValidate className="mb-3">
         <Form.Label>Project title</Form.Label>
         <div className="inline-input">
           <Form.Control type="text" placeholder="Enter english title" name="projectTitleEn" value={projectTitleEn} onChange={handleProjectDataChange} />
@@ -115,7 +115,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
         </div>
       </Form.Group>
       
-      <Form.Group noValidate className="mb-3" controlId="titles">
+      <Form.Group noValidate className="mb-3">
         <Form.Label>Project subtitle</Form.Label>
         <div className="inline-input">
           <Form.Control type="text" placeholder="Enter english subtitle" name="projectSubtitleEn" value={projectSubtitleEn} onChange={handleProjectDataChange} />
@@ -123,18 +123,18 @@ const UpdateProjectForm = ({showModal, projectId}) => {
         </div>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formFile">
+      <Form.Group className="mb-3">
         <Form.Label>Upload new image</Form.Label>
         <Form.Control type="file" accept="image/*" name="projectImage" onChange={handleProjectImageChange} />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="tagId">
+      <Form.Group className="mb-3">
         <Form.Label>Project date</Form.Label>
         <Form.Control type="input" name="projectDate" value={projectDate} onChange={handleProjectDataChange} isInvalid={notValidProjectDate} />
         <Form.Control.Feedback type="invalid">Please enter valid date</Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formFile">
+      <Form.Group className="mb-3">
         <Form.Label>Select react tags</Form.Label>
         <Select
           closeMenuOnSelect={false}
