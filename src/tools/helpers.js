@@ -6,7 +6,7 @@ export const getRandomInt = (min, max) => {
 
 export const generateUniqueId = () => {
   return `${getRandomInt(10000, 99999)}${Date.now()}`;
-}
+};
 
 export const updateObject = (oldObject, newProperties) => {
   return {
