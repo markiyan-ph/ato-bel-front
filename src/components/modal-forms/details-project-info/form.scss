@@ -21,6 +21,18 @@
       font-size: revert;
       line-height: revert;
     }
+
+    .remove-specification-button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
+      .remove-specification-button {
+        font-weight: 700;
+        width: 30px;
+      }
+
+    }
   }
   
   .add-specification {

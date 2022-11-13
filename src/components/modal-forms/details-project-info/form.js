@@ -84,6 +84,12 @@ const DetailsProjectInfoForm = ({ projectId }) => {
   const addSpecification = () => {
     setSpecifications([...specifications, specificationObj]);
   };
+  
+  const removeSpecification = (i) => {
+    const newSpecs = [...specifications];
+    newSpecs.splice(i, 1);
+    setSpecifications(newSpecs);
+  };
   // const onAddTag = () => {
   //   const tag = {
   //     tagId,
@@ -169,6 +175,9 @@ const DetailsProjectInfoForm = ({ projectId }) => {
   const specificationsFields = specifications.map((spec, i) => (
     <fieldset key={spec.id}>
       <legend>Specification</legend>
+      <div className='remove-specification-button-wrapper'>
+        <Button className='remove-specification-button' variant='danger' size='sm' onClick={() => removeSpecification(i)}>X</Button>
+      </div>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
         <div className="inline-input">
