@@ -168,7 +168,7 @@ const DetailsProjectInfoForm = ({ projectId }) => {
 
   const specificationsFields = specifications.map((spec, i) => (
     <fieldset key={spec.id}>
-      <legend>Specification {spec.id}</legend>
+      <legend>Specification</legend>
       <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
         <div className="inline-input">
