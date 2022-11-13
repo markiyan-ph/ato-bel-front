@@ -219,78 +219,76 @@ const DetailsProjectInfoForm = ({ projectId }) => {
   ));
 
   return (
-    <React.StrictMode>
-      <Form noValidate className="update-project-details-form">
-        <Form.Group noValidate className="mb-3">
-          <Form.Label>Title</Form.Label>
-          <div className="inline-input">
-            <Form.Group className="mb-3 inline-input-child">
-              <Form.Control
-                type="input"
-                value={ukTitle}
-                name="ukTitle"
-                onChange={handleDetailsDataChange}
-                placeholder={placeholders.en}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3 inline-input-child">
-              {/* <Form.Label>Title EN</Form.Label> */}
-              <Form.Control
-                type="input"
-                value={enTitle}
-                name="enTitle"
-                onChange={handleDetailsDataChange}
-                placeholder={placeholders.uk}
-              />
-            </Form.Group>
-          </div>
-        </Form.Group>
-
-        <Form.Group noValidate className="mb-3">
-          <Form.Label>Text</Form.Label>
-          {/* <div className="inline-input"> */}
+    <Form noValidate className="update-project-details-form">
+      <Form.Group noValidate className="mb-3">
+        <Form.Label>Title</Form.Label>
+        <div className="inline-input">
           <Form.Group className="mb-3 inline-input-child">
             <Form.Control
-              as="textarea"
-              value={enText}
-              name="enText"
+              type="input"
+              value={ukTitle}
+              name="ukTitle"
               onChange={handleDetailsDataChange}
               placeholder={placeholders.en}
-              style={{ height: '100px' }}
             />
           </Form.Group>
 
           <Form.Group className="mb-3 inline-input-child">
             {/* <Form.Label>Title EN</Form.Label> */}
             <Form.Control
-              as="textarea"
-              value={ukText}
-              name="ukText"
+              type="input"
+              value={enTitle}
+              name="enTitle"
               onChange={handleDetailsDataChange}
               placeholder={placeholders.uk}
-              style={{ height: '100px' }}
             />
           </Form.Group>
-          {/* </div> */}
+        </div>
+      </Form.Group>
+
+      <Form.Group noValidate className="mb-3">
+        <Form.Label>Text</Form.Label>
+        {/* <div className="inline-input"> */}
+        <Form.Group className="mb-3 inline-input-child">
+          <Form.Control
+            as="textarea"
+            value={enText}
+            name="enText"
+            onChange={handleDetailsDataChange}
+            placeholder={placeholders.en}
+            style={{ height: '100px' }}
+          />
         </Form.Group>
 
-        <Form.Group noValidate className="mb-3">
-          {specificationsFields}
-          <div className="add-specification">
-            <Button variant="warning" size="sm" className="add-specification-button" onClick={addSpecification}>
-              Add specification
-            </Button>
-          </div>
+        <Form.Group className="mb-3 inline-input-child">
+          {/* <Form.Label>Title EN</Form.Label> */}
+          <Form.Control
+            as="textarea"
+            value={ukText}
+            name="ukText"
+            onChange={handleDetailsDataChange}
+            placeholder={placeholders.uk}
+            style={{ height: '100px' }}
+          />
         </Form.Group>
+        {/* </div> */}
+      </Form.Group>
 
-        <div className="modal-form-buttons">
-          <Button variant="primary" onClick={() => console.log('Submit')}>
-            Submit
+      <Form.Group noValidate className="mb-3">
+        {specificationsFields}
+        <div className="add-specification">
+          <Button variant="warning" size="sm" className="add-specification-button" onClick={addSpecification}>
+            Add specification
           </Button>
         </div>
-      </Form>
-    </React.StrictMode>
+      </Form.Group>
+
+      <div className="modal-form-buttons">
+        <Button variant="primary" onClick={() => console.log('Submit')}>
+          Submit
+        </Button>
+      </div>
+    </Form>
   );
 };
 
