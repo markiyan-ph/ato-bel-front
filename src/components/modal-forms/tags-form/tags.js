@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { placeholders } from '../../../tools'
+import { placeholders } from '../../../tools';
 import * as actions from '../../../store/actions';
 
 import './tags.scss';
