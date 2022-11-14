@@ -4,11 +4,13 @@ import TagsForm from './tags-form';
 import UpdateProjectForm from './update-project-form';
 import AddToMainPageForm from './add-to-main-page-form';
 import DetailsProjectInfoForm from './details-project-info';
+import DetailsTitleImageForm from './details-title-image';
 
 export {
   AddProjectForm,
   AddToMainPageForm,
   DetailsProjectInfoForm,
+  DetailsTitleImageForm,
   ModalForm,
   TagsForm,
   UpdateProjectForm
