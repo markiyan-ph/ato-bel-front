@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ModalForm, DetailsProjectInfoForm } from '../modal-forms';
+import { ModalForm, DetailsProjectInfoForm, DetailsTitleImageForm } from '../modal-forms';
 import * as actions from '../../store/actions';
 import { FullWidthTemplate } from './templates';
 
@@ -12,18 +12,22 @@ const ProjectsDetails = () => {
   const { i18n } = useTranslation();
   const lang = i18n.language;
   const [showProjectInfoUpdateForm, popupProjectInfoUpdate] = useState(false);
+  const [showTitleImageUpdateForm, popupTitleImageUpdate] = useState(false);
   const projectDetails = useSelector(state => state.projectDetails);
   const { isAdmin, isAuthorized } = useSelector(state => state.authorization);
 
   const openProjectInfoUpdate = () => popupProjectInfoUpdate(true);
   const closeProjectInfoUpdate = () => popupProjectInfoUpdate(false);
+  const openTitleImageUpdate = () => popupTitleImageUpdate(true);
+  const closeTitleImageUpdate = () => popupTitleImageUpdate(false);
 
   const fetchProjectDetails = projectId => {
     dispatch(actions.fetchProjectDetails(projectId));
   };
 
   const showControls = isAdmin && isAuthorized;
-  const updateProjectForm = <DetailsProjectInfoForm projectId={projectId} showForm={popupProjectInfoUpdate} />;
+  const updateProjectInfoForm = <DetailsProjectInfoForm projectId={projectId} showForm={popupProjectInfoUpdate} />;
+  const updateTitleImageForm = <DetailsTitleImageForm projectId={projectId} details={projectDetails.details} currentImage={projectDetails?.details?.detailTitleImage?.length > 0 ? projectDetails.details.detailTitleImage : null} showModal={popupTitleImageUpdate} />;
 
   useEffect(() => {
     fetchProjectDetails(projectId);
@@ -35,8 +39,14 @@ const ProjectsDetails = () => {
       <ModalForm
         show={showProjectInfoUpdateForm}
         modalClose={closeProjectInfoUpdate}
-        form={updateProjectForm}
+        form={updateProjectInfoForm}
         formTitle="Update project data"
+      />
+      <ModalForm
+        show={showTitleImageUpdateForm}
+        modalClose={closeTitleImageUpdate}
+        form={updateTitleImageForm}
+        formTitle="Update image"
       />
       <FullWidthTemplate
         projectId={projectId}
@@ -44,6 +54,7 @@ const ProjectsDetails = () => {
         isAdmin={showControls}
         language={lang}
         editInfo={openProjectInfoUpdate}
+        editTitleImage={openTitleImageUpdate}
         loading={projectDetails.loading}
       />
     </div>

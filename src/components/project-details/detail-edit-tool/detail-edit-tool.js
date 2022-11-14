@@ -8,7 +8,7 @@ import { Trash, Pencil} from 'react-bootstrap-icons';
 
 import './detail-edit-tool.scss';
 
-const DetailEditTool = () => {
+const DetailEditTool = ({editModalClick}) => {
   // const {i18n} = useTranslation();
   // const lang = i18n.language;
   // const dispatch = useDispatch();
@@ -27,12 +27,11 @@ const DetailEditTool = () => {
   // const updateProjectForm = <UpdateProjectForm showModal={popupUpdate} projectId={projectId} />;
   // const updateMainPageProjectForm = <AddToMainPageForm showModal={popupMainPageImage} projectId={projectId} />;
 
-  // const editClick = e => {
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  //   console.log('=== Edit project ===');
-  //   openUpdate();
-  // };
+  const editClick = e => {
+    e.stopPropagation();
+    e.preventDefault();
+    editModalClick();
+  };
 
   // const mainPageClick = e => {
   //   e.stopPropagation();
@@ -51,15 +50,7 @@ const DetailEditTool = () => {
   return (
     <div className="detail-edit-tools-wrapper">
       <div className="edit-tools">
-        <div className="edit">
-          <div onClick={e => e.stopPropagation()}>
-            {/* <ModalForm
-              show={showUpdateForm}
-              modalClose={closeUpdate}
-              form={updateProjectForm}
-              formTitle="Update project data"
-            /> */}
-          </div>
+        <div className="edit" onClick={e => editClick(e)}>
           <Pencil />
         </div>
         <div className="delete">
