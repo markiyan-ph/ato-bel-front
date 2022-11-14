@@ -4,7 +4,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   projectId: null,
   details: {
-    detailMainImage: '',
+    detailTitleImage: '',
     projectInfo: {
       title: {
         en: '',
