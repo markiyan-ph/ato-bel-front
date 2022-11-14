@@ -6,7 +6,7 @@ import * as actions from '../../../store/actions';
 
 import './form.scss';
 
-const DetailsProjectInfoForm = ({ projectId }) => {
+const DetailsProjectInfoForm = ({ projectId, showForm }) => {
   const dispatch = useDispatch();
   const projectDetails = useSelector(state => state.projectDetails);
 
@@ -96,11 +96,9 @@ const DetailsProjectInfoForm = ({ projectId }) => {
     };
 
     updateProjectDetails(projectId, updatedDetails);
+    showForm(false);
   };
-  // const handleUaLabelChange = e => setUkLabel(e.target.value);
-  // const handleEnLabelChange = e => setEnLabel(e.target.value);
-  // const notValidTagId = tags.findIndex(currTag => currTag.tagId === tagId) !== -1;
-
+  
   const addSpecification = () => {
     setSpecifications([...specifications, specificationObj]);
   };
@@ -110,87 +108,6 @@ const DetailsProjectInfoForm = ({ projectId }) => {
     newSpecs.splice(i, 1);
     setSpecifications(newSpecs);
   };
-  // const onAddTag = () => {
-  //   const tag = {
-  //     tagId,
-  //     labels: {
-  //       uk: ukLable,
-  //       en: enLabel,
-  //     },
-  //   };
-
-  //   if (notValidTagId) {
-  //     return;
-  //   }
-
-  //   saveTag(tag);
-  //   cleanFields();
-  // };
-
-  // const onUpdateTag = () => {
-  //   const tagId = tagSelector;
-  //   const tag = {
-  //     tagId,
-  //     labels: {
-  //       uk: ukLable,
-  //       en: enLabel,
-  //     },
-  //   };
-
-  //   if (notValidTagId) {
-  //     return;
-  //   }
-
-  //   updateTag(tag);
-  // };
-
-  // const onDeleteTag = () => {
-  //   const tagId = tagSelector;
-  //   deleteTag(tagId);
-  //   setTagSelector(defaultSelectorValue);
-  //   cleanFields();
-  // };
-
-  // const tagsOptions = tags.map(currTag => (
-  //   <option key={currTag.tagId} value={currTag.tagId}>
-  //     {currTag.tagId}
-  //   </option>
-  // ));
-
-  // const TagIdField = (
-  //   <Form.Group className="mb-3" controlId="tagId">
-  //     <Form.Label>Tag ID</Form.Label>
-  //     <Form.Control
-  //       type="input"
-  //       value={tagId}
-  //       onChange={handleTagIdChange}
-  //       isInvalid={notValidTagId}
-  //       required
-  //     />
-  //     <Form.Control.Feedback type="invalid">Please enter unique tad id</Form.Control.Feedback>
-  //   </Form.Group>
-  // );
-
-  // const spinner = <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />;
-
-  // const AddTagButton = (
-  //   <>
-  //     <Button variant="primary" className="mr-3" onClick={onAddTag}>
-  //       {loading ? spinner : null} Add tag
-  //     </Button>{' '}
-  //   </>
-  // );
-
-  // const UpdDelTagButton = (
-  //   <>
-  //     <Button variant="warning" className="mr-3" onClick={onUpdateTag}>
-  //       {loading ? spinner : null} Update
-  //     </Button>{' '}
-  //     <Button variant="danger" className="mr-3" onClick={onDeleteTag}>
-  //       {loading ? spinner : null} Delete
-  //     </Button>{' '}
-  //   </>
-  // );
 
   const specificationsFields = specifications.map((spec, i) => (
     <fieldset key={spec.id}>
