@@ -19,10 +19,16 @@ const initialState = {
     images: []
   },
   error: false,
-  loading: false,
+  loading: true,
 };
 
 const fetchProjectDetailsSuccess = (state, action) => {
+  if (!action.projectId) {
+    return updateObject(initialState, {
+      loading: false
+    });
+  }
+  
   return updateObject(state, {
     projectId: action.projectId,
     details: action.details,

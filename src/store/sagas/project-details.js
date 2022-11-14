@@ -11,11 +11,12 @@ export function* fetchProjectDetailsSaga({ projectId }) {
       `${SERVER_API}/projects/details/${projectId}`
     );
     const respJson = yield resp.json();
+    
 
     yield put(
       actions.fetchProjectDetailsSuccess(
-        respJson.projectDetails.projectId,
-        respJson.projectDetails.details
+        respJson?.projectDetails?.projectId ? respJson.projectDetails.projectId : null,
+        respJson?.projectDetails?.details ? respJson.projectDetails.details : null
       )
     );
   } catch (err) {
