@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { ArrowUpShort } from 'react-bootstrap-icons';
 import DetailEditTool from '../detail-edit-tool';
 
@@ -6,31 +6,35 @@ import Content from '../../content';
 import './full-width.scss';
 import { Button } from 'react-bootstrap';
 
-const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo }) => {
+const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo, loading }) => {
+  const [showToTopButton, setShowToTopButton] = useState(false);
   const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
-  
-  const backToTopClick = (e) => {
+  const detailsMainImageExists = projectDetailsObj?.detailMainImage?.length > 0;
+
+  const backToTopClick = e => {
     e.preventDefault();
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    if (!loading) {
+      setShowToTopButton(document.body.scrollHeight - document.body.clientHeight > 200);
+    }
+  }, [loading]);
+
   const specificationsNames = projectDetailsObj.projectInfo.specifications.map(specification => (
-    <div key={specification._id+'name'}>
-      {specification.name[language]}
-    </div>
+    <div key={specification._id + 'name'}>{specification.name[language]}</div>
   ));
-  
+
   const specificationsValues = projectDetailsObj.projectInfo.specifications.map(specification => (
-    <div key={specification._id+'value'}>
-      {specification.value[language]}
-    </div>
+    <div key={specification._id + 'value'}>{specification.value[language]}</div>
   ));
 
   const images = projectDetailsObj.images.map(imageData => (
     <div className="image-data-container" key={imageData._id}>
       <div className="image">
         {isAdmin ? <DetailEditTool /> : null}
-        <img src={`${detailImgsPath}/${imageData.img}` } alt={imageData?.imgTitle?.[language]} loading='lazy' />
+        <img src={`${detailImgsPath}/${imageData.img}`} alt={imageData?.imgTitle?.[language]} loading="lazy" />
       </div>
       <div className="image-data">
         <div className="image-title">{imageData?.imgTitle?.[language]}</div>
@@ -38,6 +42,29 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
       </div>
     </div>
   ));
+
+  const backToTop = (
+    <div className="back-to-top" onClick={backToTopClick}>
+      <ArrowUpShort />
+      <span className="back-to-top-text">back to top</span>
+    </div>
+  );
+
+  const mainImage = (
+    <img
+      src={`${detailImgsPath}/${projectDetailsObj.detailMainImage}`}
+      alt={projectDetailsObj.projectInfo.title[language]}
+      loading="lazy"
+    />
+  );
+  
+  const mainImageStatic = (
+    <img
+      src='/static/main_detail.jpeg'
+      alt='Default edit image'
+      loading="lazy"
+    />
+  );
 
   const EditProjectInfoButton = () => (
     <div className="edit-project-info-button">
@@ -49,8 +76,9 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
     <Content classNames={'flex-child'}>
       <div className="project-details">
         <div className="main-image">
-          {isAdmin ? <DetailEditTool /> : null}
-          <img src={`${detailImgsPath}/${projectDetailsObj.detailMainImage}`} alt={projectDetailsObj.projectInfo.title} loading='lazy' />
+          {isAdmin && !loading ? <DetailEditTool /> : null}
+          {isAdmin ? detailsMainImageExists ? mainImage : mainImageStatic : null}
+          {!isAdmin && detailsMainImageExists ? mainImage : null}
         </div>
         <div className="project-info">
           <div className="project-title">
@@ -66,13 +94,10 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
 
           {isAdmin ? <EditProjectInfoButton /> : null}
         </div>
-        <div className="images">
-          {images}
-        </div>
-        
-        <div className='back-to-top' onClick={backToTopClick}><ArrowUpShort /><span className='back-to-top-text'>back to top</span></div>
+        <div className="images">{images}</div>
+
+        {showToTopButton ? backToTop : null}
       </div>
-      
     </Content>
   );
 };
