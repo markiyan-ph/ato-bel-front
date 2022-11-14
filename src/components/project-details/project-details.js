@@ -11,19 +11,19 @@ const ProjectsDetails = () => {
   const { projectId } = useParams();
   const { i18n } = useTranslation();
   const lang = i18n.language;
-  const [showUpdateForm, popupUpdate] = useState(false);
+  const [showProjectInfoUpdateForm, popupProjectInfoUpdate] = useState(false);
   const projectDetails = useSelector(state => state.projectDetails);
   const { isAdmin, isAuthorized } = useSelector(state => state.authorization);
 
-  const openUpdate = () => popupUpdate(true);
-  const closeUpdate = () => popupUpdate(false);
+  const openProjectInfoUpdate = () => popupProjectInfoUpdate(true);
+  const closeProjectInfoUpdate = () => popupProjectInfoUpdate(false);
 
   const fetchProjectDetails = projectId => {
     dispatch(actions.fetchProjectDetails(projectId));
   };
 
   const showControls = isAdmin && isAuthorized;
-  const updateProjectForm = <DetailsProjectInfoForm projectId={projectId} />;
+  const updateProjectForm = <DetailsProjectInfoForm projectId={projectId} showForm={popupProjectInfoUpdate} />;
 
   useEffect(() => {
     fetchProjectDetails(projectId);
@@ -33,8 +33,8 @@ const ProjectsDetails = () => {
   return (
     <div className="project-detail-wrapper">
       <ModalForm
-        show={showUpdateForm}
-        modalClose={closeUpdate}
+        show={showProjectInfoUpdateForm}
+        modalClose={closeProjectInfoUpdate}
         form={updateProjectForm}
         formTitle="Update project data"
       />
@@ -43,7 +43,8 @@ const ProjectsDetails = () => {
         projectDetailsObj={projectDetails.details}
         isAdmin={showControls}
         language={lang}
-        editInfo={openUpdate}
+        editInfo={openProjectInfoUpdate}
+        loading={projectDetails.loading}
       />
     </div>
   );
