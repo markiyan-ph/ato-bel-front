@@ -8,7 +8,7 @@ import Content from "../content";
 import "./project-details.scss";
 
 // const projectDetailsObj = {
-//   detailMainImage: '/uploads/63581e7be801e095c85b4d5b/project-main-img/MG_HEADER_1920x587.jpeg',
+//   detailTitleImage: '/uploads/63581e7be801e095c85b4d5b/project-main-img/MG_HEADER_1920x587.jpeg',
 //   projectInfo: {
 //     title: 'Villa Magnolia',
 //     text: 'The project is located in Lviv (Ukraine), in the south-eastern district of the city, just 7 km away from the city center. The designed area is part of a mixed-use urban block, that needs both densification and intensification. It is directly adjacent to the major city road from the South and surrounded by now degraded green area of former cooperative gardens from the other sides.',

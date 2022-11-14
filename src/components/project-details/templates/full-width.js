@@ -9,7 +9,7 @@ import { Button } from 'react-bootstrap';
 const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo, loading }) => {
   const [showToTopButton, setShowToTopButton] = useState(false);
   const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
-  const detailsMainImageExists = projectDetailsObj?.detailMainImage?.length > 0;
+  const detailsMainImageExists = projectDetailsObj?.detailTitleImage?.length > 0;
 
   const backToTopClick = e => {
     e.preventDefault();
@@ -52,7 +52,7 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
 
   const mainImage = (
     <img
-      src={`${detailImgsPath}/${projectDetailsObj.detailMainImage}`}
+      src={`${detailImgsPath}/${projectDetailsObj.detailTitleImage}`}
       alt={projectDetailsObj.projectInfo.title[language]}
       loading="lazy"
     />
@@ -77,7 +77,7 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
       <div className="project-details">
         <div className="main-image">
           {isAdmin && !loading ? <DetailEditTool /> : null}
-          {isAdmin ? detailsMainImageExists ? mainImage : mainImageStatic : null}
+          {isAdmin && !loading ? detailsMainImageExists ? mainImage : mainImageStatic : null}
           {!isAdmin && detailsMainImageExists ? mainImage : null}
         </div>
         <div className="project-info">
