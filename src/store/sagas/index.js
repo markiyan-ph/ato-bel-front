@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
-import { fetchProjectDetailsSaga, updateProjectDetailsSaga } from './project-details';
+import { fetchProjectDetailsSaga, updateProjectDetailsSaga, updateProjectDetailsImageSaga } from './project-details';
 import {
   fetchMainPageProjectsSaga,
   fetchProjectsSaga,
@@ -16,6 +16,7 @@ export function* watchProjects() {
   yield takeEvery(actionTypes.FETCH_MAIN_PAGE_PROJECTS, fetchMainPageProjectsSaga);
   yield takeEvery(actionTypes.FETCH_PROJECT_DETAILS, fetchProjectDetailsSaga);
   yield takeEvery(actionTypes.UPDATE_PROJECT_DETAILS, updateProjectDetailsSaga);
+  yield takeEvery(actionTypes.UPDATE_PROJECT_DETAILS_IMAGE, updateProjectDetailsImageSaga);
   yield takeEvery(actionTypes.ADD_PROJECT, addProjectSaga);
   yield takeEvery(actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE, addMainProjectSaga);
   yield takeEvery(actionTypes.UPDATE_PROJECT, updateProjectSaga);

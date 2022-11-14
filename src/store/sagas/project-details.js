@@ -1,4 +1,5 @@
-import { delay, put } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
+import { postJson } from "../../tools";
 import * as actions from "../actions";
 
 const SERVER_API = `/api`;
@@ -29,7 +30,7 @@ export function* updateProjectDetailsSaga({ projectId, details }) {
   try {
     yield put(actions.projectDetailsLoading());
     
-    yield delay(1000);
+    // yield delay(1000);
     
     const reqBody = JSON.stringify({
       projectId,
@@ -44,6 +45,43 @@ export function* updateProjectDetailsSaga({ projectId, details }) {
       body: reqBody
     });
 
+    const respJson = yield resp.json();
+
+    yield put(
+      actions.updateProjectDetailsSuccess(
+        respJson.projectId,
+        respJson.details
+      )
+    );
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
+export function* updateProjectDetailsImageSaga({ formData, projectId, details }) {
+  try {
+    yield put(actions.projectDetailsLoading());
+    // yield delay(1000);
+
+    const respImgUpdate = yield fetch(`${SERVER_API}/projects/details/update/image`, {
+      method: 'POST',
+      body: formData
+    });
+    const respImgUpdateJson = yield respImgUpdate.json();
+    const newDetails = {...details};
+
+    
+    if (respImgUpdateJson?.titleImage === true) {
+      newDetails.detailTitleImage = respImgUpdateJson.name;
+    };
+
+    const reqBody = JSON.stringify({
+      projectId,
+      details: newDetails
+    });
+
+    const resp = yield  postJson(`${SERVER_API}/projects/details/update`, reqBody);
     const respJson = yield resp.json();
 
     yield put(
