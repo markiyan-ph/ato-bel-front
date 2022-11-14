@@ -37,7 +37,7 @@ const AddToMainPageForm = ({showModal, projectId}) => {
   };
 
   return (
-    <div className="add-project-form">
+    <div className="add-main-page-image-form">
       <Form.Group className="mb-3" controlId="formFile">
         <Form.Label>Project main page image</Form.Label>
         <Form.Control type="file" accept="image/*" onChange={handleProjectMainPageImageChange} isInvalid={checkValidation ? projectMainPageImage === null : false} />
