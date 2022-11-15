@@ -75,7 +75,7 @@ const Gallery = ({
           className="img-container"
         >
           <img
-            src={`/uploads/${imgSrc}`}
+            src={`/${(isAdmin && _id === "AddNewProject") ? 'static' : 'uploads'}/${imgSrc}`}
             alt={imgSrc}
           />
           {imageTitle}
