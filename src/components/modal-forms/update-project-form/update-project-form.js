@@ -129,7 +129,7 @@ const UpdateProjectForm = ({showModal, projectId}) => {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Project date</Form.Label>
+        <Form.Label>Date</Form.Label>
         <Form.Control type="input" name="projectDate" value={projectDate} onChange={handleProjectDataChange} isInvalid={notValidProjectDate} />
         <Form.Control.Feedback type="invalid">Please enter valid date</Form.Control.Feedback>
       </Form.Group>
