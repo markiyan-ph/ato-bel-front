@@ -6,7 +6,7 @@ import Content from '../../content';
 import './full-width.scss';
 import { Button } from 'react-bootstrap';
 
-const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo, editTitleImage, loading }) => {
+const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo, editTitleImage, addImageBlock, loading }) => {
   const [showToTopButton, setShowToTopButton] = useState(false);
   const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
   const detailsMainImageExists = projectDetailsObj?.detailTitleImage?.length > 0;
@@ -72,6 +72,12 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
     </div>
   );
 
+  const AddImageBlock = () => (
+    <div className="add-image-block-button">
+      <Button variant='outline-primary' onClick={addImageBlock}>Add image block</Button>
+    </div>
+  );
+
   return (
     <Content classNames={'flex-child'}>
       <div className="project-details">
@@ -94,6 +100,7 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
 
           {isAdmin ? <EditProjectInfoButton /> : null}
         </div>
+        {isAdmin ? <AddImageBlock /> : null}
         <div className="images">{images}</div>
 
         {showToTopButton ? backToTop : null}
