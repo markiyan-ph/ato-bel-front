@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { placeholders, generateUniqueId } from '../../../tools';
 import * as actions from '../../../store/actions';
 
-import './details-project-info.scss';
+import './details-project-info-form.scss';
 
 const DetailsProjectInfoForm = ({ projectId, showForm }) => {
   const dispatch = useDispatch();
