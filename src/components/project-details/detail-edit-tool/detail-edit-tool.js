@@ -1,6 +1,6 @@
 import React from 'react';
 // import { useTranslation } from 'react-i18next';
-import { Trash, Pencil} from 'react-bootstrap-icons';
+import { Trash, Pencil } from 'react-bootstrap-icons';
 // import { useDispatch } from 'react-redux';
 // import { ModalForm, UpdateProjectForm, AddToMainPageForm } from '../../modal-forms';
 // import * as actions from '../../../store/actions';
@@ -8,7 +8,7 @@ import { Trash, Pencil} from 'react-bootstrap-icons';
 
 import './detail-edit-tool.scss';
 
-const DetailEditTool = ({editModalClick}) => {
+const DetailEditTool = ({ editModalClick }) => {
   // const {i18n} = useTranslation();
   // const lang = i18n.language;
   // const dispatch = useDispatch();
@@ -31,6 +31,12 @@ const DetailEditTool = ({editModalClick}) => {
     e.stopPropagation();
     e.preventDefault();
     editModalClick();
+
+    // if (imageBlock) {
+    //   editModalClick({modalState: true, elementIndex});
+    // } else {
+    //   editModalClick();
+    // }
   };
 
   // const mainPageClick = e => {
@@ -39,7 +45,7 @@ const DetailEditTool = ({editModalClick}) => {
   //   console.log('+++ Add project to main page +++');
   //   openMainPageImage();
   // };
-  
+
   // const deleteClick = e => {
   //   e.stopPropagation();
   //   e.preventDefault();

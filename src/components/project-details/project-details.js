@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ModalForm, DetailsProjectInfoForm, DetailsTitleImageForm } from '../modal-forms';
+import { ModalForm, DetailsProjectInfoForm, DetailsTitleImageForm, DetailsImageBlockForm } from '../modal-forms';
 import * as actions from '../../store/actions';
 import { FullWidthTemplate } from './templates';
 
@@ -13,6 +13,7 @@ const ProjectsDetails = () => {
   const lang = i18n.language;
   const [showProjectInfoUpdateForm, popupProjectInfoUpdate] = useState(false);
   const [showTitleImageUpdateForm, popupTitleImageUpdate] = useState(false);
+  const [showAddImageBlockForm, popupAddImageBlockUpdate] = useState({ modalState: false, elementIndex: null });
   const projectDetails = useSelector(state => state.projectDetails);
   const { isAdmin, isAuthorized } = useSelector(state => state.authorization);
 
@@ -20,6 +21,7 @@ const ProjectsDetails = () => {
   const closeProjectInfoUpdate = () => popupProjectInfoUpdate(false);
   const openTitleImageUpdate = () => popupTitleImageUpdate(true);
   const closeTitleImageUpdate = () => popupTitleImageUpdate(false);
+  const closeAddImageBlockUpdate = () => popupAddImageBlockUpdate({ ...showAddImageBlockForm, modalState: false });
 
   const fetchProjectDetails = projectId => {
     dispatch(actions.fetchProjectDetails(projectId));
@@ -27,7 +29,24 @@ const ProjectsDetails = () => {
 
   const showControls = isAdmin && isAuthorized;
   const updateProjectInfoForm = <DetailsProjectInfoForm projectId={projectId} showForm={popupProjectInfoUpdate} />;
-  const updateTitleImageForm = <DetailsTitleImageForm projectId={projectId} details={projectDetails.details} currentImage={projectDetails?.details?.detailTitleImage?.length > 0 ? projectDetails.details.detailTitleImage : null} showModal={popupTitleImageUpdate} />;
+  const updateTitleImageForm = (
+    <DetailsTitleImageForm
+      projectId={projectId}
+      details={projectDetails.details}
+      currentImage={
+        projectDetails?.details?.detailTitleImage?.length > 0 ? projectDetails.details.detailTitleImage : null
+      }
+      showModal={popupTitleImageUpdate}
+    />
+  );
+  const updateAddImageBlockForm = (
+    <DetailsImageBlockForm
+      projectId={projectId}
+      details={projectDetails.details}
+      blockIndex={showAddImageBlockForm.elementIndex}
+      showModal={popupAddImageBlockUpdate}
+    />
+  );
 
   useEffect(() => {
     fetchProjectDetails(projectId);
@@ -48,6 +67,12 @@ const ProjectsDetails = () => {
         form={updateTitleImageForm}
         formTitle="Update image"
       />
+      <ModalForm
+        show={showAddImageBlockForm.modalState}
+        modalClose={closeAddImageBlockUpdate}
+        form={updateAddImageBlockForm}
+        formTitle="Add image block"
+      />
       <FullWidthTemplate
         projectId={projectId}
         projectDetailsObj={projectDetails.details}
@@ -55,6 +80,7 @@ const ProjectsDetails = () => {
         language={lang}
         editInfo={openProjectInfoUpdate}
         editTitleImage={openTitleImageUpdate}
+        addImageBlock={popupAddImageBlockUpdate}
         loading={projectDetails.loading}
       />
     </div>

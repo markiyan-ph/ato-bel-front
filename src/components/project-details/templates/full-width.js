@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowUpShort } from 'react-bootstrap-icons';
 import DetailEditTool from '../detail-edit-tool';
 
@@ -6,7 +6,16 @@ import Content from '../../content';
 import './full-width.scss';
 import { Button } from 'react-bootstrap';
 
-const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, editInfo, editTitleImage, addImageBlock, loading }) => {
+const FullWidthTemplate = ({
+  projectId,
+  projectDetailsObj,
+  language,
+  isAdmin,
+  editInfo,
+  editTitleImage,
+  addImageBlock,
+  loading,
+}) => {
   const [showToTopButton, setShowToTopButton] = useState(false);
   const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
   const detailsMainImageExists = projectDetailsObj?.detailTitleImage?.length > 0;
@@ -30,10 +39,12 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
     <div key={specification._id + 'value'}>{specification.value[language]}</div>
   ));
 
-  const images = projectDetailsObj.images.map(imageData => (
+  const images = projectDetailsObj.images.map((imageData, i) => (
     <div className="image-data-container" key={imageData._id}>
       <div className="image">
-        {isAdmin ? <DetailEditTool /> : null}
+        {isAdmin ? (
+          <DetailEditTool editModalClick={() => addImageBlock({ modalState: true, elementIndex: i })} />
+        ) : null}
         <img src={`${detailImgsPath}/${imageData.img}`} alt={imageData?.imgTitle?.[language]} loading="lazy" />
       </div>
       <div className="image-data">
@@ -57,14 +68,8 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
       loading="lazy"
     />
   );
-  
-  const mainImageStatic = (
-    <img
-      src='/static/main_detail.jpeg'
-      alt='Default edit image'
-      loading="lazy"
-    />
-  );
+
+  const mainImageStatic = <img src="/static/main_detail.jpeg" alt="Default edit image" loading="lazy" />;
 
   const EditProjectInfoButton = () => (
     <div className="edit-project-info-button">
@@ -74,7 +79,9 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
 
   const AddImageBlock = () => (
     <div className="add-image-block-button">
-      <Button variant='outline-primary' onClick={addImageBlock}>Add image block</Button>
+      <Button variant="outline-primary" onClick={() => addImageBlock({ modalState: true, elementIndex: null })}>
+        Add image block
+      </Button>
     </div>
   );
 
@@ -83,7 +90,7 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
       <div className="project-details">
         <div className="main-image">
           {isAdmin && !loading ? <DetailEditTool editModalClick={editTitleImage} /> : null}
-          {isAdmin && !loading ? detailsMainImageExists ? mainImage : mainImageStatic : null}
+          {isAdmin && !loading ? (detailsMainImageExists ? mainImage : mainImageStatic) : null}
           {!isAdmin && detailsMainImageExists ? mainImage : null}
         </div>
         <div className="project-info">
@@ -100,8 +107,8 @@ const FullWidthTemplate = ({ projectId, projectDetailsObj, language, isAdmin, ed
 
           {isAdmin ? <EditProjectInfoButton /> : null}
         </div>
-        {isAdmin ? <AddImageBlock /> : null}
         <div className="images">{images}</div>
+        {isAdmin ? <AddImageBlock /> : null}
 
         {showToTopButton ? backToTop : null}
       </div>
