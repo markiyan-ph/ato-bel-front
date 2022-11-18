@@ -5,7 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import { placeholders } from '../../../tools';
 import * as actions from '../../../store/actions';
 
-import './details-image-block.scss';
+import './details-image-block-form.scss';
 
 const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) => {
   const dispatch = useDispatch();
