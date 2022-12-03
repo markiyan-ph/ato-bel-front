@@ -71,7 +71,7 @@ const ProjectsDetails = () => {
         show={showAddImageBlockForm.modalState}
         modalClose={closeAddImageBlockUpdate}
         form={updateAddImageBlockForm}
-        formTitle="Add image block"
+        formTitle="Add/update image block"
       />
       <FullWidthTemplate
         projectId={projectId}
