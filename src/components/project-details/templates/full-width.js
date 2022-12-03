@@ -18,6 +18,7 @@ const FullWidthTemplate = ({
 }) => {
   const [showToTopButton, setShowToTopButton] = useState(false);
   const detailImgsPath = `/uploads/${projectId}/detail-imgs`;
+  const imageStatic = <img src="/static/main_detail.jpeg" alt="Default edit image" loading="lazy" />;
   const detailsMainImageExists = projectDetailsObj?.detailTitleImage?.length > 0;
 
   const backToTopClick = e => {
@@ -45,7 +46,13 @@ const FullWidthTemplate = ({
         {isAdmin ? (
           <DetailEditTool editModalClick={() => addImageBlock({ modalState: true, elementIndex: i })} />
         ) : null}
-        <img src={`${detailImgsPath}/${imageData.img}`} alt={imageData?.imgTitle?.[language]} loading="lazy" />
+        {isAdmin && !loading ? (
+          imageData?.img ? (
+            <img src={`${detailImgsPath}/${imageData.img}`} alt={imageData?.imgTitle?.[language]} loading="lazy" />
+          ) : (
+            imageStatic
+          )
+        ) : null}
       </div>
       <div className="image-data">
         <div className="image-title">{imageData?.imgTitle?.[language]}</div>
@@ -68,9 +75,6 @@ const FullWidthTemplate = ({
       loading="lazy"
     />
   );
-
-  const mainImageStatic = <img src="/static/main_detail.jpeg" alt="Default edit image" loading="lazy" />;
-
   const EditProjectInfoButton = () => (
     <div className="edit-project-info-button">
       <Button onClick={editInfo}>Edit</Button>
@@ -90,7 +94,7 @@ const FullWidthTemplate = ({
       <div className="project-details">
         <div className="main-image">
           {isAdmin && !loading ? <DetailEditTool editModalClick={editTitleImage} /> : null}
-          {isAdmin && !loading ? (detailsMainImageExists ? mainImage : mainImageStatic) : null}
+          {isAdmin && !loading ? (detailsMainImageExists ? mainImage : imageStatic) : null}
           {!isAdmin && detailsMainImageExists ? mainImage : null}
         </div>
         <div className="project-info">
