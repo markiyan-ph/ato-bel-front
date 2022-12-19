@@ -26,18 +26,14 @@ export function* fetchProjectDetailsSaga({ projectId }) {
   }
 }
 
-export function* updateProjectDetailsSaga({ projectId, details, blockIndex }) {
+export function* updateProjectDetailsSaga({ projectId, details }) {
   try {
     yield put(actions.projectDetailsLoading());
-
-    console.log(details);
-    
     // yield delay(1000);
     
     const reqBody = JSON.stringify({
       projectId,
-      details,
-      blockIndex
+      details
     });
 
     const resp = yield fetch(`${SERVER_API}/projects/details/update`, {
@@ -62,7 +58,7 @@ export function* updateProjectDetailsSaga({ projectId, details, blockIndex }) {
   }
 }
 
-export function* updateProjectDetailsImageSaga({ formData, projectId, details, blockIndex }) {
+export function* updateProjectDetailsImageSaga({ formData, projectId, details }) {
   try {
     yield put(actions.projectDetailsLoading());
     // yield delay(1000);
@@ -72,17 +68,21 @@ export function* updateProjectDetailsImageSaga({ formData, projectId, details, b
       body: formData
     });
     const respImgUpdateJson = yield respImgUpdate.json();
-    const newDetails = {...details};
+    console.log('respImgUpdateJson', respImgUpdateJson);
+    const newDetails = JSON.parse(JSON.stringify(details));
 
     
     if (respImgUpdateJson?.titleImage === true) {
       newDetails.detailTitleImage = respImgUpdateJson.name;
-    };
+    } else {
+      newDetails.images[respImgUpdateJson.imgIndex].img = respImgUpdateJson.name;
+    }
+
+    console.log('details', details);
 
     const reqBody = JSON.stringify({
       projectId,
-      details: newDetails,
-      blockIndex
+      details: newDetails
     });
 
     const resp = yield  postJson(`${SERVER_API}/projects/details/update`, reqBody);

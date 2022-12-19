@@ -36,9 +36,9 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
     }
   }, []);
 
-  const addImage = (formData, projectId, details, blockIndex) =>
-    dispatch(actions.updateProjectDetailsImage(formData, projectId, details, blockIndex));
-  const updateProjectDetails = (projectId, details, blockIndex) => dispatch(actions.updateProjectDetails(projectId, details, blockIndex));
+  const addImage = (formData, projectId, details) =>
+    dispatch(actions.updateProjectDetailsImage(formData, projectId, details));
+  const updateProjectDetails = (projectId, details) => dispatch(actions.updateProjectDetails(projectId, details));
   const handleTitleImageChange = e => {
     setDetailsBlockImage(e.target.files[0]);
   };
@@ -51,29 +51,27 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
 
   const handleSubmit = () => {
     const newDetails = JSON.parse(JSON.stringify(details));
-    console.log('Build new data');
+    const imgBlockData = {
+      imgTitle: {
+        en: enImageTitle,
+        uk: ukImageTitle,
+      },
+      imgDescription: {
+        en: enImageDescription,
+        uk: ukImageDescription,
+      },
+    };
+
+    if (blockIndex !== null) {
+      imgBlockData.img = details?.images?.[blockIndex]?.img;
+      newDetails.images[blockIndex] = imgBlockData;
+    }
+
+    if (blockIndex === null) {
+      newDetails.images.push(imgBlockData);
+    }
+
     if (detailsBlockImage === null) {
-      console.log('ONLY Update project data call');
-      // img: blockIndex !== null ? details?.images?.[blockIndex]?.img : null,
-      const imgBlockData = {
-        imgTitle: {
-          en: enImageTitle,
-          uk: ukImageTitle,
-        },
-        imgDescription: {
-          en: enImageDescription,
-          uk: ukImageDescription,
-        },
-      };
-
-      if (blockIndex) {
-        imgBlockData.img = details?.images?.[blockIndex]?.img;
-      }
-
-      if (!blockIndex) {
-        newDetails.images.push(imgBlockData);
-      }
-
       updateProjectDetails(projectId, newDetails, blockIndex);
     } else {
       console.log('BOTH Update image with data');
@@ -93,9 +91,9 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
         formData.append('image-index', newIndex);
       }
 
-      if (blockIndex === 9999) {
-        addImage(formData, projectId, details);
-      }
+      // if (blockIndex === 9999) {
+      // }
+      addImage(formData, projectId, newDetails);
       showModal({ modalState: false, elementIndex: null });
     }
   };
