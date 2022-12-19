@@ -87,7 +87,7 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
 
         formData.append('image-index', blockIndex);
       } else {
-        const newIndex = details?.images.length + 1;
+        const newIndex = details?.images.length;
         formData.append('image-index', newIndex);
       }
 

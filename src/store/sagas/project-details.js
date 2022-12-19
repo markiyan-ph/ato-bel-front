@@ -70,7 +70,7 @@ export function* updateProjectDetailsImageSaga({ formData, projectId, details })
     const respImgUpdateJson = yield respImgUpdate.json();
     console.log('respImgUpdateJson', respImgUpdateJson);
     const newDetails = JSON.parse(JSON.stringify(details));
-
+    console.log('newDetails', newDetails);
     
     if (respImgUpdateJson?.titleImage === true) {
       newDetails.detailTitleImage = respImgUpdateJson.name;
