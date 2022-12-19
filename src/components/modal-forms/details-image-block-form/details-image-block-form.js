@@ -36,8 +36,9 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
     }
   }, []);
 
-  const addImage = (formData, projectId, details) =>
-    dispatch(actions.updateProjectDetailsImage(formData, projectId, details));
+  const addImage = (formData, projectId, details, blockIndex) =>
+    dispatch(actions.updateProjectDetailsImage(formData, projectId, details, blockIndex));
+  const updateProjectDetails = (projectId, details, blockIndex) => dispatch(actions.updateProjectDetails(projectId, details, blockIndex));
   const handleTitleImageChange = e => {
     setDetailsBlockImage(e.target.files[0]);
   };
@@ -49,9 +50,31 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
   };
 
   const handleSubmit = () => {
+    const newDetails = JSON.parse(JSON.stringify(details));
     console.log('Build new data');
     if (detailsBlockImage === null) {
       console.log('ONLY Update project data call');
+      // img: blockIndex !== null ? details?.images?.[blockIndex]?.img : null,
+      const imgBlockData = {
+        imgTitle: {
+          en: enImageTitle,
+          uk: ukImageTitle,
+        },
+        imgDescription: {
+          en: enImageDescription,
+          uk: ukImageDescription,
+        },
+      };
+
+      if (blockIndex) {
+        imgBlockData.img = details?.images?.[blockIndex]?.img;
+      }
+
+      if (!blockIndex) {
+        newDetails.images.push(imgBlockData);
+      }
+
+      updateProjectDetails(projectId, newDetails, blockIndex);
     } else {
       console.log('BOTH Update image with data');
       const formData = new FormData();

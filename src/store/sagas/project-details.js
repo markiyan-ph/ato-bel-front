@@ -26,15 +26,18 @@ export function* fetchProjectDetailsSaga({ projectId }) {
   }
 }
 
-export function* updateProjectDetailsSaga({ projectId, details }) {
+export function* updateProjectDetailsSaga({ projectId, details, blockIndex }) {
   try {
     yield put(actions.projectDetailsLoading());
+
+    console.log(details);
     
     // yield delay(1000);
     
     const reqBody = JSON.stringify({
       projectId,
-      details
+      details,
+      blockIndex
     });
 
     const resp = yield fetch(`${SERVER_API}/projects/details/update`, {
@@ -59,7 +62,7 @@ export function* updateProjectDetailsSaga({ projectId, details }) {
   }
 }
 
-export function* updateProjectDetailsImageSaga({ formData, projectId, details }) {
+export function* updateProjectDetailsImageSaga({ formData, projectId, details, blockIndex }) {
   try {
     yield put(actions.projectDetailsLoading());
     // yield delay(1000);
@@ -78,7 +81,8 @@ export function* updateProjectDetailsImageSaga({ formData, projectId, details })
 
     const reqBody = JSON.stringify({
       projectId,
-      details: newDetails
+      details: newDetails,
+      blockIndex
     });
 
     const resp = yield  postJson(`${SERVER_API}/projects/details/update`, reqBody);
