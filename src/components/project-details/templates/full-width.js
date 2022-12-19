@@ -53,7 +53,7 @@ const FullWidthTemplate = ({
             imageStatic
           )
         ) : null}
-        {!isAdmin && !loading ? (
+        {!isAdmin && !loading && imageData.img ? (
           <img src={`${detailImgsPath}/${imageData.img}`} alt={imageData?.imgTitle?.[language]} loading="lazy" />
         ) : null}
       </div>
