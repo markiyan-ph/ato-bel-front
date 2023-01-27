@@ -44,7 +44,10 @@ const FullWidthTemplate = ({
     <div className="image-data-container" key={imageData._id}>
       <div className="image">
         {isAdmin ? (
-          <DetailEditTool editModalClick={() => addImageBlock({ modalState: true, elementIndex: i })} />
+          <DetailEditTool 
+            editModalClick={() => addImageBlock({ modalState: true, elementIndex: i })} 
+            deleteData={{projectId, isBlockImage: true, blockId: imageData._id}} 
+          />
         ) : null}
         {isAdmin && !loading ? (
           imageData?.img ? (
@@ -96,7 +99,7 @@ const FullWidthTemplate = ({
     <Content classNames={'flex-child'}>
       <div className="project-details">
         <div className="main-image">
-          {isAdmin && !loading ? <DetailEditTool editModalClick={editTitleImage} /> : null}
+          {isAdmin && !loading ? <DetailEditTool editModalClick={editTitleImage} deleteData={{projectId, isBlockImage: false}} /> : null}
           {isAdmin && !loading ? (detailsMainImageExists ? mainImage : imageStatic) : null}
           {!isAdmin && detailsMainImageExists ? mainImage : null}
         </div>
