@@ -18,7 +18,7 @@ export function* fetchTagsSaga() {
 
 export function* saveTagSaga({tag}) {
   try {
-    const resp = yield postJson(`${SERVER_API}/tags/save`, JSON.stringify(tag));
+    const resp = yield postJson(`${SERVER_API}/tags/save`, tag);
     const respJson = yield resp.json();
     yield put(actions.saveTagSuccess(respJson));
   
@@ -31,7 +31,7 @@ export function* saveTagSaga({tag}) {
 export function* updateTagSaga({tag}) {
   try {
     console.log('tag update', tag);
-    const resp = yield postJson(`${SERVER_API}/tags/update`, JSON.stringify(tag));
+    const resp = yield postJson(`${SERVER_API}/tags/update`, tag);
     const respJson = yield resp.json();
     console.log(respJson);
     yield put(actions.updateTagSuccess(respJson));
@@ -44,7 +44,7 @@ export function* updateTagSaga({tag}) {
 
 export function* deleteTagSaga({tagId}) {
   try {
-    const resp = yield postJson(`${SERVER_API}/tags/delete`, JSON.stringify({tagId}));
+    const resp = yield postJson(`${SERVER_API}/tags/delete`, {tagId});
     const respJson = yield resp.json();
     yield put(actions.deleteTagSuccess(respJson));
   

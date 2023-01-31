@@ -77,7 +77,7 @@ export function* updateProjectSaga({formData}) {
 
 export function* deleteProjectSaga(projectId) {
   try {
-    const resp = yield postJson(`${SERVER_API}/projects/delete`, JSON.stringify(projectId));
+    const resp = yield postJson(`${SERVER_API}/projects/delete`, projectId);
     const respJson = yield resp.json();
     yield put(actions.deleteProjectSuccess(respJson));
   

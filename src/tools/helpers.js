@@ -54,7 +54,7 @@ export const postJson = (url, body) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: body
+    body: JSON.stringify(body)
   });
 };
 
