@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions';
@@ -36,10 +36,13 @@ const Header = () => {
   const [language, setLanguage] = useState(i18n.language);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const {isAdmin, isAuthorized} = useSelector(state => state.authorization);
+  const navigation = useNavigate();
+  const {isAdmin, isAuthorized, loginScreenCode} = useSelector(state => state.authorization);
+  const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
 
   const autorize = () => {
-    dispatch(actions.authorizeUser());
+    // dispatch(actions.authorizeUser());
+    navigation('/login');
   };
 
   const unAutorize = () => {
@@ -139,7 +142,7 @@ const Header = () => {
           </div>
 
           <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
-          {isAuthorized ? buttonsGroup : buttonsGroup}
+          {storageKey === loginScreenCode ? buttonsGroup : null}
         </div>
       </div>
     </header>
