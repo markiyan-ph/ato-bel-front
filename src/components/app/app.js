@@ -1,16 +1,20 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import Header from "../header";
 import Contacts from "../pages/contacts";
 import GalleryPage from "../pages/gallery-page";
 import MainPage from "../pages/main-page";
 import Studio from "../pages/studio";
+import AdminCodePage from "../pages/admin-code";
 import "./app.scss";
 import ProjectsDetails from "../project-details";
 import LoginPage from "../pages/login-page";
 
 
 function App() {
+  const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
+  const { authorization } = useSelector(state => state);
   return (
     <div className="app">
       <Header />
@@ -21,7 +25,9 @@ function App() {
         <Route path="/projects/:projectId" element={<ProjectsDetails />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/studio" element={<Studio />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin-screen-code" element={<AdminCodePage />} />
+        {storageKey === authorization.loginScreenCode && <Route path="/login" element={<LoginPage />} />}
+        <Route path="*" element={<Navigate to='/' />} />
       </Routes>
     </div>
   );
