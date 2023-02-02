@@ -1,0 +1,11 @@
+.admin-code-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+
+  .admin-code-form {
+    width: 500px;
+  }
+}
