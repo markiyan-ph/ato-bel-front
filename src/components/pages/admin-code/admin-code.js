@@ -15,7 +15,7 @@ const AdminCodePage = () => {
 
   return (
     <div className="admin-code-page">
-      <Form className="admin-code-form" onSubmit={handleCodeSubmit}>
+      <Form className="admin-code-form" onSubmit={handleCodeSubmit} autoComplete='off'>
         <Form.Group className="mb-3" controlId="formAdminCode">
           <Form.Label>Admin screen code</Form.Label>
           <Form.Control
