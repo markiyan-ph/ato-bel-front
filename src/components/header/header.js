@@ -35,24 +35,24 @@ const Header = () => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const navigation = useNavigate();
-  const {isAdmin, isAuthorized, loginScreenCode} = useSelector(state => state.authorization);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isAdmin, isAuthorized, loginScreenCode } = useSelector(state => state.authorization);
   const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
 
   const autorize = () => {
     // dispatch(actions.authorizeUser());
-    navigation('/login');
+    navigate('/login', { state: { from: location }, replace: true });
   };
 
   const unAutorize = () => {
     dispatch(actions.unAuthorizeUser());
   };
-  
+
   const userPreview = () => {
     dispatch(actions.userPreview());
   };
-  
+
   const userAdmin = () => {
     dispatch(actions.userAdmin());
   };
@@ -98,22 +98,21 @@ const Header = () => {
   });
 
   const buttonsGroup = (
-    <ButtonGroup aria-label="Admin buttons" className='adminButtons'>
-      {
-        isAuthorized ?
-          <Button
-            size="sm"
-            variant={isAdmin ? 'warning' : 'primary'}
-            onClick={() => {
-              isAdmin ? userPreview() : userAdmin();
-            }}
-          >
-            {isAdmin ? 'Preview' : 'Admin'}
-          </Button> : null
-      }
+    <ButtonGroup aria-label="Admin buttons" className="adminButtons">
+      {isAuthorized ? (
+        <Button
+          size="sm"
+          variant={isAdmin ? 'warning' : 'primary'}
+          onClick={() => {
+            isAdmin ? userPreview() : userAdmin();
+          }}
+        >
+          {isAdmin ? 'Preview' : 'Admin'}
+        </Button>
+      ) : null}
       <Button
         size="sm"
-        variant='warning'
+        variant="warning"
         onClick={() => {
           isAuthorized ? unAutorize() : autorize();
         }}
@@ -124,7 +123,7 @@ const Header = () => {
   );
 
   return (
-    <header className={`header ${hideHeaderSubMenu(pathname) ? '' : 'expand'}`}>
+    <header className={`header ${hideHeaderSubMenu(location.pathname) ? '' : 'expand'}`}>
       <div className="header-block d-flex align-items-center">
         <div className="logo-container">
           <LinkMenu content={<Logo />} title="company-logo" link={'/'} click={null} className="home-link mr-auto" />
@@ -132,13 +131,26 @@ const Header = () => {
 
         <div className="menu">
           <MainMenu menuItems={menuItems} />
-          <SubMenu pathname={pathname} />
+          <SubMenu pathname={location.pathname} />
         </div>
 
         <div className="language-container d-flex align-items-center">
           <div className="language-selector d-flex align-items-center">
-            <LinkMenu content="UA" title="UA" link={'#'} className={language === 'uk' ? 'is-active' : ''} click={() => switchLanguage('uk')} /> <span>&nbsp;/&nbsp;</span>
-            <LinkMenu content="EN" title="EN" link={'#'} className={language === 'en' ? 'is-active' : ''} click={() => switchLanguage('en')} />
+            <LinkMenu
+              content="UA"
+              title="UA"
+              link={'#'}
+              className={language === 'uk' ? 'is-active' : ''}
+              click={() => switchLanguage('uk')}
+            />{' '}
+            <span>&nbsp;/&nbsp;</span>
+            <LinkMenu
+              content="EN"
+              title="EN"
+              link={'#'}
+              className={language === 'en' ? 'is-active' : ''}
+              click={() => switchLanguage('en')}
+            />
           </div>
 
           <div className="social-networks d-flex align-items-center">{socialNetworks}</div>
