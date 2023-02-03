@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   isAuthorized: false,
-  isAdmin: false
+  isAdmin: false,
+  loginScreenCode: process.env.REACT_APP_ADMIN_VIEW_KEY
 };
 
 const authorizeUserSuccess = (state) => {
