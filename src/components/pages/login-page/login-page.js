@@ -15,6 +15,7 @@ const LoginPage = () => {
     userPassword: '',
   });
   const [showMessage, setShowMessage] = useState(false);
+  const [tick, setTick] = useState(null);
   const authorizationState = useSelector(state => state.authorization);
   const from = location.state?.from?.pathname || '/';
 
@@ -24,10 +25,13 @@ const LoginPage = () => {
     }
 
     if (authorizationState.failMessage !== null) {
+      clearTimeout(tick);
       setShowMessage(true);
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 3500);
+      setTick(
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 3500)
+      );
     }
   }, [authorizationState.isAuthorized, authorizationState.failMessage]);
 
@@ -77,7 +81,7 @@ const LoginPage = () => {
           Submit
         </Button>
       </Form>
-      <Message showMessage={showMessage} variant="danger">
+      <Message showMessage={showMessage} cleanupAction={actions.authorizeRemoveErrorMessage} variant="danger">
         {authorizationState.failMessage}
       </Message>
     </div>
