@@ -6,7 +6,7 @@ const SERVER_API = `/api`;
 
 export function* loginSaga({username, password}) {
   try {
-    // yield put(actions.fetchProjectsLoading());
+    // yield put(actions.fetchProjectsLoading()
     const resp = yield postJson(`${SERVER_API}/auth/login`, {username, password});
     const respJson = yield resp.json();
     
@@ -21,6 +21,23 @@ export function* loginSaga({username, password}) {
   } catch (err) {
     console.log(err);
     yield put(actions.authorizeUserFail('Unexpected error'));
+  }
+}
+
+export function* refreshTokenSaga() {
+  try {
+    // yield put(actions.fetchProjectsLoading());
+    const resp = yield postJson(`${SERVER_API}/auth/refresh`, {});
+    const respJson = yield resp.json();
+    
+    if (!resp.ok) {
+      return yield put(actions.refreshTokenFail());
+    }
+    
+    return yield put(actions.authorizeUserSuccess(respJson.accessToken));
+  } catch (err) {
+    console.log(err);
+    yield put(actions.refreshTokenFail());
   }
 }
 
