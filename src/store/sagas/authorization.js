@@ -23,3 +23,23 @@ export function* loginSaga({username, password}) {
     yield put(actions.authorizeUserFail('Unexpected error'));
   }
 }
+
+export function* logoutSaga() {
+  try {
+    // yield put(actions.fetchProjectsLoading());
+    const resp = yield postJson(`${SERVER_API}/auth/logout`, {});
+    const respJson = yield resp.json();
+    
+    if (!resp.ok) {
+      if (respJson?.message) {
+        return yield put(actions.authorizeUserFail(respJson.message));
+      }
+      return yield put(actions.authorizeUserFail('Unexpected error'));
+    }
+    
+    return yield put(actions.unAuthorizeUserSuccess());
+  } catch (err) {
+    console.log(err);
+    yield put(actions.authorizeUserFail('Unexpected error'));
+  }
+}
