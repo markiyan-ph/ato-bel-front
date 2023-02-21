@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Message } from '../../message';
 import * as actions from '../../../store/actions';
@@ -14,15 +14,22 @@ const LoginPage = () => {
     userName: '',
     userPassword: '',
   });
+  const [showMessage, setShowMessage] = useState(false);
+  const authorizationState = useSelector(state => state.authorization);
   const from = location.state?.from?.pathname || '/';
-  // const storageKey = localStorage.getItem('adminToken');
-  // const { authorization } = useSelector(state => state);
 
-  // useEffect(() => {
-  //   if (storageKey !== authorization.loginScreenCode) {
-  //     return navigate('/');
-  //   }
-  // }, [storageKey]);
+  useEffect(() => {
+    if (authorizationState.isAuthorized) {
+      return navigate(from, { replace: true });
+    }
+
+    if (authorizationState.failMessage !== null) {
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 5000);
+    }
+  }, [authorizationState.isAuthorized, authorizationState.failMessage]);
 
   const handleInputChange = e => {
     const name = e.target.name;
@@ -33,7 +40,7 @@ const LoginPage = () => {
   const handleLoginSubmit = e => {
     e.preventDefault();
     dispatch(actions.authorizeUser(loginForm.userName, loginForm.userPassword));
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   };
 
   return (
@@ -70,7 +77,7 @@ const LoginPage = () => {
           Submit
         </Button>
       </Form>
-      <Message showMessage={false} variant='danger'>Test new message Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quae nemo suscipit voluptate non delectus architecto quia temporibus eveniet! Modi atque autem asperiores soluta rerum vero ipsa dicta temporibus saepe.</Message>
+      <Message showMessage={showMessage} variant='danger'>{authorizationState.failMessage}</Message>
     </div>
   );
 };
