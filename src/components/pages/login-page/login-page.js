@@ -27,7 +27,7 @@ const LoginPage = () => {
       setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false);
-      }, 5000);
+      }, 3500);
     }
   }, [authorizationState.isAuthorized, authorizationState.failMessage]);
 
@@ -77,7 +77,9 @@ const LoginPage = () => {
           Submit
         </Button>
       </Form>
-      <Message showMessage={showMessage} variant='danger'>{authorizationState.failMessage}</Message>
+      <Message showMessage={showMessage} variant="danger">
+        {authorizationState.failMessage}
+      </Message>
     </div>
   );
 };
