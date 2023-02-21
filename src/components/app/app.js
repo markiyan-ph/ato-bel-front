@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from "../header";
 import Contacts from "../pages/contacts";
 import GalleryPage from "../pages/gallery-page";
@@ -10,11 +10,22 @@ import AdminCodePage from "../pages/admin-code";
 import "./app.scss";
 import ProjectsDetails from "../project-details";
 import LoginPage from "../pages/login-page";
+import * as actions from '../../store/actions';
 
 
 function App() {
-  const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
+  const dispatch = useDispatch();
+  const [refreshToken, setRefreshToken] = useState(true);
   const { authorization } = useSelector(state => state);
+  const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
+
+  useEffect(() => {
+    if (storageKey && storageKey === process.env.REACT_APP_ADMIN_VIEW_KEY && authorization.accessToken === null && refreshToken) {
+      dispatch(actions.refreshToken());
+      setRefreshToken(false);
+    }
+  }, []);
+
   return (
     <div className="app">
       <Header />
