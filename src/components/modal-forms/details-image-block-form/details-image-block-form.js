@@ -98,10 +98,6 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
     }
   };
 
-  // const handleDelete = () => {
-  //   console.log('Delete main page image');
-  // };
-
   return (
     <div className="add-image-block-form">
       <Form.Group className="mb-3" controlId="formFile">
@@ -114,7 +110,6 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
         <Form.Label>Title</Form.Label>
         <div className="inline-input">
           <Form.Group className="mb-3 inline-input-child">
-            {/* <Form.Label>Title EN</Form.Label> */}
             <Form.Control
               type="input"
               value={enImageTitle}
@@ -138,7 +133,6 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
 
       <Form.Group noValidate className="mb-3">
         <Form.Label>Description</Form.Label>
-        {/* <div className="inline-input"> */}
         <Form.Group className="mb-3 inline-input-child">
           <Form.Control
             as="textarea"
@@ -151,7 +145,6 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
         </Form.Group>
 
         <Form.Group className="mb-3 inline-input-child">
-          {/* <Form.Label>Title EN</Form.Label> */}
           <Form.Control
             as="textarea"
             value={ukImageDescription}
@@ -161,13 +154,9 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
             style={{ height: '100px' }}
           />
         </Form.Group>
-        {/* </div> */}
       </Form.Group>
 
       <div className="modal-form-buttons">
-        {/* <Button variant="danger" onClick={handleDelete}>
-          Delete
-        </Button> */}
         <Button variant="warning" onClick={handleSubmit}>
           Update
         </Button>

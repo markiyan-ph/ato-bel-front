@@ -34,10 +34,6 @@ const DetailsTitleImageForm = ({projectId, details, showModal, currentImage}) =>
     }
   };
 
-  // const handleDelete = () => {
-  //   console.log('Delete main page image');
-  // };
-
   return (
     <div className="add-project-form">
       <Form.Group className="mb-3" controlId="formFile">
