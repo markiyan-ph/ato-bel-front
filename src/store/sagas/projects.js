@@ -1,6 +1,7 @@
-import { put } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import * as actions from '../actions';
 import { postJson } from '../../tools';
+import { getAccessToken } from './';
 
 const SERVER_API = `/api`;
 
@@ -32,21 +33,29 @@ export function* fetchMainPageProjectsSaga() {
 
 export function* addProjectSaga({formData}) {
   try {
+    const accessToken = yield select(getAccessToken);
     const resp = yield fetch(`${SERVER_API}/projects/add`, {
       method: 'post',
-      body: formData
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
     });
     const respJson = yield resp.json();
+    console.log(respJson);
     yield put(actions.addProjectSuccess(respJson));
   
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    console.log(err.status);
     yield put(actions.fetchProjectsFail());
   }
 }
 
 export function* addMainProjectSaga({formData}) {
   try {
+    const accessToken = yield select(getAccessToken);
+    console.log('accessToken ----> ', accessToken);
     const resp = yield fetch(`${SERVER_API}/projects/main/add`, {
       method: 'post',
       body: formData

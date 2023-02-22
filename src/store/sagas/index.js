@@ -17,6 +17,8 @@ import {
 } from './projects';
 import { saveTagSaga, deleteTagSaga, fetchTagsSaga, updateTagSaga } from './tags';
 
+export const getAccessToken = state => state.authorization.accessToken;
+
 export function* watchProjects() {
   yield takeEvery(actionTypes.AUTHORIZE_USER, loginSaga);
   yield takeEvery(actionTypes.UNAUTHORIZE_USER, logoutSaga);
