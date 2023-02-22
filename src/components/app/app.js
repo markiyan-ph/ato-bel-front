@@ -1,17 +1,16 @@
-import React, {useEffect, useState} from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from "../header";
-import Contacts from "../pages/contacts";
-import GalleryPage from "../pages/gallery-page";
-import MainPage from "../pages/main-page";
-import Studio from "../pages/studio";
-import AdminCodePage from "../pages/admin-code";
-import "./app.scss";
-import ProjectsDetails from "../project-details";
-import LoginPage from "../pages/login-page";
+import Header from '../header';
+import Contacts from '../pages/contacts';
+import GalleryPage from '../pages/gallery-page';
+import MainPage from '../pages/main-page';
+import Studio from '../pages/studio';
+import AdminCodePage from '../pages/admin-code';
+import './app.scss';
+import ProjectsDetails from '../project-details';
+import LoginPage from '../pages/login-page';
 import * as actions from '../../store/actions';
-
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +19,12 @@ function App() {
   const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
 
   useEffect(() => {
-    if (storageKey && storageKey === process.env.REACT_APP_ADMIN_VIEW_KEY && authorization.accessToken === null && refreshToken) {
+    if (
+      storageKey &&
+      storageKey === process.env.REACT_APP_ADMIN_VIEW_KEY &&
+      authorization.accessToken === null &&
+      refreshToken
+    ) {
       dispatch(actions.refreshToken());
       setRefreshToken(false);
     }
@@ -38,7 +42,7 @@ function App() {
         <Route path="/studio" element={<Studio />} />
         <Route path="/admin-screen-code" element={<AdminCodePage />} />
         {storageKey === authorization.loginScreenCode && <Route path="/login" element={<LoginPage />} />}
-        <Route path="*" element={<Navigate to='/' />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );
