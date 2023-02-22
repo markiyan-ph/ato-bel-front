@@ -5,6 +5,7 @@ const initialState = {
   isAuthorized: false,
   isAdmin: false,
   accessToken: null,
+  csrfToken: null,
   failMessage: null,
   loginScreenCode: process.env.REACT_APP_ADMIN_VIEW_KEY,
 };
@@ -20,6 +21,7 @@ const authorizeUserSuccess = (state, action) => {
     isAuthorized: true,
     isAdmin: true,
     accessToken: action.token,
+    csrfToken: action.csrfToken,
     failMessage: null,
   });
 };
@@ -35,6 +37,7 @@ const authorizeUserFail = (state, action) => {
     isAuthorized: false,
     isAdmin: false,
     accessToken: null,
+    csrfToken: null,
     failMessage: action.message,
   });
 };
@@ -44,6 +47,7 @@ const refreshTokenFail = state => {
     isAuthorized: false,
     isAdmin: false,
     accessToken: null,
+    csrfToken: null,
     failMessage: null
   });
 };
