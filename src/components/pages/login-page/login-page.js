@@ -21,6 +21,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (authorizationState.isAuthorized) {
+      sessionStorage.setItem('csrfToken', authorizationState.csrfToken);
       return navigate(from, { replace: true });
     }
 
