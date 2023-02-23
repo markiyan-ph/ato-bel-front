@@ -39,6 +39,7 @@ export function* addProjectSaga({ formData }) {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    const respJson = yield resp.json();
 
     if (!resp.ok) {
       if (respJson?.message) {
@@ -47,7 +48,6 @@ export function* addProjectSaga({ formData }) {
       return yield put(actions.fetchProjectsFail());
     }
 
-    const respJson = yield resp.json();
     yield put(actions.addProjectSuccess(respJson));
   } catch (err) {
     console.log(err.message);
