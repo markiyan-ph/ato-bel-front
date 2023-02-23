@@ -25,7 +25,7 @@ export const fetchProjectsFail = () => ({
 
 });
 
-export const addProject = (formData, token) => ({type: actionTypes.ADD_PROJECT, formData, token});
+export const addProject = (formData) => ({type: actionTypes.ADD_PROJECT, formData});
 export const addProjectSuccess = project => ({type: actionTypes.ADD_PROJECT_SUCCESS, project});
 
 export const deleteProject = projectId => ({type: actionTypes.DELETE_PROJECT, projectId});
