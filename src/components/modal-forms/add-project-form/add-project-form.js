@@ -96,13 +96,16 @@ const AddProjectForm = ({ showModal }) => {
             placeholder="Enter english title"
             value={projectTitleEn}
             onChange={handleProjectTitleEnChange}
+            isInvalid={checkValidation ? projectTitleEn.trim().length === 0 : false}
           />
           <Form.Control
             type="text"
             placeholder="Enter ukraine title"
             value={projectTitleUk}
             onChange={handleProjectTitleUkChange}
+            isInvalid={checkValidation ? projectTitleEn.trim().length === 0 : false}
           />
+          <Form.Control.Feedback type="invalid">Please enter titles</Form.Control.Feedback>
         </div>
       </Form.Group>
 
