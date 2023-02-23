@@ -46,15 +46,12 @@ const AddProjectForm = ({ showModal }) => {
   const [projectSubtitleUk, setProjectSubtitleUk] = useState('');
   const [projectSubtitleEn, setProjectSubtitleEn] = useState('');
   const [projectTags, setProjectTags] = useState([]);
-  const { tags, authorization } = useSelector(state => ({
-    tags: state.tags.tagsList,
-    authorization: state.authorization,
-  }));
+  const tags = useSelector(state => state.tags.tagsList);
   const { i18n } = useTranslation();
   const lang = i18n.language;
   const options = tags.map(tag => ({ value: tag.tagId, label: tag.labels[lang] }));
 
-  const addProject = (formData, token) => dispatch(actions.addProject(formData, token));
+  const addProject = (formData) => dispatch(actions.addProject(formData));
   const handleProjectDateChange = e => setProjectDate(e.target.value);
   const handleProjectImageChange = e => {
     setProjectImage(e.target.files[0]);
@@ -80,7 +77,7 @@ const AddProjectForm = ({ showModal }) => {
       formData.append('project-date', projectDate);
       formData.append('project-tags', formDataTags);
 
-      addProject(formData, authorization.accessToken);
+      addProject(formData);
       showModal(false);
     }
   };
