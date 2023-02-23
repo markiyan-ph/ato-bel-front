@@ -16,12 +16,16 @@ export const fetchMainPageProjectsSuccess = projects => ({
 
 export const fetchProjectsFail = () => ({
   type: actionTypes.FETCH_PROJECTS_FAIL,
-  projects: [],
+  projects: {
+    projectsList: [],
+    lastPage: 1,
+    pages: 1
+  },
   error: true
 
 });
 
-export const addProject = formData => ({type: actionTypes.ADD_PROJECT, formData});
+export const addProject = (formData, token) => ({type: actionTypes.ADD_PROJECT, formData, token});
 export const addProjectSuccess = project => ({type: actionTypes.ADD_PROJECT_SUCCESS, project});
 
 export const deleteProject = projectId => ({type: actionTypes.DELETE_PROJECT, projectId});
