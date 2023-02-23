@@ -1,7 +1,12 @@
 .modal-dialog {
   .inline-input {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    column-gap: 10px;
+
+    & > input {
+      width: calc(50% - 5px);
+    }
   }
   
   .modal-form-buttons {
