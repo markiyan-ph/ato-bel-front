@@ -1,6 +1,7 @@
-import { put, select } from 'redux-saga/effects';
+import { put, select, call } from 'redux-saga/effects';
 import * as actions from '../actions';
-import { postJson } from '../../tools';
+import { refreshTokenSaga } from './authorization';
+import { ErrorCodes, postJson } from '../../tools';
 import { getAccessToken } from './';
 
 const SERVER_API = `/api`;
@@ -42,16 +43,16 @@ export function* addProjectSaga({ formData }) {
     const respJson = yield resp.json();
 
     if (!resp.ok) {
-      if (respJson?.message) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.addProject(formData));
+      } else {
         return yield put(actions.fetchProjectsFail());
       }
-      return yield put(actions.fetchProjectsFail());
     }
 
-    yield put(actions.addProjectSuccess(respJson));
+    return yield put(actions.addProjectSuccess(respJson));
   } catch (err) {
-    console.log(err.message);
-    console.log(err.status);
     yield put(actions.fetchProjectsFail());
   }
 }
@@ -59,13 +60,26 @@ export function* addProjectSaga({ formData }) {
 export function* addMainProjectSaga({ formData }) {
   try {
     const accessToken = yield select(getAccessToken);
-    console.log('accessToken ----> ', accessToken);
     const resp = yield fetch(`${SERVER_API}/projects/main/add`, {
       method: 'post',
       body: formData,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
+
     const respJson = yield resp.json();
-    yield put(actions.addMainPageProjectImageSuccess(respJson));
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.addMainPageProjectImage(formData));
+      } else {
+        return yield put(actions.fetchProjectsFail());
+      }
+    }
+
+    return yield put(actions.addMainPageProjectImageSuccess(respJson));
   } catch (err) {
     console.log(err);
     yield put(actions.fetchProjectsFail());
@@ -79,7 +93,17 @@ export function* updateProjectSaga({ formData }) {
       body: formData,
     });
     const respJson = yield resp.json();
-    yield put(actions.updateProjectSuccess(respJson));
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(updateProjectSaga(formData));
+      } else {
+        return yield put(actions.fetchProjectsFail());
+      }
+    }
+
+    return yield put(actions.updateProjectSuccess(respJson));
   } catch (err) {
     console.log(err);
     yield put(actions.fetchProjectsFail());
@@ -88,9 +112,20 @@ export function* updateProjectSaga({ formData }) {
 
 export function* deleteProjectSaga(projectId) {
   try {
-    const resp = yield postJson(`${SERVER_API}/projects/delete`, projectId);
+    const accessToken = yield select(getAccessToken);
+    const resp = yield postJson(`${SERVER_API}/projects/delete`, projectId, {Authorization: `Bearer ${accessToken}`});
     const respJson = yield resp.json();
-    yield put(actions.deleteProjectSuccess(respJson));
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.deleteProject(projectId.projectId));
+      } else {
+        return yield put(actions.fetchProjectsFail());
+      }
+    }
+
+    return yield put(actions.deleteProjectSuccess(respJson));
   } catch (err) {
     console.log(err);
     yield put(actions.fetchProjectsFail());
