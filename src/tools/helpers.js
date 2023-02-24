@@ -47,12 +47,13 @@ export const hideHeaderSubMenu = pathname => {
   return ['/', '/main/', '/contacts/'].includes(pathname);
 };
 
-export const postJson = (url, body) => {
+export const postJson = (url, body, headers = {}) => {
   return fetch(url, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      ...headers
     },
     body: JSON.stringify(body)
   });
