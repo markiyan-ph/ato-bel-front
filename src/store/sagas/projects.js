@@ -112,16 +112,20 @@ export function* deleteMainProjectSaga({ projectId }) {
 
 export function* updateProjectSaga({ formData }) {
   try {
+    const accessToken = yield select(getAccessToken);
     const resp = yield fetch(`${SERVER_API}/projects/update`, {
       method: 'post',
       body: formData,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     const respJson = yield resp.json();
 
     if (!resp.ok) {
       if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
         yield call(refreshTokenSaga);
-        return yield put(updateProjectSaga(formData));
+        return yield put(actions.updateProject(formData));
       } else {
         return yield put(actions.fetchProjectsFail());
       }
