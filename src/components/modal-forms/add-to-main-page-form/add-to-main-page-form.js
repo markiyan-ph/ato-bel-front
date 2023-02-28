@@ -13,6 +13,7 @@ const AddToMainPageForm = ({showModal, projectId}) => {
   // const lang = i18n.language;
 
   const addImageToMainPage = formData => dispatch(actions.addMainPageProjectImage(formData));
+  const deleteImageToMainPage = projectId => dispatch(actions.deleteMainPageProjectImage(projectId));
   const handleProjectMainPageImageChange = e => {
     setProjectMainPageImage(e.target.files[0]);
   };
@@ -34,6 +35,11 @@ const AddToMainPageForm = ({showModal, projectId}) => {
 
   const handleDelete = () => {
     console.log('Delete main page image');
+    // TODO: remove below line
+    console.log('projectId', projectId);
+    deleteImageToMainPage(projectId);
+    showModal(false);
+
   };
 
   return (

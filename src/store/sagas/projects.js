@@ -89,14 +89,7 @@ export function* addMainProjectSaga({ formData }) {
 export function* deleteMainProjectSaga({ projectId }) {
   try {
     const accessToken = yield select(getAccessToken);
-    const resp = yield fetch(`${SERVER_API}/projects/main/add`, {
-      method: 'post',
-      body: {projectId},
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
+    const resp = yield postJson(`${SERVER_API}/projects/main/delete`, { projectId }, {Authorization: `Bearer ${accessToken}`});
     const respJson = yield resp.json();
 
     if (!resp.ok) {
@@ -144,7 +137,7 @@ export function* updateProjectSaga({ formData }) {
 export function* deleteProjectSaga(projectId) {
   try {
     const accessToken = yield select(getAccessToken);
-    const resp = yield postJson(`${SERVER_API}/projects/delete`, projectId, {Authorization: `Bearer ${accessToken}`});
+    const resp = yield postJson(`${SERVER_API}/projects/delete`, projectId, { Authorization: `Bearer ${accessToken}` });
     const respJson = yield resp.json();
 
     if (!resp.ok) {
