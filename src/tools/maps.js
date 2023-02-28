@@ -5,5 +5,6 @@ export const placeholders = {
 
 export const ErrorCodes = {
   INVALID_TOKEN: 'Invalid Token',
-  INVALID_CREDENTIALS: 'Invalid Credentials'
+  INVALID_CREDENTIALS: 'Invalid Credentials',
+  MAIN_PAGE_IMAGE_FAIL: 'Main page image is not removed'
 };

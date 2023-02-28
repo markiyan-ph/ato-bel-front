@@ -42,3 +42,6 @@ export const addMainPageProjectImageSuccess = projectId => ({
   type: actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE_SUCCESS,
   projectId,
 });
+export const deleteMainPageProjectImage = projectId => ({ type: actionTypes.DELETE_MAIN_PAGE_PROJECT_IMAGE, projectId });
+export const deleteMainPageProjectImageSuccess = projectId => ({ type: actionTypes.DELETE_MAIN_PAGE_PROJECT_IMAGE_SUCCESS, projectId });
+export const deleteMainPageProjectImageFail = message  => ({ type: actionTypes.DELETE_MAIN_PAGE_PROJECT_IMAGE_FAIL, message });

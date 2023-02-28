@@ -86,6 +86,37 @@ export function* addMainProjectSaga({ formData }) {
   }
 }
 
+export function* deleteMainProjectSaga({ projectId }) {
+  try {
+    const accessToken = yield select(getAccessToken);
+    const resp = yield fetch(`${SERVER_API}/projects/main/add`, {
+      method: 'post',
+      body: {projectId},
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const respJson = yield resp.json();
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.deleteMainPageProjectImage(projectId));
+      } else if (respJson?.message && respJson?.message === ErrorCodes.MAIN_PAGE_IMAGE_FAIL) {
+        return yield put(actions.deleteMainPageProjectImageFail(respJson.message));
+      } else {
+        return yield put(actions.fetchProjectsFail());
+      }
+    }
+
+    return yield put(actions.addMainPageProjectImageSuccess(respJson));
+  } catch (err) {
+    console.log(err);
+    yield put(actions.fetchProjectsFail());
+  }
+}
+
 export function* updateProjectSaga({ formData }) {
   try {
     const resp = yield fetch(`${SERVER_API}/projects/update`, {
