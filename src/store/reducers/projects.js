@@ -53,7 +53,7 @@ const updateProjectSuccess = (state, action) => {
   return updateObject(state, { projectsList: updatedList, loading: false });
 };
 
-const addMainPageImageSuccess = (state) => {
+const updateMainPageImageSuccess = (state) => {
   return updateObject(state, {loading: false});
 };
 
@@ -91,7 +91,8 @@ const projectsReducer = (state = initialState, action) => {
     case actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE:
       return projectsLoading(state);
     case actionTypes.ADD_MAIN_PAGE_PROJECT_IMAGE_SUCCESS:
-      return addMainPageImageSuccess(state);
+    case actionTypes.DELETE_MAIN_PAGE_PROJECT_IMAGE_SUCCESS:
+      return updateMainPageImageSuccess(state);
     default:
       return state;
   }
