@@ -41,27 +41,8 @@ const DetailsProjectInfoForm = ({ projectId, showForm }) => {
     }
   }, []);
 
-  // const saveTag = tag => dispatch(actions.saveTag(tag));
   const updateProjectDetails = (projectId, details) => dispatch(actions.updateProjectDetails(projectId, details));
-  // const deleteTag = tagId => dispatch(actions.deleteTag(tagId));
-
-  // const cleanFields = () => {
-  //   setTagId('');
-  //   setUkLabel('');
-  //   setEnLabel('');
-  // };
-
-  // const handleTagSelectorChange = e => {
-  //   const selectorValue = e.target.value;
-  //   if (selectorValue === defaultSelectorValue) {
-  //     cleanFields();
-  //   } else {
-  //     setUkLabel(tags.find(tag => tag.tagId === selectorValue).labels.uk);
-  //     setEnLabel(tags.find(tag => tag.tagId === selectorValue).labels.en);
-  //   }
-  //   setTagSelector(selectorValue);
-  // };
-
+  
   const handleDetailsDataChange = e => {
     const name = e.target.name;
     const value = e.target.value;
@@ -71,7 +52,7 @@ const DetailsProjectInfoForm = ({ projectId, showForm }) => {
   const handleSpecificationsChange = (lang, i, e) => {
     const name = e.target.name;
     const value = e.target.value;
-    const newSpecs = [...specifications];
+    const newSpecs = structuredClone(specifications);
     newSpecs[i][name][lang] = value;
     setSpecifications(newSpecs);
   };
