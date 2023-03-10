@@ -1,6 +1,8 @@
-import { put } from 'redux-saga/effects';
-import { postJson } from '../../tools';
+import { call, put, select } from 'redux-saga/effects';
+import { getAccessToken } from '.';
+import { ErrorCodes, postJson } from '../../tools';
 import * as actions from '../actions';
+import { refreshTokenSaga } from './authorization';
 
 const SERVER_API = `/api`;
 
@@ -25,19 +27,30 @@ export function* fetchProjectDetailsSaga({ projectId }) {
 
 export function* updateProjectDetailsSaga({ projectId, details }) {
   try {
+    const accessToken = yield select(getAccessToken);
     yield put(actions.projectDetailsLoading());
-    // yield delay(1000);
 
     const reqBody = {
       projectId,
       details,
     };
 
-    const resp = yield postJson(`${SERVER_API}/projects/details/update`, reqBody);
-
+    const resp = yield postJson(`${SERVER_API}/projects/details/update`, reqBody, { Authorization: `Bearer ${accessToken}` });
     const respJson = yield resp.json();
 
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        yield put(actions.updateProjectDetails(projectId, details));
+        return;
+      } else {
+        yield put(actions.fetchProjectsFail());
+        return;
+      }
+    }
+
     yield put(actions.updateProjectDetailsSuccess(respJson.projectId, respJson.details));
+    return;
   } catch (err) {
     console.log(err);
     yield put(actions.fetchProjectsFail());
@@ -46,14 +59,27 @@ export function* updateProjectDetailsSaga({ projectId, details }) {
 
 export function* updateProjectDetailsImageSaga({ formData, projectId, details }) {
   try {
+    const accessToken = yield select(getAccessToken);
     yield put(actions.projectDetailsLoading());
-    // yield delay(1000);
 
     const respImgUpdate = yield fetch(`${SERVER_API}/projects/details/update/image`, {
       method: 'POST',
       body: formData,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     const respImgUpdateJson = yield respImgUpdate.json();
+
+    if (!respImgUpdate.ok) {
+      if (respImgUpdateJson?.message && respImgUpdateJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.updateProjectDetailsImage(formData, projectId, details));
+      } else {
+        return yield put(actions.fetchProjectsFail());
+      }
+    }
+    
     const newDetails = JSON.parse(JSON.stringify(details));
 
     if (respImgUpdateJson?.titleImage === true) {
@@ -67,7 +93,7 @@ export function* updateProjectDetailsImageSaga({ formData, projectId, details })
       details: newDetails,
     };
 
-    const resp = yield postJson(`${SERVER_API}/projects/details/update`, reqBody);
+    const resp = yield postJson(`${SERVER_API}/projects/details/update`, reqBody, { Authorization: `Bearer ${accessToken}` });
     const respJson = yield resp.json();
 
     yield put(actions.updateProjectDetailsSuccess(respJson.projectId, respJson.details));
@@ -79,9 +105,19 @@ export function* updateProjectDetailsImageSaga({ formData, projectId, details })
 
 export function* deleteProjectDetailsImageSaga(deleteData) {
   try {
+    const accessToken = yield select(getAccessToken);
     yield put(actions.projectDetailsLoading());
-    const resp = yield postJson(`${SERVER_API}/projects/details/delete`, deleteData);
+    const resp = yield postJson(`${SERVER_API}/projects/details/delete`, deleteData, { Authorization: `Bearer ${accessToken}` });
     const respJson = yield resp.json();
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.deleteProjectDetailsImage(deleteData.projectId));
+      } else {
+        return yield put(actions.fetchProjectsFail());
+      }
+    }
 
     yield put(actions.updateProjectDetailsSuccess(respJson.projectId, respJson.details));
   } catch (err) {
