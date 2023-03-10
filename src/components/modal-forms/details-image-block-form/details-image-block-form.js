@@ -72,7 +72,7 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
     }
 
     if (detailsBlockImage === null) {
-      updateProjectDetails(projectId, newDetails, blockIndex);
+      updateProjectDetails(projectId, newDetails);
     } else {
       console.log('BOTH Update image with data');
       const formData = new FormData();
