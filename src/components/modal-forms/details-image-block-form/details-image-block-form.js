@@ -94,8 +94,8 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
       // if (blockIndex === 9999) {
       // }
       addImage(formData, projectId, newDetails);
-      showModal({ modalState: false, elementIndex: null });
     }
+    showModal({ modalState: false, elementIndex: null });
   };
 
   return (
