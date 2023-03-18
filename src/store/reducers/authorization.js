@@ -4,6 +4,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   isAuthorized: false,
   isAdmin: false,
+  isMainAdmin: false,
   accessToken: null,
   csrfToken: null,
   failMessage: null,
@@ -36,6 +37,7 @@ const authorizeUserFail = (state, action) => {
   return updateObject(state, {
     isAuthorized: false,
     isAdmin: false,
+    isMainAdmin: false,
     accessToken: null,
     csrfToken: null,
     failMessage: action.message,
@@ -46,6 +48,7 @@ const refreshTokenFail = state => {
   return updateObject(state, {
     isAuthorized: false,
     isAdmin: false,
+    isMainAdmin: false,
     accessToken: null,
     csrfToken: null,
     failMessage: null
@@ -55,6 +58,7 @@ const refreshTokenFail = state => {
 const unAuthorizeUserSuccess = state => {
   return updateObject(state, {
     isAuthorized: false,
+    isMainAdmin: false,
     isAdmin: false,
   });
 };
