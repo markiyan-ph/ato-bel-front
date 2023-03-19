@@ -32,6 +32,7 @@ export function* refreshTokenSaga() {
     const respJson = yield resp.json();
 
     if (!resp.ok) {
+      sessionStorage.clear();
       return yield put(actions.refreshTokenFail());
     }
 
@@ -47,6 +48,7 @@ export function* logoutSaga() {
     // yield put(actions.fetchProjectsLoading());
     const resp = yield postJson(`${SERVER_API}/auth/logout`, {});
     const respJson = yield resp.json();
+    sessionStorage.clear();
 
     if (!resp.ok) {
       if (respJson?.message) {
