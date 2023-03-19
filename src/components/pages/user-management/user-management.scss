@@ -1,0 +1,21 @@
+.user-management-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .user-management-form {
+    width: 500px;
+  }
+
+  table {
+    margin-top: 30px;
+
+    tr {
+      vertical-align: middle;
+      td.user-name-col {
+        width: 100%;
+      }
+    }
+  }
+}
