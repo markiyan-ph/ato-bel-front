@@ -37,7 +37,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAdmin, isAuthorized, loginScreenCode } = useSelector(state => state.authorization);
+  const { isAdmin, isAuthorized, isMainAdmin, loginScreenCode } = useSelector(state => state.authorization);
   const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
 
   const autorize = () => {
@@ -65,12 +65,20 @@ const Header = () => {
     }
   };
 
-  const menuItems = [
-    { title: t('header.menu.projects'), link: '/projects/', click: null },
-    { title: t('header.menu.studio'), link: '/studio/', click: null },
-    // { title: t("header.menu.blog"), link: "/blog/", click: null },
-    { title: t('header.menu.contacts'), link: '/contacts/', click: null },
-  ];
+  const menuItems = () => {
+    const items = [
+      { title: t('header.menu.projects'), link: '/projects/', click: null },
+      { title: t('header.menu.studio'), link: '/studio/', click: null },
+      // { title: t("header.menu.blog"), link: "/blog/", click: null },
+      { title: t('header.menu.contacts'), link: '/contacts/', click: null },
+    ];
+
+    if (isAuthorized && isAdmin && isMainAdmin) {
+      items.push({ title: t('header.menu.userManagement'), link: '/user-management/', click: null });
+    }
+
+    return items;
+  };
 
   const listOfSocialNetworks = [
     {
@@ -130,7 +138,7 @@ const Header = () => {
         </div>
 
         <div className="menu">
-          <MainMenu menuItems={menuItems} />
+          <MainMenu menuItems={menuItems()} />
           <SubMenu pathname={location.pathname} />
         </div>
 

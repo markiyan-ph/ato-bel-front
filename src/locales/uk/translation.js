@@ -6,7 +6,8 @@ export default {
       studio: "майстерня",
       blog: "блог",
       contacts: "контакти",
-      language: "eng"
+      language: "eng",
+      userManagement: "користувачі"
     }
   },
   page: {
