@@ -4,7 +4,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   isAuthorized: false,
   isAdmin: false,
-  isMainAdmin: false,
+  isMainAdmin: true,
   accessToken: null,
   csrfToken: null,
   failMessage: null,
@@ -21,6 +21,7 @@ const authorizeUserSuccess = (state, action) => {
   return updateObject(state, {
     isAuthorized: true,
     isAdmin: true,
+    isMainAdmin: true,
     accessToken: action.token,
     csrfToken: action.csrfToken,
     failMessage: null,
