@@ -13,8 +13,8 @@
 
     tr {
       vertical-align: middle;
-      td.user-name-col {
-        width: 100%;
+      td.user-name-col, td.user-email-col {
+        width: 50%;
       }
     }
   }

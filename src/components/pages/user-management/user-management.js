@@ -65,6 +65,7 @@ const UserManagementPage = () => {
     <tr key={user.id}>
       <td>{i + 1}</td>
       <td className="user-name-col">{user.username}</td>
+      <td className="user-email-col">{user.email}</td>
       <td>
         <Button variant="danger" onClick={() => handleDeleteUser(user.id, user.username)}>
           Delete
@@ -134,7 +135,9 @@ const UserManagementPage = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th colSpan={2}>User</th>
+                <th>User</th>
+                <th>Email</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>{users}</tbody>
