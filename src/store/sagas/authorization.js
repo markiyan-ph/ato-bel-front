@@ -1,6 +1,7 @@
-import { put } from 'redux-saga/effects';
+import { put, select, call } from 'redux-saga/effects';
 import * as actions from '../actions';
-import { postJson } from '../../tools';
+import { ErrorCodes, postJson } from '../../tools';
+import { getAccessToken } from './';
 
 const SERVER_API = `/api`;
 
@@ -61,5 +62,54 @@ export function* logoutSaga() {
   } catch (err) {
     console.log(err);
     yield put(actions.authorizeUserFail('Unexpected error'));
+  }
+}
+export function* addUserSaga({ userData }) {
+  try {
+    const accessToken = yield select(getAccessToken);
+    const resp = yield postJson(`${SERVER_API}/auth/newuser`, userData, { Authorization: `Bearer ${accessToken}` });
+    const respJson = yield resp.json();
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.addUser(userData));
+      } else if (respJson?.message) {
+        return yield put(actions.usersActionFail(respJson?.message));
+      } else {
+        yield put(actions.usersActionFail('Unexpected error'));
+      }
+    }
+
+    return yield put(actions.addUserSuccess(respJson));
+  } catch (err) {
+    yield put(actions.usersActionFail('Unexpected error'));
+  }
+}
+
+export function* fetchUsersSaga() {
+  try {
+    const accessToken = yield select(getAccessToken);
+    const resp = yield fetch(`${SERVER_API}/auth/userslist`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const respJson = yield resp.json();
+
+    if (!resp.ok) {
+      if (respJson?.message && respJson?.message === ErrorCodes.INVALID_TOKEN) {
+        yield call(refreshTokenSaga);
+        return yield put(actions.fetchUsers());
+      } else if (respJson?.message) {
+        return yield put(actions.usersActionFail(respJson?.message));
+      } else {
+        yield put(actions.usersActionFail('Unexpected error'));
+      }
+    }
+
+    return yield put(actions.fetchUsersSuccess(respJson));
+  } catch (err) {
+    yield put(actions.usersActionFail('Unexpected error'));
   }
 }

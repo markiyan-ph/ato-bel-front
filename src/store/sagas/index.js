@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
-import { loginSaga, logoutSaga, refreshTokenSaga } from './authorization';
+import { addUserSaga, fetchUsersSaga, loginSaga, logoutSaga, refreshTokenSaga } from './authorization';
 import {
   fetchProjectDetailsSaga,
   updateProjectDetailsSaga,
@@ -24,6 +24,9 @@ export function* watchProjects() {
   yield takeEvery(actionTypes.AUTHORIZE_USER, loginSaga);
   yield takeEvery(actionTypes.UNAUTHORIZE_USER, logoutSaga);
   yield takeEvery(actionTypes.REFRESH_TOKEN, refreshTokenSaga);
+  yield takeEvery(actionTypes.FETCH_USERS, fetchUsersSaga);
+  yield takeEvery(actionTypes.ADD_USER, addUserSaga);
+  // yield takeEvery(actionTypes.DELETE_USER, fetchProjectsSaga);
   yield takeEvery(actionTypes.FETCH_PROJECTS, fetchProjectsSaga);
   yield takeEvery(actionTypes.FETCH_MAIN_PAGE_PROJECTS, fetchMainPageProjectsSaga);
   yield takeEvery(actionTypes.FETCH_PROJECT_DETAILS, fetchProjectDetailsSaga);
