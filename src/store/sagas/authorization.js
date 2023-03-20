@@ -18,7 +18,7 @@ export function* loginSaga({ username, password }) {
       return yield put(actions.authorizeUserFail('Unexpected error'));
     }
 
-    return yield put(actions.authorizeUserSuccess(respJson.accessToken, respJson.csrfToken));
+    return yield put(actions.authorizeUserSuccess(respJson.accessToken, respJson.csrfToken, respJson.isMainAdmin));
   } catch (err) {
     console.log(err);
     yield put(actions.authorizeUserFail('Unexpected error'));
@@ -37,7 +37,7 @@ export function* refreshTokenSaga() {
       return yield put(actions.refreshTokenFail());
     }
 
-    return yield put(actions.authorizeUserSuccess(respJson.accessToken, respJson.csrfToken));
+    return yield put(actions.refreshTokenSuccess(respJson.accessToken, respJson.isMainAdmin));
   } catch (err) {
     console.log(err);
     yield put(actions.refreshTokenFail());

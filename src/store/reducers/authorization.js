@@ -4,7 +4,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   isAuthorized: false,
   isAdmin: false,
-  isMainAdmin: true,
+  isMainAdmin: false,
   usersList: [],
   accessToken: null,
   csrfToken: null,
@@ -22,7 +22,18 @@ const authorizeUserSuccess = (state, action) => {
   return updateObject(state, {
     isAuthorized: true,
     isAdmin: true,
-    isMainAdmin: true,
+    isMainAdmin: action.isMainAdmin,
+    accessToken: action.token,
+    csrfToken: action.csrfToken,
+    failMessage: null,
+  });
+};
+
+const refreshTokenSuccess = (state, action) => {
+  return updateObject(state, {
+    isAuthorized: true,
+    isAdmin: true,
+    isMainAdmin: action.isMainAdmin,
     accessToken: action.token,
     csrfToken: action.csrfToken,
     failMessage: null,
@@ -102,6 +113,8 @@ const authorizationReducer = (state = initialState, action) => {
       return addUserSuccess(state, action);
     case actionTypes.FETCH_USERS_SUCCESS:
       return fetchUserSuccess(state, action);
+    case actionTypes.REFRESH_TOKEN_SUCCESS:
+      return refreshTokenSuccess(state, action);
     case actionTypes.REFRESH_TOKEN_FAIL:
       return refreshTokenFail(state);
     case actionTypes.AUTHORIZE_REMOVE_ERROR_MESSAGE:
