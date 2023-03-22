@@ -35,8 +35,6 @@ const AddToMainPageForm = ({showModal, projectId}) => {
 
   const handleDelete = () => {
     console.log('Delete main page image');
-    // TODO: remove below line
-    console.log('projectId', projectId);
     deleteImageToMainPage(projectId);
     showModal(false);
 

@@ -58,7 +58,6 @@ const DetailsProjectInfoForm = ({ projectId, showForm }) => {
   };
 
   const handleFormSubmit = () => {
-    console.log('Submit');
     const submitSpecifications = specifications.map(s => ({ name: s.name, value: s.value }));
     const updatedDetails = {
       detailTitleImage: projectDetails.details.detailTitleImage,

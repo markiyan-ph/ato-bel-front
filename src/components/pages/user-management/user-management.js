@@ -41,11 +41,11 @@ const UserManagementPage = () => {
 
   const handleAddUserSubmit = e => {
     e.preventDefault();
+  
     if (userData.password !== userData.repeatPassword) {
       return setCheckValidation(true);
     }
 
-    console.log(userData);
     addNewUser({ username: userData.username, email: userData.email, password: userData.password });
   };
 
