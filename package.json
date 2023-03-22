@@ -5,6 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "bootstrap": "^5.2.1",
+    "env-cmd": "^10.1.0",
     "i18next": "^21.6.16",
     "i18next-browser-languagedetector": "^6.1.5",
     "react": "^17.0.2",
@@ -26,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -f ./env/client.prod.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
