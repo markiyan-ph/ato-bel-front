@@ -17,7 +17,6 @@
   .project-info {
     margin: 2.1em auto;
     width: $project-detail-content-width;
-    max-width: $project-detail-content-max-width;
 
     .project-title {
       h4 {
@@ -67,7 +66,8 @@
   
   .images {
     .image-data-container {
-      margin-bottom: 2.1em;
+      margin: 1em auto 2.1em auto;
+      width: $project-detail-content-width;
 
       .image {
         position: relative;
@@ -90,8 +90,6 @@
 
       .image-description {
         margin: 1em auto 0 auto;
-        width: $project-detail-content-width;
-        max-width: $project-detail-content-max-width;
         font-weight: 400;
         font-size: 1em;
         line-height: 1.25em;
