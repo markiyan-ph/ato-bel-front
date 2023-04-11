@@ -6,6 +6,20 @@ import Content from '../../content';
 import './full-width.scss';
 import { Button } from 'react-bootstrap';
 
+const EditProjectInfoButton = ({ editInfo }) => (
+  <div className="edit-project-info-button">
+    <Button onClick={editInfo}>Edit</Button>
+  </div>
+);
+
+const AddImageBlock = ({ addImageBlock }) => (
+  <div className="add-image-block-button">
+    <Button variant="outline-primary" onClick={() => addImageBlock({ modalState: true, elementIndex: null })}>
+      Add image block
+    </Button>
+  </div>
+);
+
 const FullWidthTemplate = ({
   projectId,
   projectDetailsObj,
@@ -27,8 +41,17 @@ const FullWidthTemplate = ({
   };
 
   useEffect(() => {
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+
     if (!loading) {
       setShowToTopButton(document.body.scrollHeight - document.body.clientHeight > 200);
+
+      if (scrollPosition) {
+        setTimeout(() => {
+          window.scrollTo({ top: parseInt(scrollPosition), left: 0, behavior: 'auto' });
+          sessionStorage.removeItem('scrollPosition');
+        }, 300);
+      }
     }
   }, [loading]);
 
@@ -44,9 +67,9 @@ const FullWidthTemplate = ({
     <div className="image-data-container" key={imageData._id}>
       <div className="image">
         {isAdmin ? (
-          <DetailEditTool 
-            editModalClick={() => addImageBlock({ modalState: true, elementIndex: i })} 
-            deleteData={{projectId, isBlockImage: true, blockId: imageData._id}} 
+          <DetailEditTool
+            editModalClick={() => addImageBlock({ modalState: true, elementIndex: i })}
+            deleteData={{ projectId, isBlockImage: true, blockId: imageData._id }}
           />
         ) : null}
         {isAdmin && !loading ? (
@@ -81,25 +104,14 @@ const FullWidthTemplate = ({
       loading="lazy"
     />
   );
-  const EditProjectInfoButton = () => (
-    <div className="edit-project-info-button">
-      <Button onClick={editInfo}>Edit</Button>
-    </div>
-  );
-
-  const AddImageBlock = () => (
-    <div className="add-image-block-button">
-      <Button variant="outline-primary" onClick={() => addImageBlock({ modalState: true, elementIndex: null })}>
-        Add image block
-      </Button>
-    </div>
-  );
 
   return (
     <Content classNames={'flex-child'}>
       <div className="project-details">
         <div className="main-image">
-          {isAdmin && !loading ? <DetailEditTool editModalClick={editTitleImage} deleteData={{projectId, isBlockImage: false}} /> : null}
+          {isAdmin && !loading ? (
+            <DetailEditTool editModalClick={editTitleImage} deleteData={{ projectId, isBlockImage: false }} />
+          ) : null}
           {isAdmin && !loading ? (detailsMainImageExists ? mainImage : imageStatic) : null}
           {!isAdmin && detailsMainImageExists ? mainImage : null}
         </div>
@@ -115,10 +127,10 @@ const FullWidthTemplate = ({
             <div className="specification-value">{specificationsValues}</div>
           </div>
 
-          {isAdmin ? <EditProjectInfoButton /> : null}
+          {isAdmin ? <EditProjectInfoButton editInfo={editInfo} /> : null}
         </div>
         <div className="images">{images}</div>
-        {isAdmin ? <AddImageBlock /> : null}
+        {isAdmin ? <AddImageBlock addImageBlock={addImageBlock} /> : null}
 
         {showToTopButton ? backToTop : null}
       </div>
