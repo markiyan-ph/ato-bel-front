@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 // import { useTranslation } from 'react-i18next';
 import { Trash, Pencil } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
@@ -12,8 +12,8 @@ const DetailEditTool = ({ editModalClick, deleteData }) => {
   // const lang = i18n.language;
   const dispatch = useDispatch();
   const [showDeleteConfirmation, popupDeleteConfirmation] = useState(false);
-  const openConfirmation = () => popupDeleteConfirmation(true);
-  const closeConfirmation = () => popupDeleteConfirmation(false);
+  const openConfirmation = useCallback(() => popupDeleteConfirmation(true), []);
+  const closeConfirmation = useCallback(() => popupDeleteConfirmation(false), []);
 
   const editClick = e => {
     e.stopPropagation();
