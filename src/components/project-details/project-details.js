@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -17,11 +17,11 @@ const ProjectsDetails = () => {
   const projectDetails = useSelector(state => state.projectDetails);
   const { isAdmin, isAuthorized } = useSelector(state => state.authorization);
 
-  const openProjectInfoUpdate = () => popupProjectInfoUpdate(true);
-  const closeProjectInfoUpdate = () => popupProjectInfoUpdate(false);
-  const openTitleImageUpdate = () => popupTitleImageUpdate(true);
-  const closeTitleImageUpdate = () => popupTitleImageUpdate(false);
-  const closeAddImageBlockUpdate = () => popupAddImageBlockUpdate({ ...showAddImageBlockForm, modalState: false });
+  const openProjectInfoUpdate = useCallback(() => popupProjectInfoUpdate(true));
+  const closeProjectInfoUpdate = useCallback(() => popupProjectInfoUpdate(false));
+  const openTitleImageUpdate = useCallback(() => popupTitleImageUpdate(true));
+  const closeTitleImageUpdate = useCallback(() => popupTitleImageUpdate(false));
+  const closeAddImageBlockUpdate = useCallback(() => popupAddImageBlockUpdate({ ...showAddImageBlockForm, modalState: false }));
 
   const fetchProjectDetails = projectId => {
     dispatch(actions.fetchProjectDetails(projectId));
