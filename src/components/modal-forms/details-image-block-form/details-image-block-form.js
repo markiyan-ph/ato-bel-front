@@ -22,8 +22,6 @@ const DetailsImageBlockForm = ({ projectId, details, showModal, blockIndex }) =>
   const { enImageTitle, ukImageTitle, enImageDescription, ukImageDescription } = detailsImageData;
 
   useEffect(() => {
-    sessionStorage.setItem('scrollPosition', window.scrollY);
-    
     if (blockIndex !== null && blockIndex !== undefined) {
       const updatedImgData = details?.images?.[blockIndex];
 

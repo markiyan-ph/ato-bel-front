@@ -41,17 +41,8 @@ const FullWidthTemplate = ({
   };
 
   useEffect(() => {
-    const scrollPosition = sessionStorage.getItem('scrollPosition');
-
     if (!loading) {
       setShowToTopButton(document.body.scrollHeight - document.body.clientHeight > 200);
-
-      if (scrollPosition) {
-        setTimeout(() => {
-          window.scrollTo({ top: parseInt(scrollPosition), left: 0, behavior: 'auto' });
-          sessionStorage.removeItem('scrollPosition');
-        }, 300);
-      }
     }
   }, [loading]);
 
