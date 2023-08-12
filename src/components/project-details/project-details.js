@@ -81,7 +81,7 @@ const ProjectsDetails = () => {
         editInfo={openProjectInfoUpdate}
         editTitleImage={openTitleImageUpdate}
         addImageBlock={popupAddImageBlockUpdate}
-        loading={projectDetails.loading}
+        loading={isAdmin ? false : projectDetails.loading}
       />
     </div>
   );

@@ -41,10 +41,13 @@ const FullWidthTemplate = ({
   };
 
   useEffect(() => {
-    if (!loading) {
-      setShowToTopButton(document.body.scrollHeight - document.body.clientHeight > 200);
+    if (projectDetailsObj?.images?.length > 0) {
+      setShowToTopButton((document.body.scrollHeight - document.body.clientHeight > 200) || projectDetailsObj.images.length > 4);
     }
-  }, [loading]);
+    return () => {
+      setShowToTopButton(false);
+    };
+  }, [projectId, projectDetailsObj?.images?.length]);
 
   const specificationsNames = projectDetailsObj.projectInfo.specifications.map(specification => (
     <div key={specification._id + 'name'}>{specification.name[language]}</div>
