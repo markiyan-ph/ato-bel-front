@@ -14,6 +14,8 @@
   }
 
   a {
+    cursor: pointer;
+
     &.is-active {
       font-weight: $header-sub-font-weight-hover;
     }
