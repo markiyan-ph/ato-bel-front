@@ -34,6 +34,13 @@ const SubHeader = ({ pathname }) => {
     // }
   }, [tags.length]);
 
+  const setTagStatus = (e, tagId) => {
+    e.preventDefault();
+    setSelectedTags(selectedTags =>
+      selectedTags.includes(tagId) ? updateDeleteListItem(selectedTags, selectedTags.indexOf(tagId)) : [tagId]
+    );
+  };
+
   if (pathname === '/projects/') {
     menuList = tags;
     menu = menuList.map(({ tagId, labels }) => (
@@ -41,15 +48,7 @@ const SubHeader = ({ pathname }) => {
         <a
           title={tagId}
           className={selectedTags.includes(tagId) ? 'is-active' : ''}
-          // TODO: move onClick to separate function
-          onClick={e => {
-            e.preventDefault();
-            setSelectedTags(selectedTags =>
-              selectedTags.includes(tagId)
-                ? updateDeleteListItem(selectedTags, selectedTags.indexOf(tagId))
-                : [...selectedTags, tagId]
-            );
-          }}
+          onClick={e => setTagStatus(e, tagId)}
         >
           {labels[lang]}
         </a>
