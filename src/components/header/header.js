@@ -38,7 +38,7 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { isAdmin, isAuthorized, isMainAdmin, loginScreenCode } = useSelector(state => state.authorization);
-  const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
+  const storageKey = localStorage.getItem(import.meta.env.VITE_REACT_APP_STORAGE_VARIABLE);
 
   const autorize = () => {
     // dispatch(actions.authorizeUser());

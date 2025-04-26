@@ -1,7 +1,7 @@
-@import "../../assets/styles/shared";
+@use "../../assets/styles/shared";
 
 .app {
-  font-family: $main-font-family;
-  font-size: $main-font-size;
-  color: $main-color;
+  font-family: shared.$main-font-family;
+  font-size: shared.$main-font-size;
+  color: shared.$main-color;
 }

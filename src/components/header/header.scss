@@ -1,23 +1,23 @@
-@import "../../assets/styles/shared";
+@use "../../assets/styles/shared";
 
 .header {
   background-color: #ffffff;
-  color: $header-color;
+  color: shared.$header-color;
   width: 100%;
-  height: $header-main-height;
-  padding: 0 $container-indent 0 $container-indent;
+  height: shared.$header-main-height;
+  padding: 0 shared.$container-indent 0 shared.$container-indent;
   position: fixed;
   z-index: 100;
   display: flex;
   flex-direction: column;
 
   &.expand {
-    height: $header-full-height;
+    height: shared.$header-full-height;
   }
   
   .header-block {
     width: 100%;
-    height: $header-main-height;
+    height: shared.$header-main-height;
   }
 
   .break {
@@ -34,7 +34,7 @@
 
   
   %menu-links {
-    color: $header-color;
+    color: shared.$header-color;
     font-family: 'GothicA1';
     font-style: normal;
     font-weight: 400;
@@ -48,7 +48,7 @@
       z-index: 100;
 
       li {
-        color: $header-color;
+        color: shared.$header-color;
         list-style: none;
         margin: 0;
       }
@@ -61,11 +61,11 @@
       text-decoration: none;
 
       &.is-active {
-        color: $header-color-active;
+        color: shared.$header-color-active;
       }
 
       &:hover {
-        color: $header-color-hover;
+        color: shared.$header-color-hover;
         text-decoration: none;
       }
 
@@ -89,7 +89,7 @@
     height: 100%;
     padding: 0 10px 0 10px;
     
-    width: $container-width;
+    width: shared.$container-width;
 
     ul {
       gap: 45px;
@@ -119,15 +119,15 @@
     
     a {
       &.is-active {
-        font-weight: $header-main-font-weight-hover;
+        font-weight: shared.$header-main-font-weight-hover;
       }
   
       &:hover {
-        font-weight: $header-main-font-weight-hover;
+        font-weight: shared.$header-main-font-weight-hover;
       }
   
       &::before {
-        font-weight: $header-main-font-weight-hover;
+        font-weight: shared.$header-main-font-weight-hover;
       }
     }
   }

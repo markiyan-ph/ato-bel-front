@@ -11,5 +11,9 @@ COPY . .
 
 EXPOSE 3000
 
+ENV VITE_PORT=3000
+ENV VITE_HOST=0.0.0.0
+ENV VITE_PROXY_API=http://server:5005
+
 #start app
-CMD [ "npm", "start" ]
+ENTRYPOINT ["npm", "run", "dev"]

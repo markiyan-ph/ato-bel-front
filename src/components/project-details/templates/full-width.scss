@@ -1,4 +1,4 @@
-@import "../../../assets/styles/shared";
+@use "../../../assets/styles/shared";
 
 .project-details {
   .main-image {
@@ -16,7 +16,7 @@
 
   .project-info {
     margin: 2.1em auto;
-    width: $project-detail-content-width;
+    width: shared.$project-detail-content-width;
 
     .project-title {
       h4 {
@@ -68,7 +68,7 @@
   .images {
     .image-data-container {
       margin: 1em auto 2.1em auto;
-      width: $project-detail-content-width;
+      width: shared.$project-detail-content-width;
 
       .image {
         position: relative;

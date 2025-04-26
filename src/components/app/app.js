@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
   const [refreshToken, setRefreshToken] = useState(true);
   const { authorization } = useSelector(state => state);
-  const storageKey = localStorage.getItem(process.env.REACT_APP_STORAGE_VARIABLE);
+  const storageKey = localStorage.getItem(import.meta.env.VITE_REACT_APP_STORAGE_VARIABLE);
   const csrfToken = sessionStorage.getItem('csrfToken');
 
   useEffect(() => {

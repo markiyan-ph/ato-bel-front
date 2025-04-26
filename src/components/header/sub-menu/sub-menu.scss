@@ -1,7 +1,7 @@
-@import '../../../assets/styles/shared';
+@use '../../../assets/styles/shared';
 
 .submenu-block {
-  height: $header-main-height;
+  height: shared.$header-main-height;
   font-size: 13px;
   line-height: 16px;
   position: fixed;
@@ -17,15 +17,15 @@
     cursor: pointer;
 
     &.is-active {
-      font-weight: $header-sub-font-weight-hover;
+      font-weight: shared.$header-sub-font-weight-hover;
     }
 
     &:hover {
-      font-weight: $header-sub-font-weight-hover;
+      font-weight: shared.$header-sub-font-weight-hover;
     }
 
     &::before {
-      font-weight: $header-sub-font-weight-hover;
+      font-weight: shared.$header-sub-font-weight-hover;
     }
   }
 }

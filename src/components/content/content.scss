@@ -1,5 +1,5 @@
-@import "../../assets/styles/shared";
+@use "../../assets/styles/shared";
 
 .content {
-  padding: $header-full-height 0 0 0;
+  padding: shared.$header-full-height 0 0 0;
 }

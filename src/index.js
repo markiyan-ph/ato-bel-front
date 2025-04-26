@@ -11,6 +11,7 @@ import * as actionTypes from './store/actions/actionTypes';
 
 import "./i18n";
 import "./index.scss";
+import { createRoot } from "react-dom/client";
 
 const rootReducer = {
   authorization: authorizationReducer,
@@ -42,4 +43,5 @@ const app = (
   </Provider>
 );
 
-ReactDOM.render(app, document.getElementById("root"));
+createRoot(document.getElementById('root')).render(app);
+

@@ -9,7 +9,7 @@ const initialState = {
   accessToken: null,
   csrfToken: null,
   failMessage: null,
-  loginScreenCode: process.env.REACT_APP_ADMIN_VIEW_KEY,
+  loginScreenCode: import.meta.env.VITE_REACT_APP_ADMIN_VIEW_KEY,
 };
 
 const authorizeUser = state => {

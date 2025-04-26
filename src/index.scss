@@ -1,6 +1,6 @@
-@import "~bootstrap/scss/bootstrap";
-@import "./assets/styles/shared";
-@import "./assets/styles/fonts";
+// @use "bootstrap/scss/bootstrap";
+@use "assets/styles/shared";
+@use "assets/styles/fonts";
 
 html, body {
   -moz-osx-font-smoothing: grayscale;
@@ -9,15 +9,15 @@ html, body {
   -webkit-box-sizing:border-box;
   -moz-box-sizing:border-box;
   box-sizing: border-box;
-  color: $main-color;
-  font-family: $main-font-family;
+  color: shared.$main-color;
+  font-family: shared.$main-font-family;
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 code {
-  font-family: $main-font-family;
+  font-family: shared.$main-font-family;
 }
 
 .wrapper {

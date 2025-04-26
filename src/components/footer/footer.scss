@@ -1,9 +1,9 @@
-@import "../../assets/styles/shared";
+@use "../../assets/styles/shared";
 
 .footer {
-  height: $footer-height;
+  height: shared.$footer-height;
   margin-top: 1rem;
-  padding: 0 $container-indent 0 $container-indent;
+  padding: 0 shared.$container-indent 0 shared.$container-indent;
   width: 100%;
   
   .footer-container {
